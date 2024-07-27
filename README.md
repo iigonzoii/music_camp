@@ -54,8 +54,8 @@ Returns the information about the current user that is logged in.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/session
   - Body: none
 
 - Successful Response when there is a logged in user
@@ -73,12 +73,14 @@ Returns the information about the current user that is logged in.
         "lastName": "Smith",
         "email": "john.smith@gmail.com",
         "username": "JohnSmith",
+        "password":"secret",
         "bio": "",
         "website": "",
         "spotify": "",
         "instagram": "",
         "facebook": "",
         "artistImageUrl": "",
+        "userImageUrl": ",
         "headerImageUrl": "",
         "backgroundImageUrl": "",
         "createdAt": "2021-11-19 20:39:36",
@@ -108,8 +110,8 @@ information.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/session
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -162,7 +164,7 @@ information.
 
     ```json
     {
-      "message": "Bad Request",
+      "message": "Bad Request", // (or "Validation error")
       "errors": {
         "credential": "Email or username is required",
         "password": "Password is required"
@@ -178,8 +180,8 @@ user's information.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/users
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -196,6 +198,7 @@ user's information.
       "spotify": "",
       "instagram": "",
       "facebook": "",
+      "userImageUrl": "",
       "artistImageUrl": "",
       "headerImageUrl": "",
       "backgroundImageUrl": ""
@@ -262,7 +265,7 @@ user's information.
 
     ```json
     {
-      "message": "Bad Request",
+      "message": "Bad Request", // (or "Validation error")
       "errors": {
         "email": "Invalid email",
         "username": "Username is required",
@@ -281,8 +284,8 @@ Returns all the albums.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/albums
   - Body: none
 
 - Successful Response
@@ -306,7 +309,6 @@ Returns all the albums.
           "tags": ["Stoner Rock", "Classic Rock"],
           "price": 9.99,
           "stock": 123,
-          "type": "CD",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -321,8 +323,8 @@ Returns all the albums owned (created) by the current user.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/albums/current
   - Body: none
 
 - Successful Response
@@ -346,7 +348,6 @@ Returns all the albums owned (created) by the current user.
           "tags": ["Stoner Rock", "Classic Rock"],
           "price": 9.99,
           "stock": 123,
-          "type": "CD",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -361,8 +362,8 @@ Returns the details of a album specified by its id.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/albums/:albumId
   - Body: none
 
 - Successful Response
@@ -384,7 +385,6 @@ Returns the details of a album specified by its id.
       "tags": ["Stoner Rock", "Classic Rock"],
       "price": 9.99,
       "stock": 123,
-      "type": "CD",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
       "numReviews": 5,
@@ -429,8 +429,8 @@ Creates and returns a new album.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/albums
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -461,7 +461,6 @@ Creates and returns a new album.
       "id": 1,
       "userId": 1,
       "title": "The Dark Side of the Moon",
-      "productTypeId": 1,
       "coverImageUrl": "www.image.com",
       "description": "The Dark Side of the Moon is the eighth studio album by the English rock band Pink Floyd",
       "producer": "Capitol Records",
@@ -483,17 +482,16 @@ Creates and returns a new album.
 
     ```json
     {
-      "message": "Bad Request",
+      "message": "Bad Request", // (or "Validation error")
       "errors": {
-        "title": "Required",
-        "productTypeId": "Required",
-        "coverImageUrl": "Required",
-        "description": "Required",
-        "producer": "Required",
-        "tags": "Required",
-        "price": "Required",
-        "stock": "Required",
-        "type": "Required"
+        "title": "Title Required",
+        "coverImageUrl": "Cover Image Required",
+        "description": "Description Required",
+        "producer": "Producer Required",
+        "tags": "Genre Required",
+        "price": "Price Required",
+        "stock": "Stock Required",
+        "type": "Type Required"
       }
     }
     ```
@@ -506,8 +504,8 @@ Updates and returns an existing album.
 - Require proper authorization: album must belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: PUT
+  - URL: /api/albums/:albumId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -558,17 +556,16 @@ Updates and returns an existing album.
 
     ```json
     {
-      "message": "Bad Request",
+      "message": "Bad Request", //(or "Validation error")
       "errors": {
-        "title": "Required",
-        "productTypeId": "Required",
-        "coverImageUrl": "Required",
-        "description": "Required",
-        "producer": "Required",
-        "tags": "Required",
-        "price": "Required",
-        "stock": "Required",
-        "type": "Required"
+        "title": "Title Required",
+        "coverImageUrl": "Cover image Required",
+        "description": "Description Required",
+        "producer": "Producer Required",
+        "tags": "Genre Required",
+        "price": "Price Required",
+        "stock": "Stock Required",
+        "type": "Type Required"
       }
     }
     ```
@@ -594,8 +591,8 @@ Deletes an existing album.
 - Require proper authorization: album must belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: DELETE
+  - URL: /api/albums/:albumId
   - Body: none
 
 - Successful Response
@@ -633,8 +630,8 @@ Returns all the reviews written by the current user.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/reviews/current
   - Body: none
 
 - Successful Response
@@ -683,8 +680,8 @@ Returns all the reviews that belong to a album specified by id.
 - Require Authentication: false
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/spots/:spotId/reviews
   - Body: none
 
 - Successful Response
@@ -735,8 +732,8 @@ Create and return a new review for a album specified by id.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/albums/:albumId/reviews
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -818,8 +815,8 @@ Update and return an existing review.
 - Require proper authorization: Review must belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: PUT
+  - URL: /api/reviews/:reviewId
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -888,8 +885,8 @@ Delete an existing review.
 - Require proper authorization: Review must belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: DELETE
+  - URL: /api/reviews/:reviewId
   - Body: none
 
 - Successful Response
@@ -927,8 +924,8 @@ Return all the purchases that the current user has made.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/purchases/current
   - Body: none
 
 - Successful Response
@@ -970,8 +967,8 @@ Return all the purchases for a album specified by id.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/albums/:albumId/purchases
   - Body: none
 
 - Successful Response: If you ARE NOT the owner of the album.
@@ -1040,8 +1037,8 @@ Create and return a new purchase from a album specified by id.
 - Require proper authorization: album must NOT belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/albums/:albumId/purchases
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -1101,15 +1098,15 @@ Create and return a new purchase from a album specified by id.
 
 ## WISHLIST
 
-### Get all of the Current User's wishlist
+### Get all of the Current User's wishlist items
 
 Return all the wishlist that the current user has made.
 
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/wishlist/current
   - Body: none
 
 - Successful Response
@@ -1124,7 +1121,7 @@ Return all the wishlist that the current user has made.
       "wishlist": [
         {
           "userId": 2,
-          "albumId": 1,
+          "albumId": [1, 2, 3],
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -1132,19 +1129,18 @@ Return all the wishlist that the current user has made.
     }
     ```
 
-### Create a Wishlist from a album based on the album's id
+### Create a Wishlist item based on the album's id
 
-Create and return a new purchase from a album specified by id.
+Create and return a new wishlist item specified by albumid.
 
 - Require Authentication: true
 - Require proper authorization: album must NOT belong to the current user
-
-- Successful Response
-
-  - Status Code: 200
+- Request
+  - Method: POST
+  - URL: /api/albums/:albumId/wishlist
   - Headers:
-    - Content-Type: application/json
-  - Body:
+    -Content-Type: application/json
+  -Body:
 
     ```json
     {
@@ -1155,6 +1151,21 @@ Create and return a new purchase from a album specified by id.
       "updatedAt": "2021-11-19 20:39:36"
     }
     ```
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    -Content-Type: application/json
+  - Body:
+
+    ```json
+    {
+      "id": 1,
+      "albumId": 1,
+      "userId": 2,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
+    }
+
 
 ## SHOPPING CART
 
@@ -1165,8 +1176,8 @@ Return all the shoppingCart items that the current user has made.
 - Require Authentication: true
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: GET
+  - URL: /api/shoppingCart
   - Body: none
 
 - Successful Response
@@ -1207,8 +1218,8 @@ Create and return a new purchase from a album specified by id.
 - Require proper authorization: album must NOT belong to the current user
 - Request
 
-  - Method: ?
-  - URL: ?
+  - Method: POST
+  - URL: /api/albums/:albumId/shoppingCart
   - Headers:
     - Content-Type: application/json
 

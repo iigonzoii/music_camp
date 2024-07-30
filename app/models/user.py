@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from sqlalchemy.orm import relationship
 # * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -27,16 +26,22 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.Date)
     updated_at = db.Column(db.Date)
     #* album relation
-    albums = relationship('Album', back_populates='user')
+    albums = db.relationship('Album', back_populates='user')
     #* review relation
-    reviews = relationship('Review', back_populates='user')
+    reviews = db.relationship('Review', back_populates='user')
     #* track relation
-    tracks = relationship('Track', back_populates='user')
+    tracks = db.relationship('Track', back_populates='user')
     #* purchase relation
-    purchases = relationship('Purchase', back_populates='user')
+    purchases = db.relationship('Purchase', back_populates='user')
     #* wishlist relation
-
+    wishlist = db.relationship('Wishlist', uselist=False, back_populates='user')
+    #* below is the one to one relationship for the wishlist model if youd like to cut it from here
+    # user = db.relationship('User', useList=False, back_populates='wishlist')
     #* shopping cart relation
+    shopping_cart = db.relationship('ShoppingCart', uselist=False, back_populates='user')
+    #* below is the one to one relationship for the shopping cart model if youd like to cut it
+    # user = db.relationship('User', useList=False, back_populates='shopping_cart')
+
 
 
 

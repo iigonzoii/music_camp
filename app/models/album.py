@@ -1,7 +1,8 @@
+# from .db import db, environment, SCHEMA
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-
+#* this works but i refactored because phil said it was the reccomended way
 db = SQLAlchemy()
 
 class Album(db.Model):
@@ -23,7 +24,6 @@ class Album(db.Model):
     user = relationship('User', back_populates='albums')
 
     # relationship to Track one to many
-    # ! i think albums is supposed to be plural in tracks, note by gonzo, im probably wrong
     tracks = relationship('Track', back_populates='album')
 
     # relationship to reviews

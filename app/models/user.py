@@ -1,13 +1,8 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-#? Why are my imports not importing why are my .Columns white and my ."Datatypes" white as well
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-
-# db = SQLAlchemy()
-
+# * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -26,9 +21,9 @@ class User(db.Model, UserMixin):
     instagram = db.Column(db.String(40))
     website = db.Column(db.String(40))
     facebook = db.Column(db.String(40))
-    profile_img_url = db.Column(db.String(60))
-    banner_img_url = db.Column(db.String(60))
-    backround_img_url = db.Column(db.String(60))
+    profile_img_url = db.Column(db.String(200))
+    banner_img_url = db.Column(db.String(200))
+    backround_img_url = db.Column(db.String(200))
     created_at = db.Column(db.Date)
     updated_at = db.Column(db.Date)
     #* album relation
@@ -41,7 +36,7 @@ class User(db.Model, UserMixin):
     purchases = relationship('Purchase', back_populates='user')
     #* wishlist relation
 
-    #*
+    #* shopping cart relation
 
 
 

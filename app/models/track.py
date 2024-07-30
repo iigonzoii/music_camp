@@ -14,3 +14,4 @@ class Track(db.Model):
 
     # relationship to Album many to one
     album = relationship('Album', back_populates='tracks')
+    user = relationship('User', back_populates='tracks')

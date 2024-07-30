@@ -23,7 +23,8 @@ class Album(db.Model):
     user = relationship('User', back_populates='albums')
 
     # relationship to Track one to many
+    # ! i think albums is supposed to be plural in tracks, note by gonzo, im probably wrong
     tracks = relationship('Track', back_populates='album')
 
-
-
+    # relationship to reviews
+    reviews = relationship('Review', back_populates='album')

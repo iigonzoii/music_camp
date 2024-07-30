@@ -1,7 +1,12 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+#? Why are my imports not importing why are my .Columns white and my ."Datatypes" white as well
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
+# db = SQLAlchemy()
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -10,9 +15,35 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.String(40), nullable=False)
+    last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    bio = db.Column(db.String(250))
+    website = db.Column(db.String(40))
+    spotify = db.Column(db.String(40))
+    instagram = db.Column(db.String(40))
+    website = db.Column(db.String(40))
+    facebook = db.Column(db.String(40))
+    profile_img_url = db.Column(db.String(60))
+    banner_img_url = db.Column(db.String(60))
+    backround_img_url = db.Column(db.String(60))
+    created_at = db.Column(db.Date)
+    updated_at = db.Column(db.Date)
+    #* album relation
+    albums = relationship('Album', back_populates='user')
+    #* review relation
+    reviews = relationship('Review', back_populates='user')
+    #* track relation
+    tracks = relationship('Track', back_populates='user')
+    #* purchase relation
+    purchases = relationship('Purchase', back_populates='user')
+    #* wishlist relation
+
+    #*
+
+
 
     @property
     def password(self):

@@ -1,9 +1,13 @@
-# MVP List
-MusicCamp, a BandCamp clone, is a website for users to explore and share music, write reviews, buy albums to support smaller creators, wishlist desired albums, and listen to music.
+# MVP List - Intro
+MusicCamp, a BandCamp clone, is a website for users to explore and share music, write reviews, buy albums to support smaller creators, wishlist desired albums, and listen to music. Our team implemented the following basic and core features of BandCamp:
+- Sign up and log in functionality;
+- Creating, Reading, Updating, and Deleting an album
+- Creating, Reading, Updating, and Deleting album reviews
+- Adding, Updating, and Removing products from a logged in user's wishlist and/or shopping cart
 
 ## 1. Account creation, log in, log out, and guest/demo login
 * Users can sign up, log in, and log out
-* Users can use a demo log in to try the site
+* Users can use a demo log in if they decide not to create an account
 * Users cannot use certain features without logging in such as creating products and reviews.
 * Logged in users are directed to their profile page, where they can see their profile information, music collection owned, and option to create Product(s)
 * Logged out users are directed to the homepage

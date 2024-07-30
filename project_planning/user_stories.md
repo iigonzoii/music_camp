@@ -26,14 +26,14 @@
 * upon sign out, all changes the demo user has made are not saved
 
 
-### Profile Page
-#### "/:username"
+## Profile Page
+### "/:username"
 * Shows banner, profile picture, username, and collection of album(s) the user has bought
 
-#### "/:username/wishlist"
+### "/:username/wishlist"
 * Shows banner, profile picture, username, and collection of album(s) in the user's wishlist
 
-#### "/:username/following"
+### "/:username/following"
 * !!! shows the list of artists the user is following !!!
 
 

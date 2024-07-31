@@ -18,6 +18,6 @@ class Review(db.Model):
     created_at = db.Column(db.Date)
     updated_at = db.Column(db.Date)
     #* relationship to user
-    user = relationship('User', back_populates='reviews')
+    reviewer = relationship('User', back_populates='reviews')
     #* relationship to album
     album = relationship('Album', back_populates='reviews')

@@ -1,6 +1,9 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
+from .associations import wishlist_items, shoppingcart_items, purchase_items
+
 # * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -23,26 +26,20 @@ class User(db.Model, UserMixin):
     profile_img_url = db.Column(db.String(200))
     banner_img_url = db.Column(db.String(200))
     backround_img_url = db.Column(db.String(200))
-    created_at = db.Column(db.Date)
-    updated_at = db.Column(db.Date)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
     #* album relation
-    albums = db.relationship('Album', back_populates='user')
+    albums = db.relationship('Album', back_populates='artist')
     #* review relation
-    reviews = db.relationship('Review', back_populates='user')
+    reviews = db.relationship('Review', back_populates='reviewer')
     #* track relation
-    tracks = db.relationship('Track', back_populates='user')
-    #* purchase relation
-    purchases = db.relationship('Purchase', back_populates='user')
-    #* wishlist relation
-    wishlist = db.relationship('Wishlist', uselist=False, back_populates='user')
-    #* below is the one to one relationship for the wishlist model if youd like to cut it from here
-    # user = db.relationship('User', useList=False, back_populates='wishlist')
-    #* shopping cart relation
-    shopping_cart = db.relationship('ShoppingCart', uselist=False, back_populates='user')
-    #* below is the one to one relationship for the shopping cart model if youd like to cut it
-    # user = db.relationship('User', useList=False, back_populates='shopping_cart')
+    tracks = db.relationship('Track', back_populates='artist')
 
-
+    #* Association table relations with User
+    wishlisted_albums = db.relationship('Album', secondary=wishlist_items, backref='user_wishlist')
+    cart_albums = db.relationship('Album', secondary=shoppingcart_items, backref='user_cart')
+    purchased_albums = db.relationship('Album', secondary=purchase_items, backref='user_purchases')
 
 
     @property

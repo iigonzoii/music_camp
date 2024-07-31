@@ -14,9 +14,9 @@ def seed_users():
     #seeder data
     testuser1 = User(
         username='testuser1', email='testuser1@email.com', password='password',
-        firstName='Charlie', lastName='Booth', bio='bio of the user', website='userwebsite.url',
-        spotify='spotifylink.url', instagram='instalink.url', facebook='fblink.url',
-        profileImageUrl='profileimg.url', bannerImageUrl='bannerimg.url', backgroundImageUrl='bgimg.url')
+        firstName='Charlie', lastName='Booth', bio='bio of the user', website='userWebsite.url',
+        spotify='spotifyLink.url', instagram='instaLink.url', facebook='fbLink.url',
+        profileImageUrl='profileImg.url', bannerImageUrl='bannerImg.url', backgroundImageUrl='bgImg.url')
     testuser2 = User(
         username='testuser2', email='testuser2@email.com', password='password')
     testuser3 = User(

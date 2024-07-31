@@ -24,6 +24,3 @@ class Album(db.Model):
 
     # relationship to Track one to many
     tracks = relationship('Track', back_populates='album')
-
-
-

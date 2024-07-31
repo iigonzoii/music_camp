@@ -11,9 +11,50 @@ def seed_users():
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
 
+    #seeder data
+    testuser1 = User(
+        username='testuser1', email='testuser1@email.com', password='password',
+        firstName='Charlie', lastName='Booth', bio='bio of the user', website='userwebsite.url',
+        spotify='spotifylink.url', instagram='instalink.url', facebook='fblink.url',
+        profileImageUrl='profileimg.url', bannerImageUrl='bannerimg.url', backgroundImageUrl='bgimg.url')
+    testuser2 = User(
+        username='testuser2', email='testuser2@email.com', password='password')
+    testuser3 = User(
+        username='testuser3', email='testuser3@email.com', password='password')
+    testuser4 = User(
+        username='testuser4', email='testuser4@email.com', password='password')
+    testuser5 = User(
+        username='testuser5', email='testuser5@email.com', password='password')
+    testuser6 = User(
+        username='testuser6', email='testuser6@email.com', password='password')
+    testuser7 = User(
+        username='testuser7', email='testuser7@email.com', password='password')
+    testuser8 = User(
+        username='testuser8', email='testuser8@email.com', password='password')
+    testuser9 = User(
+        username='testuser9', email='testuser9@email.com', password='password')
+    testuser10 = User(
+        username='testuser10', email='testuser10@email.com', password='password')
+    testuser11 = User(
+        username='testuser11', email='testuser11@email.com', password='password')
+    testuser12 = User(
+        username='testuser12', email='testuser12@email.com', password='password')
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(testuser1)
+    db.session.add(testuser2)
+    db.session.add(testuser3)
+    db.session.add(testuser4)
+    db.session.add(testuser5)
+    db.session.add(testuser6)
+    db.session.add(testuser7)
+    db.session.add(testuser8)
+    db.session.add(testuser9)
+    db.session.add(testuser10)
+    db.session.add(testuser11)
+    db.session.add(testuser12)
 
     db.session.commit()
 

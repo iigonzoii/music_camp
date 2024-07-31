@@ -7,7 +7,7 @@ class Album(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     band = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(50), nullable=False)
     product_type = db.Column(db.String, nullable=False)
@@ -28,3 +28,4 @@ class Album(db.Model):
     tracks = db.relationship('Track', back_populates='albums')
     # relationship to reviews
     reviews = db.relationship('Review', back_populates='albums')
+

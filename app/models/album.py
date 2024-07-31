@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA
 
-
 class Album(db.Model):
     __tablename__ = 'albums'
 
@@ -19,13 +18,14 @@ class Album(db.Model):
     tags = db.Column(db.String)
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    #  relationship to User
-    user = db.relationship('User', back_populates='albums')
 
-    #  relationship to Track
-    tracks = db.relationship('Track', back_populates='album')
-
-    # relationship to Review
-    reviews = db.relationship('Review', back_populates='album')
+    # relationship to User many to one
+    artist = db.relationship('User', back_populates='albums')
+    # relationship to Track one to many
+    tracks = db.relationship('Track', back_populates='albums')
+    # relationship to reviews
+    reviews = db.relationship('Review', back_populates='albums')
 

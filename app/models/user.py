@@ -21,11 +21,10 @@ class User(db.Model, UserMixin):
     website = db.Column(db.String(40))
     spotify = db.Column(db.String(40))
     instagram = db.Column(db.String(40))
-    website = db.Column(db.String(40))
     facebook = db.Column(db.String(40))
     profile_img_url = db.Column(db.String(200))
     banner_img_url = db.Column(db.String(200))
-    backround_img_url = db.Column(db.String(200))
+    background_img_url = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -56,6 +55,16 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'email': self.email,
             'username': self.username,
-            'email': self.email
+            "bio": self.bio,
+            "website": self.website,
+            "spotify": self.spotify,
+            "instagram": self.instagram,
+            "facebook": self.facebook,
+            "profileImageUrl": self.profile_img_url,
+            "bannerImageUrl": self.banner_img_url,
+            "backgroundImageUrl": self.background_img_url
         }

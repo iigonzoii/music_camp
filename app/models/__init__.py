@@ -4,3 +4,4 @@ from .review import Review
 from .track import Track
 from .user import User
 from .db import environment, SCHEMA
+from .review import Review

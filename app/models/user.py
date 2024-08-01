@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(250))
-    website = db.Column(db.String(40))
     spotify = db.Column(db.String(40))
     instagram = db.Column(db.String(40))
     facebook = db.Column(db.String(40))
@@ -33,7 +32,7 @@ class User(db.Model, UserMixin):
     #* review relation
     reviews = db.relationship('Review', back_populates='reviewer')
     #* track relation
-    tracks = db.relationship('Track', back_populates='artist')
+    tracks = db.relationship('Track', back_populates='user')
 
     #* Association table relations with User
     wishlisted_albums = db.relationship('Album', secondary=wishlist_items, backref='user_wishlist')

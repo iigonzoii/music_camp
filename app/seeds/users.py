@@ -15,7 +15,7 @@ def seed_users():
     user_one = User(
         username='User1',first_name='User', last_name='One', email='emailu1@aa.io', password='password')
     user_two = User(
-        username='User2', email='emailu2@aa.io', password='password')
+        username='User2', first_name='User', last_name="Two", email='emailu2@aa.io', password='password')
 
     artist_one= User(
         first_name="Artist", last_name='One', username='ArtistOne', email='emaila1@aa.io', password='password',

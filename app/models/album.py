@@ -25,7 +25,7 @@ class Album(db.Model):
     # relationship to User many to one
     artist = db.relationship('User', back_populates='albums')
     # relationship to Track one to many
-    tracks = db.relationship('Track', back_populates='albums')
+    tracks = db.relationship('Track', back_populates='album')
     # relationship to reviews
-    reviews = db.relationship('Review', back_populates='albums')
+    reviews = db.relationship('Review', back_populates='album')
 

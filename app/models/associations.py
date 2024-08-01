@@ -11,7 +11,7 @@ wishlist_items = db.Table(
 )
 
 shoppingcart_items = db.Table(
-    'shoppingcart_items',
+    'shopping_cart_items',
     db.Column('id', db.Integer, primary_key=True),
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
     db.Column('album_id', db.Integer, db.ForeignKey('albums.id'), nullable=False),
@@ -25,7 +25,7 @@ shoppingcart_items = db.Table(
 purchase_items = db.Table(
     'purchase_items',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
+    db.Column('useruser_id', db.Integer, db.ForeignKey('users.id'), nullable=False),
     db.Column('album_id', db.Integer, db.ForeignKey('albums.id'), nullable=False),
     db.Column('quantity', db.Integer, nullable=False),
     db.Column('price', db.Float, nullable=False),

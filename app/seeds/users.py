@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        first_name="Demo", last_name='User', username='Demo', email='demo@aa.io', password='password',
+        first_name="Demo", last_name='User', email='demo@aa.io', username='DemoAccount', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
         profile_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc',
@@ -13,30 +13,30 @@ def seed_users():
         background_img_url="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847",
         )
     user_one = User(
-        username='User1',first_name='User', last_name='One', email='emailu1@aa.io', password='password')
+        first_name='User', last_name='One', email='emailu1@aa.io', username='User1', password='password')
     user_two = User(
-        username='User2', first_name='User', last_name="Two", email='emailu2@aa.io', password='password')
+        first_name='User', last_name="Two", email='emailu2@aa.io', username='User2', password='password')
 
     artist_one= User(
-        first_name="Artist", last_name='One', username='ArtistOne', email='emaila1@aa.io', password='password',
+        first_name="Artist", last_name='One', email='emaila1@aa.io', username='ArtistOne', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
         profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere"
         )
     artist_two=User(
-        first_name="Artist", last_name='Two', username='ArtistTwo', email='emaila2@aa.io', password='password',
+        first_name="Artist", last_name='Two', email='emaila2@aa.io', username='ArtistTwo', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
         profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_three=User(
-        first_name="Artist", last_name='Three', username='ArtistThree', email='emaila3@aa.io', password='password',
+        first_name="Artist", last_name='Three', email='emaila3@aa.io', username='ArtistThree', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
         profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_four=User(
-        first_name="Artist", last_name='Four',username='ArtistFour', email='emaila4@aa.io', password='password',
+        first_name="Artist", last_name='Four', email='emaila4@aa.io', username='ArtistFour', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
         profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",

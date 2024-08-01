@@ -9,6 +9,7 @@ class Track(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     album_id = db.Column(db.Integer, db.ForeignKey('albums.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.Float, nullable=False)  # Duration in seconds
     file_url = db.Column(db.String(250))

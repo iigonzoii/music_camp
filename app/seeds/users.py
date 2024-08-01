@@ -8,20 +8,20 @@ def seed_users():
         first_name="Demo", last_name='User',username='Demo', email='demo@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc',banner_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBand.jpg?alt=media&token=70d07189-3781-4ddd-a803-da95edc9e302', background_img_url="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847",
         )
     user_one = User(
-        username='User1',first_name='User', last_name='One', email='email@aa.io', password='password')
+        username='User1',first_name='User', last_name='One', email='emailu1@aa.io', password='password')
     user_two = User(
-        username='User2', email='email@aa.io', password='password')
+        username='User2', email='emailu2@aa.io', password='password')
     artist_one= User(
-        first_name="Artist", last_name='One',username='ArtistOne', email='email@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere"
+        first_name="Artist", last_name='One',username='ArtistOne', email='emaila1@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere"
         )
     artist_two=User(
-        first_name="Artist", last_name='Two',username='ArtistTwo', email='email@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Two',username='ArtistTwo', email='emaila2@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_three=User(
-        first_name="Artist", last_name='Three',username='ArtistThree', email='email@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Three',username='ArtistThree', email='emaila3@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_four=User(
-        first_name="Artist", last_name='Four',username='ArtistFour', email='email@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Four',username='ArtistFour', email='emaila4@aa.io', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
 
     db.session.add(demo)
@@ -31,6 +31,7 @@ def seed_users():
     db.session.add(artist_two)
     db.session.add(artist_three)
     db.session.add(artist_four)
+    
     db.session.commit()
 
 

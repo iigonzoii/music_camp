@@ -9,12 +9,14 @@ review_routes = Blueprint('reviews', __name__)
 # Get all reviews by current user
 @review_routes.route('/current')
 @login_required
-def users():
+def user_reviews():
     """
-    Query for all users and returns them in a list of user dictionaries
+    Get all current user's reviews
     """
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    reviews = Review.query.filter_by(user_id=current_user.id).all()
+    if not reviews:
+        return {'errors': {'message': 'No existing reviews'}}, 404
+    return {'reviews': [review.to_dict() for review in reviews]}
 
 
 
@@ -65,9 +67,21 @@ def delete_review(review_id):
 
 
 
+# Album route
+# Get all reviews by album id
+@album_routes.route('/<int:album_id>/reviews')
+def album_reviews(album_id):
+    """
+    Get all reviews for an album
+    """
+    reviews = Review.query.filter_by(album_id=album_id).all()
+    if not reviews:
+        return {'errors': {'message': 'No existing reviews'}}, 404
+    return {'reviews': [review.to_dict() for review in reviews]}
 
 
-# review route for album
+# Album route
+# Create a review by album id
 @album_routes.route('/<int:album_id>/reviews', methods=['POST'])
 @login_required
 def new_review(album_id):

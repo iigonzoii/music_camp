@@ -1,0 +1,8 @@
+.CMcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    justify-content: flex-start;
+    margin:auto;
+    width: 1060px;
+}

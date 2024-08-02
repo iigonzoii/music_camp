@@ -27,19 +27,34 @@ function LandingPage() {
 
     return (
         <>
-            <div className="LPsection1">section one, TOP div will house the genre and categories tabs according to wireframe </div>
+            <div className="LPsection1">section one, TOP div will house the genre and categories tabs according to wireframe
+                <div className="LProw1"> row 1
+                    <button>All Genres</button>
+                    <button>genre1</button>
+                    <button>genre2</button>
+                    <button>genre3</button>
+                    <button>genre4</button>
+                </div>
+                <div className="LProw2">row 2
+                <button>all categories</button>
+                <button>Digital</button>
+                <button>Vinyl</button>
+                <button>Compact Discs</button>
+                <button>Cassettes</button>
+                </div>
+            </div>
 
             <div className="LPcontainer">
 
                 <div className="LPsection2">section two, LEFT div will house the tiled list of albums and album data according to wireframe
-                <CardMapper />
+                    <CardMapper />
                 </div>
 
                 <div className="LPsection3">
                     <div>album div </div>
                     <div>album data div</div>
                     <div>
-                    <button>Go to album</button><button>Wishlist</button>
+                        <button>Go to album</button><button>Wishlist</button>
                     </div>
                     <div>number of tracks</div>
                     <div>released `DATE`</div>

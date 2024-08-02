@@ -6,6 +6,9 @@
 .LPsection1 {
 border: solid 5px red;
 margin: 0px 20px 0px 20px;
+display: flex;
+/* flex-wrap: wrap; */
+flex-direction: column;
 
 }
 .LPsection2 {
@@ -21,4 +24,11 @@ margin: 0px 20px 0px 20px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+}
+.LProw1 {
+    display: flex;
+
+}
+.LProw2 {
+    display: flex;
 }

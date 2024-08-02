@@ -59,11 +59,6 @@ function ProfileButton() {
           ) : (
             <>
               <OpenModalMenuItem
-              // cssm="logInn"
-              // ! HOW DO I GET CSS FROM MODAL.CSS OR ANY OTHER FILE INTO HERE. CSSM TIES INTO OPENMODAL.JSX
-              // className={"logInn"}
-              // className="logInn"
-                // buttonText="Log In"
                 itemText="Log In"
                 onItemClick={closeMenu}
                 // onButtonClick={closeMenu}

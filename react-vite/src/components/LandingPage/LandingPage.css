@@ -25,10 +25,10 @@ flex-direction: column;
     flex-wrap: wrap;
     flex-direction: column;
 }
-.LProw1 {
+.LPgenre {
     display: flex;
 
 }
-.LProw2 {
+.LPcategory {
     display: flex;
 }

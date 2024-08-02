@@ -28,14 +28,14 @@ function LandingPage() {
     return (
         <>
             <div className="LPsection1">section one, TOP div will house the genre and categories tabs according to wireframe
-                <div className="LProw1"> row 1
+                <div className="LPgenre"> row 1
                     <button>All Genres</button>
                     <button>genre1</button>
                     <button>genre2</button>
                     <button>genre3</button>
                     <button>genre4</button>
                 </div>
-                <div className="LProw2">row 2
+                <div className="LPcategory">row 2
                 <button>all categories</button>
                 <button>Digital</button>
                 <button>Vinyl</button>

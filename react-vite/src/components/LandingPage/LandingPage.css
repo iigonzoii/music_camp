@@ -18,4 +18,7 @@ margin: 0px 20px 0px 20px;
     border: solid 5px blue;
     margin: 0px 20px 0px 0px;
     width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }

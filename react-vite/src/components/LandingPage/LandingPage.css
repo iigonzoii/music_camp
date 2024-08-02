@@ -1,0 +1,14 @@
+.LPsection1 {
+border: solid 5px red;
+}
+.LPsection2 {
+    border: solid 5px rgb(83, 235, 40);
+
+}
+.LPsection3 {
+    border: solid 5px blue;
+
+}
+.LPcontainer {
+    display: flex;
+}

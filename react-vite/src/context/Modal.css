@@ -22,3 +22,64 @@
   position: absolute;
   background-color:white;
 }
+/* .logInn{
+  text-decoration: none;
+  background: none;
+  color: #FF5A5F;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-bottom: 10px;
+} */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 170px;
+}
+.login-form > input {
+  margin: 2px;
+  width: 80%;
+  background-color: #E8F0FE;
+  height: 25px;
+  font-size: 18px;
+}
+.login-form > button{
+  background-color: #FF5A5F;
+  color: white;
+  width: 80%;
+  box-shadow: 2px 5px 5px black;
+  margin:auto;
+  height: 40px;
+  border: solid black 3px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 270px;
+}
+.signup-form > input{
+  margin: 2px;
+  width: 80%;
+  background-color: #E8F0FE;
+  height: 25px;
+  font-size: 18px;
+}
+.signup-form > button{
+  width: 80%;
+  box-shadow: 2px 5px 5px black;
+  margin:auto;
+  background-color: #FF5A5F;
+  color: white;
+  height: 40px;
+  border: solid black 3px;
+  font-size: 20px;
+  cursor: pointer;
+}

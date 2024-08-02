@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import "./Navigation.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function ProfileButton() {
           ) : (
             <>
               <OpenModalMenuItem
+              cssm="logInn"
                 itemText="Log In"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}

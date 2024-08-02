@@ -1,3 +1,19 @@
-.profile-dropdown {
+/* .profile-dropdown {
   position: absolute;
+} */
+.logo{
+  text-decoration: none;
+  color:#280dae;
+  font-size: 15px;
+}
+nav{
+  display: flex;
+  border-bottom: solid grey;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+
+}
+.pointer{
+  cursor:pointer;
 }

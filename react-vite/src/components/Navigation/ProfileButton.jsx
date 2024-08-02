@@ -5,6 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import "./Navigation.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function ProfileButton() {
   return (
     <>
       <button onClick={toggleMenu}>
+      <i className="pointer" ></i>
         <FaUserCircle />
       </button>
       {showMenu && (
@@ -57,8 +59,13 @@ function ProfileButton() {
           ) : (
             <>
               <OpenModalMenuItem
+              // cssm="logInn"
+              // ! HOW DO I GET CSS FROM MODAL.CSS OR ANY OTHER FILE INTO HERE. CSSM TIES INTO OPENMODAL.JSX
+              className={"logInn"}
+              // className="logInn"
+                // buttonText="Log In"
                 itemText="Log In"
-                onItemClick={closeMenu}
+                // onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem

@@ -43,6 +43,7 @@ function ProfileButton() {
   return (
     <>
       <button onClick={toggleMenu}>
+      <i className="pointer" ></i>
         <FaUserCircle />
       </button>
       {showMenu && (
@@ -58,9 +59,13 @@ function ProfileButton() {
           ) : (
             <>
               <OpenModalMenuItem
-              cssm="logInn"
+              // cssm="logInn"
+              // ! HOW DO I GET CSS FROM MODAL.CSS OR ANY OTHER FILE INTO HERE. CSSM TIES INTO OPENMODAL.JSX
+              className={"logInn"}
+              // className="logInn"
+                // buttonText="Log In"
                 itemText="Log In"
-                onItemClick={closeMenu}
+                // onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem

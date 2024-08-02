@@ -22,7 +22,7 @@
   position: absolute;
   background-color:white;
 }
-/* .logInn{
+.logInn{
   text-decoration: none;
   background: none;
   color: #FF5A5F;
@@ -32,7 +32,7 @@
   cursor: pointer;
   outline: inherit;
   margin-bottom: 10px;
-} */
+}
 .login-form {
   display: flex;
   flex-direction: column;

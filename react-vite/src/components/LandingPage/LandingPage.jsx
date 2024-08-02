@@ -25,11 +25,13 @@ function LandingPage() {
     // }
 
     return (
-        <div className="LPcontainer">
+        <>
         <div className="LPsection1">section one, TOP div will house the genre and categories tabs according to wireframe </div>
+        <div className="LPcontainer">
         <div className="LPsection2">section two, LEFT div will house the tiled list of albums and album data according to wireframe </div>
         <div className="LPsection3">section three, RIGHT div will house the tiled list of albums and album data according to wireframe </div>
         </div>
+        </>
     )
 }
 

@@ -1,14 +1,19 @@
+.LPcontainer {
+    display: flex;
+}
+
+
 .LPsection1 {
 border: solid 5px red;
+margin: 0px 20px 0px 20px;
 }
 .LPsection2 {
     border: solid 5px rgb(83, 235, 40);
+    margin: 0px 0px 0px 20px;
 
 }
 .LPsection3 {
     border: solid 5px blue;
+    margin: 0px 20px 0px 0px;
 
-}
-.LPcontainer {
-    display: flex;
 }

@@ -1,6 +1,7 @@
-/* .profile-dropdown {
+.profile-dropdown {
   position: absolute;
-} */
+  list-style-type: none;
+}
 .logo{
   text-decoration: none;
   color:#280dae;
@@ -17,3 +18,14 @@ nav{
 .pointer{
   cursor:pointer;
 }
+/* .logInn{
+  text-decoration: none;
+  background: none;
+  color: #FF5A5F;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-bottom: 10px;
+} */

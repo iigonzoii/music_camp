@@ -13,7 +13,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
-        // element: <h1>dsaf</h1>,
 
       },
       {

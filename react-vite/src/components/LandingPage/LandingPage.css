@@ -25,10 +25,18 @@ flex-direction: column;
     flex-wrap: wrap;
     flex-direction: column;
 }
+.LPsection3 >div > button {
+    cursor: pointer;
+}
 .LPgenre {
     display: flex;
-
+}
+.LPgenre > button{
+    cursor: pointer;
 }
 .LPcategory {
     display: flex;
+}
+.LPcategory > button{
+    cursor: pointer;
 }

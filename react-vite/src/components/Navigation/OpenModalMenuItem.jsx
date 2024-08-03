@@ -15,7 +15,7 @@ function OpenModalMenuItem({
   };
 
   return (
-    <li onClick={onClick}>{itemText}</li>
+    <li className='logInn' onClick={onClick}>{itemText}</li>
   );
 }
 

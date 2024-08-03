@@ -19,3 +19,14 @@ class Track(db.Model):
 
     # Relationship to User (many-to-one)
     user = db.relationship('User', back_populates='tracks')
+
+    def to_dict(self):
+                return {
+                    'id': self.id,
+                    'user_id': self.user_id,
+                    'album_id': self.album_id,
+                    'name': self.name,
+                    'duration': self.duration,
+                    'created_at': self.created_at,
+                    'updated_at': self.updated_at
+                }

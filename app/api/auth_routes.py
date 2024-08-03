@@ -7,6 +7,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 auth_routes = Blueprint('auth', __name__)
 
 
+
 @auth_routes.route('/')
 def authenticate():
     """
@@ -52,9 +53,20 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            bio=form.data.get('bio', ''),
+            spotify=form.data.get('spotify', ''),
+            instagram=form.data.get('instagram', ''),
+            website=form.data.get('website', ''),
+            facebook=form.data.get('facebook', ''),
+            profile_img_url=form.data.get('profile_img_url', ''),
+            banner_img_url=form.data.get('banner_img_url', ''),
+            background_img_url=form.data.get('background_img_url', '')
+
         )
         db.session.add(user)
         db.session.commit()

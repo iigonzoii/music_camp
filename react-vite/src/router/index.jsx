@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import LandingPage from "../components/LandingPage"
 import UserHome from '../components/UserHome';
+import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
 import Layout from './Layout';
 
 
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path:"/home",
         element:<UserHome />
+      },
+      {
+        path:"/albums/:albumId",
+        element:<AlbumDetails />
       },
       {
         path: "login",

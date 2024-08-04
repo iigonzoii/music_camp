@@ -28,6 +28,8 @@ class Album(db.Model):
     tracks = db.relationship('Track', back_populates='album')
     # relationship to reviews
     reviews = db.relationship('Review', back_populates='album')
+    # relationship to purchases
+    purchases = db.relationship('PurchaseItem', back_populates='album')
 
 
 
@@ -45,6 +47,11 @@ class Album(db.Model):
             'tags': self.tags,
             'price': self.price,
             'stock': self.stock,
+            'tracks': [track.to_dict() for track in self.tracks],
+            'reviews': [review.to_dict() for review in self.reviews],
+            'purchases': [purchase.to_dict() for purchase in self.purchases],
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
+    
+

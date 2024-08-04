@@ -13,6 +13,9 @@ class Track(db.Model):
     name = db.Column(db.String(50), nullable=False)
     duration = db.Column(db.Float, nullable=False)  # Duration in seconds
     file_url = db.Column(db.String(250))
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
 
     # Relationship to Album (many-to-one)
     album = db.relationship('Album', back_populates='tracks')

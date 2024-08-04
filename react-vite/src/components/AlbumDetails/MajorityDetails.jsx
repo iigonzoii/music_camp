@@ -13,9 +13,9 @@ function MajorityDetails() {
                     <p>album.description</p>
 
                     <ol className="ADtrackList">
-                        <li className="test">trackname track duration</li>
-                        <li className="test">trackname track duration</li>
-                        <li className="test">trackname track duration</li>
+                        <li>trackname track duration</li>
+                        <li>trackname track duration</li>
+                        <li>trackname track duration</li>
                     </ol>
                     <p>produced by</p>
                     <p>Released `Release Date`</p>
@@ -25,8 +25,8 @@ function MajorityDetails() {
 
                     <img src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampRockAlbumCover.jpg?alt=media&token=3d36d4a9-7fab-4f37-ac7d-e677d5a94495" />
 
-                    <p className="test"><i className="fa-regular fa-heart pointer "></i>wishlist</p>
-                    <p className="test">Supported by</p>
+                    <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
+                    <p>Supported by</p>
                     <ul>
                         <li>reviewer profile image and their review</li>
                         <li>reviewer profile image and their review</li>

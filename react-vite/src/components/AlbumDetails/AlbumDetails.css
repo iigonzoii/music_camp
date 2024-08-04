@@ -9,8 +9,8 @@
 
 .ADbanner {
     object-fit: cover;
-   height: 200px;
-   width: 901px;
+    height: 200px;
+    width: 901px;
 
 }
 
@@ -76,11 +76,12 @@
     /* margin-top: 20px; */
 }
 
-.ADasideDiscoImgs{
+.ADasideDiscoImgs {
     height: 100px;
     width: 100px;
     /* margin-top: 20px; */
 }
-.ADsection3 > div{
+
+.ADsection3>div {
     margin-top: 20px;
 }

@@ -1,10 +1,9 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .associations import wishlist_items, shoppingcart_items
+from .purchase_item import PurchaseItem
 
-from .associations import wishlist_items, shoppingcart_items, purchase_items
-
-# * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -28,18 +27,15 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    #* album relation
+    # Relationships
     albums = db.relationship('Album', back_populates='artist')
-    #* review relation
     reviews = db.relationship('Review', back_populates='reviewer')
-    #* track relation
     tracks = db.relationship('Track', back_populates='user')
-
-    #* Association table relations with User
+    
+    # Association table relations with User
     wishlisted_albums = db.relationship('Album', secondary=wishlist_items, backref='user_wishlist')
     cart_albums = db.relationship('Album', secondary=shoppingcart_items, backref='user_cart')
-    purchased_albums = db.relationship('Album', secondary=purchase_items, backref='user_purchases')
-
+    purchases = db.relationship('PurchaseItem', back_populates='user')
 
     @property
     def password(self):

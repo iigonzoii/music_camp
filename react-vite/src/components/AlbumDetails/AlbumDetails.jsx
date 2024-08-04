@@ -1,53 +1,30 @@
+import MajorityDetails from "./MajorityDetails"
+import AlbumAside from "./AlbumAside"
 import "./AlbumDetails.css"
-// todo top container
-    //*
-// todo left container
-    //* two inner containers labeled with data of some sort
-    //* within each sub container create element placeholders for said data
-// todo right container
-    //* flex column and seperate data groups into divs
-// todo top container element placement
-// todo left container inner container
+// todo figure out how to set banner image to fill the div its in
+// * need to set the upper section as well as the others to some defined size and make responsive
+// todo section three aside align the content properly
+// * I think instead of aligning items center, we should probably align the content at flex start/left and then mess with the width settings or put margin auto so we get a centered position while keeping the text in line with the divs above it
+//* may have to put each small section into divs idk
 
 function AlbumDetails() {
 
     return (
         <>
-        <section className="ADsection1">
-ay ay shawtayyyy
-        </section>
-
-        <div className="ADcontainer">
-            <section className="ADsection2">
-
-                <div className="ADalbumData">
-                    sub container left
-                    <p>album title</p>
-                    <p>by user.username</p>
-                    <div className="V2Play">version2 play button and song</div>
-                    <p>Product Type</p>
-                    <button>Buy Product.Type</button>
-                    <p>album.description</p>
-
-                    <ol className="ADtrackList">
-                        <li className="test">trackname track duration</li>
-                        <li className="test">trackname track duration</li>
-                        <li className="test">trackname track duration</li>
-                    </ol>
-                    <p>produced by</p>
-                    <p>Released `Release Date`</p>
-                </div>
-
-                <div className="ADalbumArea">
-                sub container right
-                </div>
-
+            <section className="ADsection1">
+                <img className="ADbanner" src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847" />
             </section>
 
-            <aside className="ADsection3">
-section 3
-            </aside>
-        </div>
+            <div className="ADcontainer">
+
+                <section className="ADsection2">
+                    <MajorityDetails />
+                </section>
+                <aside className="ADsection3">
+                    <AlbumAside />
+                </aside>
+
+            </div>
         </>
     )
 }

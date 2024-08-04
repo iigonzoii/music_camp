@@ -1,31 +1,47 @@
-.ADcontainer{
+.ADcontainer {
     display: flex;
 }
 
-.ADsection1{
-    border: solid 1px red;
+.ADsection1 {
+
     margin: 0px 20px 0px 20px;
 }
-.ADsection2{
+
+.ADbanner {
+    object-fit: cover;
+   height: 200px;
+   width: 901px;
+
+}
+
+.ADsection2 {
     border: solid 1px rgb(83, 235, 40);
     margin: 0px 0px 0px 20px;
     width: 80%;
     display: flex;
 }
-.ADsection3{
-    border: solid 1px blue;
-    margin: 0px 20px 0px 0px;
-    width: 20%;
-}
-.ADalbumData{
+
+.ADalbumData {
     border: solid 1px black;
     width: 50%;
 }
-.ADalbumArea{
+
+.ADalbumArea {
     border: solid 1px;
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.ADtrackList{
+
+.ADalbumArea>img {
+    margin-top: 20px;
+    width: 250px;
+    height: 180px;
+    max-width: 100%;
+}
+
+.ADtrackList {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -33,7 +49,24 @@
     background-color: lightslategray;
 }
 
-.V2Play{
+.V2Play {
     background-color: lightslategray;
     height: 50px;
+}
+
+.ADv2supporters {
+    height: 100px;
+    width: 200px;
+    border: solid;
+}
+
+.ADsection3 {
+    border: solid 1px blue;
+    margin: 0px 20px 0px 0px;
+    width: 20%;
+}
+
+.ADasideImg {
+    height: 100px;
+    width: 100px;
 }

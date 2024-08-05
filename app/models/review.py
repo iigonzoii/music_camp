@@ -17,6 +17,8 @@ class Review(db.Model):
     reviewer = db.relationship('User', back_populates='reviews')
     #* relationship to album
     album = db.relationship('Album', back_populates='reviews')
+    # created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    # updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
 
     def to_dict(self):

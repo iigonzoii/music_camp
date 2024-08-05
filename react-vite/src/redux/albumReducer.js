@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf"
+// import { csrfFetch } from "./csrf"
 // ! i dont know if i need csrf fetches to be used or not
 
 
@@ -39,7 +39,8 @@ export const update = (updatedAlbum) => {
 
 //* Get all albums
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await csrfFetch('/api/albums');
+    const response = await ('/api/albums');
+    // csrfFetch
     const albums = await response.json();
     dispatch(loadAlbums(albums.data));
 };
@@ -47,3 +48,26 @@ export const fetchAlbums = () => async (dispatch) => {
 
 
 //*---------REDUCERS-----------
+
+const initialState = { spotDetail: {} };
+
+const albumReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOAD_ALBUMS: {
+            // console.log("ACTIONNNN",action)
+            let newState = {}
+            action.albums.forEach(album => {
+                newState[album.id] = album
+            })
+            return newState
+        }
+        case LOAD_ALBUM:
+            return { ...state, albumDetail: {...action.album}};
+        case UPDATE_ALBUM:
+            return {...state, albumDetail: action.album}
+        default:
+            return state;
+    }
+};
+
+export default albumReducer;

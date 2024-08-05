@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react"
+import { useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { fetchAlbum } from "../../redux/albumReducer"
@@ -10,10 +10,10 @@ function MajorityDetails() {
     console.log("ALBUMIDDDDDD",albumId)
     const dispatch = useDispatch();
     let album = useSelector(state => state.album.albumDetail);
-    console.log("ALBUM", album)
+    // console.log("ALBUM", album)
     // album = Object.values(album)
     // let reserve = () => alert("Feature coming soon")
-    let [isLoaded, setIsLoaded] = useState(false)
+    // let [isLoaded, setIsLoaded] = useState(false)
     // let review = useSelector(state => state.review)
     // review = Object.values(review).reverse()
     // console.log("REVIEWWWW", review)
@@ -35,25 +35,26 @@ function MajorityDetails() {
         <div className="ADalbumData">
                     sub container left
                     {console.log("albumInReturn",album)}
-                    {<p>{album && album.band}</p>}
-                    <p>by user.username</p>
+                    {/* <p>{album && album.Album.title}</p> */}
+                    {/* <p>{`by ${album.Album.band}`}</p> */}
                     <div className="V2Play">version2 play button and song</div>
-                    <p>Product Type</p>
-                    <button>Buy Product.Type</button>
-                    <p>album.description</p>
+                    {/* <p>{album.Album.product_type}</p> */}
+                    {/* <button>{`Buy ${album.Album.product_type} album`}</button> */}
+                    {/* <p>{album.Album.description}</p> */}
 
                     <ol className="ADtrackList">
+                        {/* idk how to get this working */}
                         <li>trackname track duration</li>
                         <li>trackname track duration</li>
                         <li>trackname track duration</li>
                     </ol>
-                    <p>produced by</p>
-                    <p>Released `Release Date`</p>
+                    {/* <p>{`Produced by ${album.Album.producer}`}</p> */}
+                    {/* <p>{`Released ${album.Album.created_at}`}</p> */}
                 </div>
 
                 <div className="ADalbumArea">
 
-                    <img src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampRockAlbumCover.jpg?alt=media&token=3d36d4a9-7fab-4f37-ac7d-e677d5a94495" />
+                    {/* <img src={album.Album.cover_image_url} /> */}
 
                     <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                     <p>Supported by</p>

@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from .associations import wishlist_items, shoppingcart_items, purchase_items
+from .associations import wishlist, cart_items, purchase_items
 
 # * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
@@ -36,8 +36,8 @@ class User(db.Model, UserMixin):
     tracks = db.relationship('Track', back_populates='user')
 
     #* Association table relations with User
-    wishlisted_albums = db.relationship('Album', secondary=wishlist_items, backref='user_wishlist')
-    cart_albums = db.relationship('Album', secondary=shoppingcart_items, backref='user_cart')
+    wishlisted_albums = db.relationship('Album', secondary=wishlist, backref='user_wishlist')
+    cart_albums = db.relationship('Album', secondary=cart_items, backref='user_cart')
     purchased_albums = db.relationship('Album', secondary=purchase_items, backref='user_purchases')
 
 

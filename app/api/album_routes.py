@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
 from app.models import Album, Review, Track, PurchaseItem, db
-from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm
+from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm, TrackPostForm
 
 
 album_routes = Blueprint('albums', __name__)
@@ -108,6 +108,38 @@ def update_album(album_id):
         db.session.commit()
         return album.to_dict()
     return form.errors, 401
+
+
+# Track route
+# Create a track by album id
+@album_routes.route('/<int:album_id>', methods=['POST'])
+@login_required
+def new_track(album_id):
+    """
+    Creates a track for an album
+    """
+    album = Album.query.get(album_id)
+    if not album:
+        return {'errors': {'message': 'Album not found'}}, 400
+    if album.user_id != current_user.id:
+        return {'errors': {'message': 'This album does not belong to the user'}}, 400
+
+    form = TrackPostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        theTrack = Track(
+            user_id=current_user.id,
+            album_id=album_id,
+            name=form.data['name'],
+            file_url=form.data['file'],
+            duration=form.data['duration']
+        )
+        db.session.add(theTrack)
+        db.session.commit()
+        return theTrack.to_dict(), 201
+    return form.errors, 401
+
 
 
 

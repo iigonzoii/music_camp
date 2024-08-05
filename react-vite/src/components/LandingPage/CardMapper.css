@@ -6,3 +6,9 @@
     margin:auto;
     width: 1060px;
 }
+
+.CMImg {
+    height: 100px;
+    width: 100px;
+    /* margin-top: 20px; */
+}

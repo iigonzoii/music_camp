@@ -18,13 +18,7 @@ function CardMapper() {
         // * on load we dispatch fetchSpots thunk from our store/spots
         dispatch(fetchAlbums());
     }, [dispatch]);
-    // let checkAvg = (rating) => {
-    //     if (isNaN(rating)) {
-    //         return "New"
-    //     } else {
-    //         return rating
-    //     }
-    // }
+
 
     return (
         <div className="CMcontainer">

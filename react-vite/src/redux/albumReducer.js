@@ -1,15 +1,8 @@
-// import { csrfFetch } from "./csrf"
-// ! i dont know if i need csrf fetches to be used or not
-
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
 const LOAD_ALBUM = "album/loadAlbum"
 const UPDATE_ALBUM = "album/updateAlbum"
-
-
-
-
 
 //*-------ACTION CREATORS---------
 export const loadAlbums = (albums) => {
@@ -31,9 +24,6 @@ export const update = (updatedAlbum) => {
         updatedAlbum
     }
 }
-
-
-
 
 //*---------THUNKS------------
 

@@ -103,7 +103,7 @@ export const createAlbum = (album) => async (dispatch) => {
 }
 //*---------REDUCERS-----------
 
-const initialState = { spotDetail: {} };
+const initialState = { albumDetail: {} };
 
 const albumReducer = (state = initialState, action) => {
     switch (action.type) {

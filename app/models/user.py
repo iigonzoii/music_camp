@@ -4,7 +4,6 @@ from flask_login import UserMixin
 
 from .associations import wishlist, cart_items, purchase_items
 
-# * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -28,11 +27,9 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    #* album relation
+    # Relationships
     albums = db.relationship('Album', back_populates='artist')
-    #* review relation
     reviews = db.relationship('Review', back_populates='reviewer')
-    #* track relation
     tracks = db.relationship('Track', back_populates='user')
 
     #* Association table relations with User

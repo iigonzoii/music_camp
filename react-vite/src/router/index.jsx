@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
 import LandingPage from "../components/LandingPage"
 import UserHome from '../components/UserHome';
+import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
 import Layout from './Layout';
 
 
@@ -21,12 +21,12 @@ export const router = createBrowserRouter([
         element:<UserHome />
       },
       {
-        path: "login",
-        element: <LoginFormPage />,
+        path:"/albums/:albumId",
+        element:<AlbumDetails />
       },
       {
-        path: "signup",
-        element: <SignupFormPage />,
+        path: "login",
+        element: <LoginFormPage />,
       },
     ],
   },

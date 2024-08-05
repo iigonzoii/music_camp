@@ -2,9 +2,20 @@
 
 /* Document
    ========================================================================== */
+   /** our sitewide */
 button {
   cursor: pointer;
 }
+html {
+  background-color: rgba(0, 0, 0, 0.862);
+}
+p{
+  color: lightgrey;
+}
+div{
+  color: lightgrey;
+}
+
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.

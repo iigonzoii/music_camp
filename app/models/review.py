@@ -17,3 +17,15 @@ class Review(db.Model):
     reviewer = db.relationship('User', back_populates='reviews')
     #* relationship to album
     album = db.relationship('Album', back_populates='reviews')
+
+
+    def to_dict(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'album_id': self.album_id,
+                'review': self.review,
+                'stars': self.stars,
+                'created_at': self.created_at,
+                'updated_at': self.updated_at
+            }

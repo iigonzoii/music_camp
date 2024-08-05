@@ -3,7 +3,7 @@
 }
 
 .LPsection1 {
-border: solid 1px red;
+border: solid 2px red;
 margin: 0px 20px 0px 20px;
 display: flex;
 /* flex-wrap: wrap; */
@@ -13,6 +13,9 @@ flex-direction: column;
     border: solid 1px rgb(83, 235, 40);
     margin: 0px 0px 0px 20px;
     width: 80%;
+    /* display flex */
+    /* row */
+    /* wrap */
 
 }
 .LPsection3 {

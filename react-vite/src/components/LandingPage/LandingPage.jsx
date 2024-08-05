@@ -32,7 +32,7 @@ function LandingPage() {
 
             <div className="LPcontainer">
 
-                <section className="LPsection2">section two, LEFT div will house the tiled list of albums and album data according to wireframe
+                <section className="LPsection2">
                     <CardMapper />
                     {/* <div className="CMcontainer">
             {albums && albums.map((album, index) => (

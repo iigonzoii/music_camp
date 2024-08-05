@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
-
 import { fetchAlbums } from "../../redux/albumReducer"
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import "./CardMapper.css"
@@ -10,21 +8,14 @@ function CardMapper() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // * going into the global state and accessing the spot slice of state from my combine reducer
+    // * going into the global state and accessing the album slice of state from my combine reducer
     let albums = useSelector(state => state.album);
-    // * turning that object into an array of spots
+    // * turning that object into an array of albums
     albums = Object.values(albums)
     useEffect(() => {
-        // * on load we dispatch fetchSpots thunk from our store/spots
+        // * on load we dispatch fetchAlbums thunk from our store/albums
         dispatch(fetchAlbums());
     }, [dispatch]);
-    // let checkAvg = (rating) => {
-    //     if (isNaN(rating)) {
-    //         return "New"
-    //     } else {
-    //         return rating
-    //     }
-    // }
 
     return (
         <div className="CMcontainer">

@@ -39,17 +39,71 @@ export const update = (updatedAlbum) => {
 
 //* Get all albums
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await ('/api/albums');
+    const response = await fetch('/api/albums');
     // csrfFetch
     const albums = await response.json();
     dispatch(loadAlbums(albums.data));
 };
 
+//* Get album by ID
+export const fetchAlbum = (albumId) => async (dispatch) => {
+    const response = await fetch(`/api/albums/${albumId}`)
+    // csrfFetch
+    const album = await response.json()
+    dispatch(loadAlbum(album))
+    return album
+}
 
+//* update album by ID
+export const updateAlbum = (albumId, album) => async dispatch => {
+    const response = await (`/api/albums/${albumId}`, {
+        // csrfFetch
+        method: 'Put',
+        body: JSON.stringify(album)
+    })
+    if (response.ok) {
+        const updatedAlbum = await response.json()
+        dispatch(update(updatedAlbum))
+        return updatedAlbum
+    } else {
+        const errors = await response.json()
+        return errors
+    }
+}
 
+//* delete album by id
+export const deleteAlbum = albumId => async dispatch =>{
+    const response = await (`/api/albums/${albumId}`, {
+        // csrfFetch
+        method: "DELETE"
+    })
+    dispatch(fetchCurrUserAlbums())
+    return response
+}
+
+//* Get current users albums
+export const fetchCurrUserAlbums = () => async (dispatch) => {
+    const response = await ("/api/albums/current")
+    // csrfFetch
+    const albums = await response.json()
+    dispatch(loadAlbums(albums.Spots))
+}
+
+//* Create an album
+export const createAlbum = (album) => async (dispatch) => {
+    const response = await (`/api/spots`, {
+        // csrfFetch
+        method: "POST",
+        body: JSON.stringify(album),
+        headers: { "Content-Type": "application/json" }
+    })
+    const newAlbum = await response.json()
+    dispatch(loadAlbum(newAlbum))
+    return newAlbum
+}
 //*---------REDUCERS-----------
 
-const initialState = { spotDetail: {} };
+const initialState = { albumDetail: {} };
 
 const albumReducer = (state = initialState, action) => {
     switch (action.type) {

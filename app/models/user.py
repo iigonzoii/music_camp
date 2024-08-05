@@ -2,7 +2,8 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from .associations import wishlist, cart_items, purchase_items
+from .associations import wishlist, cart_items
+from .purchase_item import PurchaseItem
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -35,7 +36,9 @@ class User(db.Model, UserMixin):
     #* Association table relations with User
     wishlisted_albums = db.relationship('Album', secondary=wishlist, backref='user_wishlist')
     cart_albums = db.relationship('Album', secondary=cart_items, backref='user_cart')
-    purchased_albums = db.relationship('Album', secondary=purchase_items, backref='user_purchases')
+    # purchase_items = db.relationship('Album', secondary=PurchaseItem, backref='user')
+    purchases = db.relationship('PurchaseItem', back_populates='user')
+
 
 
     @property
@@ -52,6 +55,18 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
             'username': self.username,
-            'email': self.email
+            'bio': self.bio,
+            'spotify': self.spotify,
+            'instagram': self.instagram,
+            'website': self.website,
+            'facebook': self.facebook,
+            'profile_img_url': self.profile_img_url,
+            'banner_img_url': self.banner_img_url,
+            'background_img_url': self.background_img_url,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

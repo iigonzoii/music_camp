@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
-from .users import seed_users, undo_users
 from .albums import seed_albums, undo_albums
 from .tracks import seed_tracks, undo_tracks
+from .users import seed_users, undo_users
 
 from app.models.db import db, environment, SCHEMA
 
@@ -18,8 +18,8 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
-        undo_tracks()
         undo_albums()
+        undo_tracks()
         undo_users()
 
     seed_users()

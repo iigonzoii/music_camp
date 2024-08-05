@@ -5,23 +5,41 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        first_name="Demo", last_name='User', email='demotest@aa.io', username='DemoUser', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc',banner_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBand.jpg?alt=media&token=70d07189-3781-4ddd-a803-da95edc9e302', background_img_url="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847",
+        first_name="Demo", last_name='User', email='demotest@aa.io', username='DemoUser', password='password',
+        bio='This is where band bio goes', website='artistWebSite',
+        spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
+        profile_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc',
+        banner_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBand.jpg?alt=media&token=70d07189-3781-4ddd-a803-da95edc9e302',
+        background_img_url="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847",
         )
     user_one = User(
         first_name='User', last_name='One', email='demotest2@aa.io', username='DemoUser1', password='password')
     user_two = User(
         first_name="User", last_name="Two", email='demotest3@aa.io', username='DemoUser2', password='password')
+
     artist_one= User(
-        first_name="Artist", last_name='One', email='demoartest4@aa.io', username='DemoArtist1', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere"
+        first_name="Artist", last_name='One', email='demoartest4@aa.io', username='DemoArtist1', password='password',
+        bio='This is where band bio goes', website='artistWebSite',
+        spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',
+        profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere"
         )
     artist_two=User(
-        first_name="Artist", last_name='Two', email='demoartest5@aa.io', username='DemoArtist2', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Two', email='demoartest5@aa.io', username='DemoArtist2', password='password',
+        bio='This is where band bio goes', website='artistWebSite',
+        spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',
+        profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_three=User(
-        first_name="Artist", last_name='Three', email='demoartest6@aa.io', username='DemoArtist3', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Three', email='demoartest6@aa.io', username='DemoArtist3', password='password',
+        bio='This is where band bio goes', website='artistWebSite',
+        spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
+        profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
     artist_four=User(
-        first_name="Artist", last_name='Four', email='demoartest7@aa.io', username='DemoArtist4', password='password',bio='This is where band bio goes',website='artistWebSite',spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',profile_img_url='imgUrlHere',banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        first_name="Artist", last_name='Four', email='demoartest7@aa.io', username='DemoArtist4', password='password',
+        bio='This is where band bio goes', website='artistWebSite',
+        spotify="spotifyUserName", instagram='instagramUrl', facebook='facebookprofileUrl',
+        profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
         )
 
 
@@ -44,13 +62,13 @@ def seed_users():
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
 def undo_users():
-   if environment == "production":
-       db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
-   else:
-       db.session.execute(text("DELETE FROM users"))
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM users"))
 
 
-   db.session.commit()
+    db.session.commit()
 
 
 
@@ -62,10 +80,10 @@ def undo_users():
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
 def undo_users():
-   if environment == "production":
-       db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
-   else:
-       db.session.execute(text("DELETE FROM users"))
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM users"))
 
 
-   db.session.commit()
+    db.session.commit()

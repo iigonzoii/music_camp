@@ -42,7 +42,8 @@ export const fetchAlbums = () => async (dispatch) => {
     const response = await fetch('/api/albums');
     // csrfFetch
     const albums = await response.json();
-    dispatch(loadAlbums(albums.data));
+    // console.log(albums)
+    dispatch(loadAlbums(albums));
 };
 
 //* Get album by ID
@@ -108,9 +109,8 @@ const initialState = { albumDetail: {} };
 const albumReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ALBUMS: {
-            // console.log("ACTIONNNN",action)
             let newState = {}
-            action.albums.forEach(album => {
+            action.albums.albums.forEach(album => {
                 newState[album.id] = album
             })
             return newState

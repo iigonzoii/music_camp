@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from .associations import wishlist, cart_items
+from .associations import wishlist
 from .purchase_item import PurchaseItem
 
 class User(db.Model, UserMixin):
@@ -35,7 +35,7 @@ class User(db.Model, UserMixin):
 
     #* Association table relations with User
     wishlisted_albums = db.relationship('Album', secondary=wishlist, backref='user_wishlist')
-    cart_albums = db.relationship('Album', secondary=cart_items, backref='user_cart')
+    # cart_albums = db.relationship('Album', secondary=cart_items, backref='user_cart')
     # purchase_items = db.relationship('Album', secondary=PurchaseItem, backref='user')
     purchases = db.relationship('PurchaseItem', back_populates='user')
 

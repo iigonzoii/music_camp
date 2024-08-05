@@ -13,7 +13,7 @@ flex-direction: column;
     border: solid 1px rgb(83, 235, 40);
     margin: 0px 0px 0px 20px;
     width: 80%;
-    /* display flex */
+    display: flex;
     /* row */
     /* wrap */
 
@@ -40,4 +40,9 @@ flex-direction: column;
 }
 .LPcategory > button{
     cursor: pointer;
+}
+
+.LPasideimg{
+    height: 100px;
+    width: 100px;
 }

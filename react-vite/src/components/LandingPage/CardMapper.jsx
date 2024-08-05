@@ -18,13 +18,7 @@ function CardMapper() {
         // * on load we dispatch fetchSpots thunk from our store/spots
         dispatch(fetchAlbums());
     }, [dispatch]);
-    // let checkAvg = (rating) => {
-    //     if (isNaN(rating)) {
-    //         return "New"
-    //     } else {
-    //         return rating
-    //     }
-    // }
+
 
     return (
         <div className="CMcontainer">
@@ -33,7 +27,7 @@ function CardMapper() {
                     title={`${album.title}`}
                     onClick={() => navigate(`/albums/${album.id}`)}
                     key={index}>
-                    <img className="pointer" src={album.cover_image_url} />
+                    <img className="CMImg" src={album.cover_image_url} />
                     <div className="spot-data-container">
                             <p>{album.title}</p>
                         <p>{`by ${album.band}`}</p>

@@ -9,6 +9,8 @@ import sessionReducer from "./session";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  // album:albumReducer,
+  // review:reviewReducer
 });
 
 let enhancer;

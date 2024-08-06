@@ -22,3 +22,5 @@ class ProductType(db.Model):
             'amount': self.amount,
             'price': self.price
         }
+    
+    

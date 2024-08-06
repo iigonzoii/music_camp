@@ -56,18 +56,21 @@ def create_album():
         )
 
         db.session.add(new_album)
+        db.session.flush()
+
+        product_types = []
+        if form.cd_amount.data:
+            product_types.append(ProductType(album_id=new_album.id, type='CD', amount=form.cd_amount.data, price=form.cd_price.data))
+        if form.vinyl_amount.data:
+            product_types.append(ProductType(album_id=new_album.id, type='Vinyl', amount=form.vinyl_amount.data, price=form.vinyl_price.data))
+        if form.cassette_amount.data:
+            product_types.append(ProductType(album_id=new_album.id, type='Cassette', amount=form.cassette_amount.data, price=form.cassette_price.data))
+        if form.digital_amount.data:
+            product_types.append(ProductType(album_id=new_album.id, type='Digital', amount=form.digital_amount.data, price=form.digital_price.data))
+
+        db.session.add_all(product_types)
         db.session.commit()
 
-        new_product_type = ProductType(
-            album_id=new_album.id,
-            cd=form.cd.data,
-            vinyl=form.vinyl.data,
-            cassette=form.cassette.data,
-            digital=form.digital.data
-        )
-
-        db.session.add(new_product_type)
-        db.session.commit()
 
         return new_album.to_dict(), 201
 

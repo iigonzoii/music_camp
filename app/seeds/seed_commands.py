@@ -6,6 +6,7 @@ from .seed_users import seed_users
 from .seed_albums import seed_albums
 from .seed_tracks import seed_tracks
 from .seed_reviews import seed_reviews
+from .seed_products import seed_products
 
 # Create a seed group to hold our commands
 seed_commands = AppGroup('seed')
@@ -16,6 +17,7 @@ def seed_all():
     seed_albums()
     seed_tracks()
     seed_reviews()
+    seed_products()
     click.echo('Seeded all data!')
 
 @seed_commands.command('users')
@@ -37,3 +39,8 @@ def seed_tracks_command():
 def seed_tracks_command():
     seed_reviews()
     click.echo('Seeded reviews!')
+
+@seed_commands.command('product_types')
+def seed_product_command():
+    seed_products()
+    click.echo('Seeded product types!')

@@ -11,8 +11,6 @@ class AlbumForm(FlaskForm):
     producer = StringField('Producer', validators=[DataRequired()])
     genre = StringField('Genre', validators=[DataRequired()])
     tags = StringField('Tags', validators=[Optional()])
-    price = FloatField('Price', validators=[DataRequired()])
-    stock = IntegerField('Stock', validators=[DataRequired()])
     cd_amount = IntegerField('CD Quantity', validators=[DataRequired(), NumberRange(min=0)])
     cd_price = FloatField('CD Price', validators=[DataRequired(), NumberRange(min=0)])
     vinyl_amount = IntegerField('Vinyl Quantity', validators=[DataRequired(), NumberRange(min=0)])

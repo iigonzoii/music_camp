@@ -51,8 +51,6 @@ def create_album():
             producer=form.producer.data,
             genre=form.genre.data,
             tags=form.tags.data,
-            price=form.price.data,
-            stock=form.stock.data
         )
 
         db.session.add(new_album)

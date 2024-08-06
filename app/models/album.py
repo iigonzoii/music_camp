@@ -10,7 +10,6 @@ class Album(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     band = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(50), nullable=False)
-    product_type = db.Column(db.String, nullable=False)
     cover_image_url = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     producer = db.Column(db.String, nullable=False)
@@ -30,7 +29,8 @@ class Album(db.Model):
     reviews = db.relationship('Review', back_populates='album')
     # relationship to purchases
     purchases = db.relationship('PurchaseItem', back_populates='album')
-
+    # relationship to product_types
+    product_types = db.relationship('ProductType', back_populates='album', uselist=False)
 
 
     def to_dict(self):
@@ -39,7 +39,6 @@ class Album(db.Model):
             'user_id': self.user_id,
             'band': self.band,
             'title': self.title,
-            'product_type': self.product_type,
             'cover_image_url': self.cover_image_url,
             'description': self.description,
             'producer': self.producer,
@@ -47,6 +46,7 @@ class Album(db.Model):
             'tags': self.tags,
             'price': self.price,
             'stock': self.stock,
+            'product_types': self.product_types.to_dict() if self.product_types else None,
             'tracks': [track.to_dict() for track in self.tracks],
             'reviews': [review.to_dict() for review in self.reviews],
             'purchases': [purchase.to_dict() for purchase in self.purchases],

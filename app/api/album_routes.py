@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
-from app.models import Album, Review, Track, PurchaseItem, db
+from app.models import Album, Review, Track, PurchaseItem, ProductType, db
 from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm, TrackPostForm
 
 
@@ -23,6 +23,7 @@ def all_albums():
 def album_by_id(album_id):
     album_details = db.session.query(Album).options(
         joinedload(Album.tracks),
+        joinedload(Album.product_types),
         joinedload(Album.reviews).joinedload(Review.reviewer),
         joinedload(Album.purchases).joinedload(PurchaseItem.user)
     ).filter(Album.id == album_id).first()
@@ -45,7 +46,6 @@ def create_album():
             user_id=current_user.id,
             band=form.band.data,
             title=form.title.data,
-            product_type=form.product_type.data,
             cover_image_url=form.cover_image_url.data,
             description=form.description.data,
             producer=form.producer.data,
@@ -56,6 +56,17 @@ def create_album():
         )
 
         db.session.add(new_album)
+        db.session.commit()
+
+        new_product_type = ProductType(
+            album_id=new_album.id,
+            cd=form.cd.data,
+            vinyl=form.vinyl.data,
+            cassette=form.cassette.data,
+            digital=form.digital.data
+        )
+
+        db.session.add(new_product_type)
         db.session.commit()
 
         return new_album.to_dict(), 201

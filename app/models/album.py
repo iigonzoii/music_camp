@@ -15,8 +15,6 @@ class Album(db.Model):
     producer = db.Column(db.String, nullable=False)
     genre = db.Column(db.String, nullable=False)
     tags = db.Column(db.String)
-    price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -44,8 +42,6 @@ class Album(db.Model):
             'producer': self.producer,
             'genre': self.genre,
             'tags': self.tags,
-            'price': self.price,
-            'stock': self.stock,
             'product_types': [pt.to_dict() for pt in self.product_types],
             'tracks': [track.to_dict() for track in self.tracks],
             'reviews': [review.to_dict() for review in self.reviews],

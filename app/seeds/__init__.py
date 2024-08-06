@@ -3,6 +3,7 @@ from .albums import seed_albums, undo_albums
 from .tracks import seed_tracks, undo_tracks
 from .users import seed_users, undo_users
 from .reviews import seed_reviews, undo_reviews
+from .product_type_seeds import seed_products, undo_products
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,11 +24,13 @@ def seed():
         undo_tracks()
         undo_users()
         undo_reviews()
+        undo_products()
 
     seed_users()
     seed_albums()
     seed_tracks()
     seed_reviews()
+    seed_products()
     # Add other seed functions here
 
 
@@ -38,4 +41,5 @@ def undo():
     undo_albums()
     undo_tracks()
     undo_reviews()
+    undo_products()
     # Add other undo functions here

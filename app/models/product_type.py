@@ -8,10 +8,9 @@ class ProductType(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
-    cd = db.Column(db.Integer, default=0)
-    vinyl = db.Column(db.Integer, default=0)
-    cassette = db.Column(db.Integer, default=0)
-    digital = db.Column(db.Integer, default=0)
+    type = db.Column(db.String, nullable=False)
+    amount = db.Column(db.Integer, default=0)
+    price = db.Column(db.Float, nullable=False, default=0)
 
     album = db.relationship('Album', back_populates='product_types')
 
@@ -19,8 +18,7 @@ class ProductType(db.Model):
         return {
             'id': self.id,
             'album_id': self.album_id,
-            'cd': self.cd,
-            'vinyl': self.vinyl,
-            'cassette': self.cassette,
-            'digital': self.digital
+            'type': self.type,
+            'amount': self.amount,
+            'price': self.price
         }

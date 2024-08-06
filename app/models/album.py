@@ -30,7 +30,7 @@ class Album(db.Model):
     # relationship to purchases
     purchases = db.relationship('PurchaseItem', back_populates='album')
     # relationship to product_types
-    product_types = db.relationship('ProductType', back_populates='album', uselist=False)
+    product_types = db.relationship('ProductType', back_populates='album')
 
 
     def to_dict(self):
@@ -46,7 +46,7 @@ class Album(db.Model):
             'tags': self.tags,
             'price': self.price,
             'stock': self.stock,
-            'product_types': self.product_types.to_dict() if self.product_types else None,
+            'product_types': [pt.to_dict() for pt in self.product_types],
             'tracks': [track.to_dict() for track in self.tracks],
             'reviews': [review.to_dict() for review in self.reviews],
             'purchases': [purchase.to_dict() for purchase in self.purchases],

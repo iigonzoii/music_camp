@@ -1,8 +1,8 @@
 """create users table
 
-Revision ID: d7be432c6792
+Revision ID: 8613a99f82f8
 Revises: 
-Create Date: 2024-08-05 07:08:54.951722
+Create Date: 2024-08-05 17:32:46.871793
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd7be432c6792'
+revision = '8613a99f82f8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,7 +44,6 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('band', sa.String(length=50), nullable=False),
     sa.Column('title', sa.String(length=50), nullable=False),
-    sa.Column('product_type', sa.String(), nullable=False),
     sa.Column('cover_image_url', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('producer', sa.String(), nullable=False),
@@ -55,6 +54,16 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('product_types',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('album_id', sa.Integer(), nullable=False),
+    sa.Column('cd', sa.Integer(), nullable=True),
+    sa.Column('vinyl', sa.Integer(), nullable=True),
+    sa.Column('cassette', sa.Integer(), nullable=True),
+    sa.Column('digital', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['album_id'], ['albums.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('purchase_items',
@@ -111,6 +120,7 @@ def downgrade():
     op.drop_table('tracks')
     op.drop_table('reviews')
     op.drop_table('purchase_items')
+    op.drop_table('product_types')
     op.drop_table('albums')
     op.drop_table('users')
     # ### end Alembic commands ###

@@ -38,12 +38,14 @@ def album_by_id(album_id):
         joinedload(Album.reviews).joinedload(Review.reviewer),
         joinedload(Album.purchases).joinedload(PurchaseItem.user),
     ).filter(Album.id == album_id).first()
-
+    # Gets all related albums by the artist of the albums details route and adds to query
+    artist_id = album_details.user_id
+    albums = db.session.query(Album).filter(Album.user_id == artist_id).all()
 
     if not album_details:
         return {'errors': {'message': 'Album not found'}}, 404
 
-    return {'Album': album_details.to_dict()}, 200
+    return {'Album': album_details.to_dict(), 'UserAlbums': [ album.to_dict() for album in albums]}, 200
 
 
 

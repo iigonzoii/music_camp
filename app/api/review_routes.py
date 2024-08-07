@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, User, Review, Album
-from app.forms import ReviewPostForm, ReviewEditForm
+from app.models import db, Review
+from app.forms import ReviewEditForm
 
 
 review_routes = Blueprint('reviews', __name__)
@@ -16,7 +16,7 @@ def user_reviews():
     reviews = Review.query.filter_by(user_id=current_user.id).all()
     if not reviews:
         return {'errors': {'message': 'No existing reviews'}}, 404
-    return {'reviews': [review.to_dict() for review in reviews]}
+    return {'reviews': [review.to_dict() for review in reviews]}, 200
 
 
 
@@ -37,9 +37,9 @@ def update_review(review_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        theReview.review=form.data['review'],
+        theReview.review=form.data['review']
         theReview.stars=form.data['stars']
-        # db.session.add(theReview)
+        db.session.add(theReview)
         db.session.commit()
         return theReview.to_dict()
     return form.errors, 401
@@ -62,50 +62,3 @@ def delete_review(review_id):
     db.session.delete(theReview)
     db.session.commit()
     return {'message': "Review successfully deleted"}, 200
-
-
-
-
-
-# Album route
-# Get all reviews by album id
-@album_routes.route('/<int:album_id>/reviews')
-def album_reviews(album_id):
-    """
-    Get all reviews for an album
-    """
-    reviews = Review.query.filter_by(album_id=album_id).all()
-    if not reviews:
-        return {'errors': {'message': 'No existing reviews'}}, 404
-    return {'reviews': [review.to_dict() for review in reviews]}
-
-
-# Album route
-# Create a review by album id
-@album_routes.route('/<int:album_id>/reviews', methods=['POST'])
-@login_required
-def new_review(album_id):
-    """
-    Creates a review for an album
-    """
-    album = Album.query.get(album_id)
-    if not album:
-        return {'errors': {'message': 'Album not found'}}, 400
-    existing_review = Review.query.filter_by(user_id=current_user.id, album_id=album_id).first()
-    if existing_review:
-        return {'errors': {'message': 'This user has an existing review for the album'}}, 400
-
-    form = ReviewPostForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    if form.validate_on_submit():
-        review = Review(
-            user_id=current_user.id,
-            album_id=album_id,
-            review=form.data['review'],
-            stars=form.data['stars']
-        )
-        db.session.add(new_review)
-        db.session.commit()
-        return review.to_dict()
-    return form.errors, 401

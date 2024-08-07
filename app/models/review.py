@@ -11,8 +11,10 @@ class Review(db.Model):
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
     review = db.Column(db.String(250), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.Date)
-    updated_at = db.Column(db.Date)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+
     #* relationship to user
     reviewer = db.relationship('User', back_populates='reviews')
     #* relationship to album

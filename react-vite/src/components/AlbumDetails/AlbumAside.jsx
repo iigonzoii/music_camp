@@ -1,10 +1,24 @@
+import { useEffect} from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
+import { fetchAlbum } from "../../redux/albumReducer"
 import "./AlbumDetails.css"
 
 function AlbumAside() {
+    const { albumId } = useParams()
+    // console.log("ALBUMIDDDDDD",albumId)
+    const dispatch = useDispatch();
+    let album = useSelector(state => state.album.albumDetail);
+    console.log("ALBUM", album)
+
+    useEffect(() => {
+        dispatch(fetchAlbum(+albumId))
+    }, [dispatch, albumId]);
 
     return (
         <>
         <div>
+            {/* how to access users profile img */}
                         <img className="ADasideImg" src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc" />
                         <div>Artist/Band Name</div>
                         <div>Artist City</div>

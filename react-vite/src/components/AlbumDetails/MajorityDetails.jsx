@@ -20,22 +20,17 @@ function MajorityDetails() {
 
         <>
             <div className="ADalbumData">
-                sub container left
                 <p>{album && album.Album.title}</p>
                 <p>{`by ${album.Album.band}`}</p>
                 <div className="V2Play">version2 play button and song</div>
-                {/* dont know how to get the below types */}
-                {/* <p>{album.Album.product_types}</p> */}
+                <p>{album.Album.description}</p>
 
                 {album && album.Album.product_types.map((ptype, index) => (
                         <button key={index}>
-                            <button>{`Buy ${ptype.type} album`}</button>
+                            {`Buy ${ptype.type}`}
                             </button>
                     ))}
 
-
-
-                <p>{album.Album.description}</p>
                 <ol className="ADtrackList">
                     {album && album.Album.tracks.map((track, index) => (
                         <li key={index}>

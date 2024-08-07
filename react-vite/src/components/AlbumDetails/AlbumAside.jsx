@@ -21,7 +21,7 @@ function AlbumAside() {
             {/* how to access users profile img */}
                         <img className="ADasideImg" src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc" />
                         {/* <div>Artist/Band Name</div> */}
-                        <div>{album.Album.band}</div>
+                        <div>{album.band}</div>
 
                         <div>Artist City</div>
                         <div>Artist Country</div>

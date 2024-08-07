@@ -10,5 +10,6 @@
 .CMImg {
     height: 100px;
     width: 100px;
+    object-fit:cover;
     /* margin-top: 20px; */
 }

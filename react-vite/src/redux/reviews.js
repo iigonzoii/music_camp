@@ -1,7 +1,7 @@
 
 //*------ACTION TYPES---------
-const LOAD_REVIEWS = "review/loadReviews"
-const LOAD_REVIEW = "review/loadReview"
+const LOAD_REVIEWS = "reviews/loadReviews"
+// const LOAD_REVIEW = "reviews/loadReview"
 const ADD_REVIEW = 'reviews/addReview';
 const UPDATE_REVIEW = 'reviews/updateReview';
 const DELETE_REVIEW = 'reviews/deleteReview';
@@ -14,12 +14,12 @@ export const loadReviews = (reviews) => {
     }
 }
 
-export const loadReview = (review) => {
-    return {
-        type: LOAD_REVIEW,
-        review
-    }
-}
+// export const loadReview = (review) => {
+//     return {
+//         type: LOAD_REVIEW,
+//         review
+//     }
+// }
 
 export const addReview = (review) => {
     return {
@@ -67,7 +67,7 @@ export const createReview = (albumId, review) => async (dispatch) => {
         headers: { "Content-Type": "application/json" }
     })
     const newReview = await response.json()
-    dispatch(loadReview(newReview))
+    dispatch(addReview(newReview))
     return newReview
 }
 
@@ -79,7 +79,7 @@ export const editReview = (reviewId, review) => async dispatch => {
     })
     if (response.ok) {
         const updatedReview = await response.json()
-        dispatch(update(updatedReview))
+        dispatch(updateReview(updatedReview))
         return updatedReview
     } else {
         const errors = await response.json()
@@ -88,12 +88,11 @@ export const editReview = (reviewId, review) => async dispatch => {
 }
 
 //* Delete a review by id
-export const removeReview = (reviewId) => async dispatch =>{
+export const removeReview = (reviewId) => async (dispatch) =>{
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: "DELETE"
     })
-    const deletedReview = await response.json()
-    dispatch(deleteReview(deletedReview))
+    dispatch(deleteReview(reviewId))
     return response
 }
 
@@ -114,8 +113,8 @@ const reviewReducer = (state = initialState, action) => {
             });
             return newState;
         }
-        case LOAD_REVIEW:
-            return { ...state, reviewDetail: {...action.review}};
+        // case LOAD_REVIEW:
+        //     return { ...state, reviewDetail: {...action.review}};
         case ADD_REVIEW: {
             return {
                 ...state,

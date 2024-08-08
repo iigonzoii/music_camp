@@ -1,8 +1,9 @@
 
 //*------ACTION TYPES---------
-const LOAD_TRACKS = "review/loadTracks"
-const ADD_TRACK = 'reviews/addTrack';
-const DELETE_TRACK = 'reviews/DELETE_TRACK';
+const LOAD_TRACKS = "tracks/loadTracks"
+// const LOAD_TRACK = "tracks/loadTrack"
+const ADD_TRACK = 'tracks/addTrack';
+const DELETE_TRACK = 'tracks/DELETE_TRACK';
 
 //*-------ACTION CREATORS---------
 export const loadTracks = (tracks) => {
@@ -12,6 +13,13 @@ export const loadTracks = (tracks) => {
     }
 }
 
+// export const loadTrack = (track) => {
+//     return {
+//         type: LOAD_TRACK,
+//         track
+//     }
+// }
+
 export const addTrack = (track) => {
     return {
         type: ADD_TRACK,
@@ -19,72 +27,77 @@ export const addTrack = (track) => {
     }
 }
 
-export const deleteTrack = (track) => {
+export const deleteTrack = (trackId) => {
     return {
         type: DELETE_TRACK,
-        track
+        trackId
     }
 }
 
 //*---------THUNKS------------
 
-//* Get all tracks by Album id
-export const fetchCurrUserTracks = () => async (dispatch) => {
-    const response = await ("/api/tracks/current")
-    // csrfFetch
+//* Get all tracks
+export const fetchTracks = () => async (dispatch) => {
+    const response = await fetch("/api/tracks/current")
     const tracks = await response.json()
-    dispatch(loadReviews(tracks.Tracks))
+    dispatch(loadTracks(tracks.Tracks))
 }
 
 //* Get all tracks by Album ID
-export const fetchTracksByAlbum = (albumId) => async (dispatch) => {
+export const fetchTracksbyAlbumId = (albumId) => async (dispatch) => {
     const response = await fetch(`/api/albums/${albumId}/tracks`)
-    // csrfFetch
     const tracks = await response.json()
     dispatch(loadTracks(tracks))
 }
 
 //* Create a track by Album ID
-export const createTrack = (track) => async (dispatch) => {
-    const response = await (`/api/albums/${albumId}/tracks`, {
-        // csrfFetch
+// Requires attention
+export const createTrack = (track, albumId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/albums/${albumId}`, {
         method: "POST",
         body: JSON.stringify(track),
         headers: { "Content-Type": "application/json" }
     })
     const newTrack = await response.json()
-    dispatch(loadTrack(newTrack))
+    dispatch(addTrack(newTrack))
     return newTrack
 }
 
-
 //* Delete a track by id
-export const removeTrack = trackId => async dispatch =>{
-    const response = await (`/api/reviews/${TrackId}`, {
+export const removeTrack = (trackId) => async (dispatch) =>{
+    const response = await csrfFetch(`/api/tracks/${trackId}`, {
         method: "DELETE"
     })
-    dispatch(fetchCurrUserTracks())
+    if (response.ok) {
+        dispatch(deleteTrack(trackId))
+    }
     return response
 }
 
 
 //*---------REDUCERS-----------
 
-const initialState = { reviewDetail: {} };
+const initialState = { allTracks: {} };
 
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
-            let newState = {}
-            action.tracks.tracks.forEach(track => {
-                newState[track.id] = track
+            const newState = { ...state, allTracks: {}}
+            action.tracks.forEach(track => {
+                newState.allTracks[track.id] = track
             })
             return newState
         }
-        case LOAD_REVIEW:
-            return { ...state, trackDetail: {...action.track}};
-        case UPDATE_REVIEW:
-            return {...state, trackDetail: action.track}
+        case ADD_TRACK:
+            return {
+                ...state,
+                allTracks: { ...state.allTracks, [action.track.id]: action.track },
+            };
+        case DELETE_TRACK: {
+            const newState = { ...state };
+            delete newState.allTracks[action.trackId];
+            return newState;
+        }
         default:
             return state;
     }

@@ -1,46 +1,42 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-// import { useParams } from "react-router-dom"
-import { fetchAlbums } from "../../redux/albumReducer"
-// import { useNavigate } from "react-router-dom";
-// import { fetchReviews } from "../../store/reviewReducer"
+import { useNavigate } from "react-router-dom"
+import { fetchAlbum } from "../../redux/albumReducer"
+import "./LandingPage.css"
+
 
 function LandingAside() {
-    // const { albumId } = useParams()
-    // const navigate = useNavigate();
+    let albumId = 2
+    const navigate = useNavigate();
     // console.log("albumIDDDDDD", albumId)
     const dispatch = useDispatch();
-    let albums = useSelector(state => state.album);
-    albums = Object.values(albums)
-    console.log("ALBUMS", albums)
-
-    // const session = useSelector(state => state.session);
-    // console.log(album.albumDetail)
-    // console.log("ALBUM", album)
-    // let [isLoaded, setIsLoaded] = useState(false)
-    // let review = useSelector(state => state.review)
-    // review = Object.values(review).reverse()
-    // console.log("REVIEWWWW", review)
-    // let userHasReview
-    // if (session.user !== null) userHasReview = review.find(currReview => currReview.userId === session.user.id)
+    let album = useSelector(state => state.album.albumDetail);
+    // album = Object.values(album)
+    let [isLoaded, setIsLoaded] = useState(false)
+    console.log("ALBUMS", album)
     useEffect(() => {
-        dispatch(fetchAlbums())
-        // .then(() => dispatch(fetchSpot(+spotId)))
-        // .then(() => setIsLoaded(true));
-        //! if i get build errors then take this stupid spotId out of here
-    }, [dispatch]);
-
-    return (
+        dispatch(fetchAlbum(albumId)).then(() =>
+            setIsLoaded(true));
+    }, [dispatch, albumId]);
+    if (!album || !album.Album) return
+    // let duration = 0
+    // for (let i = 0; i <= album.Album.tracks.length; i++) {
+    //     duration = duration + album.Album.tracks[i][duration]
+    // }
+    // console.log("duration", duration)
+    return isLoaded && (
         <div>
-            {/* this works until you refresh. should be using the album by id thunk i think but idk  */}
-            {/* <img className="LPasideimg" src={albums[2].cover_image_url} /> */}
-            <div>album data div</div>
-            <div>
-                <button>Go to album</button>
+            <div >album data div</div>
+
+            {/* <img className="LPasideimg" src={album.Album.cover_image_url} /> */}
+            <div className="LPasideButtons">
+                <button onClick={() => navigate(`/albums/${albumId}`)}>Go to album</button>
                 <button>Wishlist</button>
             </div>
-            <div>number of tracks</div>
-            <div>released `DATE`</div>
+
+            {/* <div>{`${album.Album.tracks.length} Tracks`}</div> */}
+            {/* idk how to get duration */}
+            {/* <div>{`Released ${album.Album.created_at.split(" ")[2]} ${album.Album.created_at.split(" ")[3]} `}</div> */}
             <div>image band name , city and country will go here</div>
             <div>`Random Review` and random reviewer name will go here</div>
 

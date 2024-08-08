@@ -9,7 +9,7 @@ function AlbumAside() {
     const dispatch = useDispatch();
     let album = useSelector(state => state.album.albumDetail);
     let [isLoaded, setIsLoaded] = useState(false)
-    console.log("ALBUM", album)
+    // console.log("ALBUM", album)
     useEffect(() => {
         dispatch(fetchAlbum(+albumId)).then(() =>
             setIsLoaded(true));

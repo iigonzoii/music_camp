@@ -43,6 +43,10 @@ flex-direction: column;
 }
 
 .LPasideimg{
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+.LPasideButtons{
+    display: flex;
 }

@@ -8,17 +8,14 @@ import "./LandingPage.css"
 function LandingAside() {
     let albumId = 2
     const navigate = useNavigate();
-    // console.log("albumIDDDDDD", albumId)
     const dispatch = useDispatch();
     let album = useSelector(state => state.album);
-    // album = Object.values(album)
     let [isLoaded, setIsLoaded] = useState(false)
     console.log("ALBUMS", album[albumId])
     useEffect(() => {
         dispatch(fetchAlbum(albumId)).then(() =>
             setIsLoaded(true));
     }, [dispatch]);
-    // if (!album || !album.Album) return
     // let duration = 0
     // for (let i = 0; i <= album.Album.tracks.length; i++) {
     //     duration = duration + album.Album.tracks[i][duration]
@@ -38,8 +35,12 @@ function LandingAside() {
                 <div>{`${album[albumId].tracks.length} Tracks`}</div>
                 {/* idk how to get duration */}
                 <div>{`Released ${album[albumId].created_at.split(" ")[2]} ${album[albumId].created_at.split(" ")[3]} `}</div>
-                <div>image band name , city and country will go here</div>
-                <div>`Random Review` and random reviewer name will go here</div>
+                <div>
+                    <img />
+                    <p>image band name , city and country will go here</p>
+                    <p>`Random Review` and random reviewer name will go here</p>
+                </div>
+
 
             </div>
         )

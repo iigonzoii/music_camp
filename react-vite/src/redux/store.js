@@ -7,12 +7,14 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import albumReducer from "./albumReducer";
+import trackReducer from "./tracks";
 import reviewReducer from "./reviews";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   album: albumReducer,
+  track: trackReducer,
   review: reviewReducer
 });
 

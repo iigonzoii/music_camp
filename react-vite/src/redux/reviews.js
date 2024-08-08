@@ -1,10 +1,9 @@
 
 //*------ACTION TYPES---------
 const LOAD_REVIEWS = "review/loadReviews"
-// const LOAD_REVIEW = "review/loadReview"
-const ADD_REVIEW = 'reviews/ADD_REVIEW';
-const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
-// const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
+const ADD_REVIEW = 'reviews/addReview';
+const UPDATE_REVIEW = 'reviews/updateReview';
+const DELETE_REVIEW = 'reviews/deleteReview';
 
 //*-------ACTION CREATORS---------
 export const loadReviews = (reviews) => {
@@ -13,13 +12,6 @@ export const loadReviews = (reviews) => {
         reviews
     }
 }
-
-// export const loadReview = (review) => {
-//     return {
-//         type: LOAD_REVIEW,
-//         review
-//     }
-// }
 
 export const addReview = (review) => {
     return {
@@ -35,12 +27,12 @@ export const updateReview = (review) => {
     }
 }
 
-// export const deleteReview = (review) => {
-//     return {
-//         type: DELETE_REVIEW,
-//         review
-//     }
-// }
+export const deleteReview = (review) => {
+    return {
+        type: DELETE_REVIEW,
+        review
+    }
+}
 
 //*---------THUNKS------------
 
@@ -108,15 +100,24 @@ const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
             let newState = {}
-            action.reviews.reviews.forEach(review => {
+            action.reviews.forEach(review => {
                 newState[review.id] = review
             })
             return newState
         }
-        case LOAD_REVIEW:
-            return { ...state, reviewDetail: {...action.review}};
+        case ADD_REVIEW: {
+            return {
+                ...state,
+                [action.review.id]: action.review,
+            };
+        }
         case UPDATE_REVIEW:
             return {...state, reviewDetail: action.review}
+        case DELETE_REVIEW: {
+            let newState = { ...state };
+            delete newState[action.reviewId];
+            return newState;
+        }
         default:
             return state;
     }

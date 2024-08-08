@@ -46,4 +46,4 @@ def complete_purchase(data):
     # can we check with phil if the commit() should be ran after all new_purchase items
     # have been added?
     db.session.commit()
-    return purchased.to_dict()
+    return purchased.to_dict(), 200

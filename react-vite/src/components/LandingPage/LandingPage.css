@@ -22,9 +22,16 @@ flex-direction: column;
     border: solid 1px blue;
     margin: 0px 20px 0px 0px;
     width: 20%;
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
+    flex-direction: column; */
+
+    margin: 0px 20px 0px 0px;
+    width: 20%;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    font-size: 10px;
 }
 .LPsection3 >div > button {
     cursor: pointer;
@@ -43,6 +50,10 @@ flex-direction: column;
 }
 
 .LPasideimg{
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+.LPasideButtons{
+    display: flex;
 }

@@ -36,6 +36,7 @@ export const fetchAlbums = () => async (dispatch) => {
     dispatch(loadAlbums(albums));
 };
 
+
 //* Get album by ID
 export const fetchAlbum = (albumId) => async (dispatch) => {
     const response = await fetch(`/api/albums/${albumId}`)
@@ -77,12 +78,12 @@ export const fetchCurrUserAlbums = () => async (dispatch) => {
     const response = await ("/api/albums/current")
     // csrfFetch
     const albums = await response.json()
-    dispatch(loadAlbums(albums.Spots))
+    dispatch(loadAlbums(albums.Albums))
 }
 
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
-    const response = await (`/api/spots`, {
+    const response = await (`/api/albums`, {
         // csrfFetch
         method: "POST",
         body: JSON.stringify(album),

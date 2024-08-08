@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
-from app.models import Album, Review, Track, PurchaseItem, ProductType, db
+from app.models import Album, Review, Track, PurchaseItem, ProductType, User, db
 from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm, TrackPostForm
 
 
@@ -18,6 +18,17 @@ def all_albums():
     return {'albums': albums_dict}, 200
 
 
+# Get all albums by User
+@album_routes.route('/user/<int:user_id>', methods=['GET'])
+def albums_by_user(user_id):
+    albums = db.session.query(Album).filter(Album.user_id == user_id).all()
+
+    if not albums:
+        return {'errors': {'message': 'No albums found for this user'}}, 404
+
+    return {'albums': [album.to_dict() for album in albums]}, 200
+
+
 # Get album details by id
 @album_routes.route('/<int:album_id>', methods=['GET'])
 def album_by_id(album_id):
@@ -25,14 +36,17 @@ def album_by_id(album_id):
         joinedload(Album.tracks),
         joinedload(Album.product_types),
         joinedload(Album.reviews).joinedload(Review.reviewer),
-        joinedload(Album.purchases).joinedload(PurchaseItem.user)
+        joinedload(Album.purchases).joinedload(PurchaseItem.user),
     ).filter(Album.id == album_id).first()
-
+    # Gets all related albums by the artist of the albums details route and adds to query
+    artist_id = album_details.user_id
+    albums = db.session.query(Album).filter(Album.user_id == artist_id).all()
 
     if not album_details:
         return {'errors': {'message': 'Album not found'}}, 404
 
-    return {'Album': album_details.to_dict()}, 200
+    return {'Album': album_details.to_dict(), 'UserAlbums': [ album.to_dict() for album in albums]}, 200
+
 
 
 # Post album
@@ -73,6 +87,7 @@ def create_album():
         return new_album.to_dict(), 201
 
     return {'errors': form.errors}, 400
+
 
 
 # Delete album by id

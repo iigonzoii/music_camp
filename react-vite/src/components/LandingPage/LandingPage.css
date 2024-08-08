@@ -3,14 +3,15 @@
 }
 
 .LPsection1 {
-border: solid 2px red;
+/* border: solid 2px red; */
 margin: 0px 20px 0px 20px;
 display: flex;
 /* flex-wrap: wrap; */
-flex-direction: column;
+/* flex-direction: column; */
+
 }
 .LPsection2 {
-    border: solid 1px rgb(83, 235, 40);
+    /* border: solid 1px rgb(83, 235, 40); */
     margin: 0px 0px 0px 20px;
     width: 80%;
     display: flex;
@@ -19,14 +20,10 @@ flex-direction: column;
 
 }
 .LPsection3 {
-    border: solid 1px blue;
-    margin: 0px 20px 0px 0px;
+    /* border: solid 1px blue; */
+    margin: 0px 20px 0px 20px;
     width: 20%;
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; */
-
-    margin: 0px 20px 0px 0px;
+    /* margin: 0px 20px 0px 20px; */
     width: 20%;
     display: flex;
     flex-direction: column;
@@ -48,6 +45,13 @@ flex-direction: column;
 .LPcategory > button{
     cursor: pointer;
 }
+.LPasideContainer{
+/* margin: auto */
+/* border: solid white; */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
 
 .LPasideimg{
     height: 150px;
@@ -57,3 +61,6 @@ flex-direction: column;
 .LPasideButtons{
     display: flex;
 }
+/* .LPupperButtons{
+    padding: 0px 0px 5px 0px;
+} */

@@ -5,11 +5,6 @@ import { fetchAlbum } from "../../redux/albumReducer"
 import MajorityDetails from "./MajorityDetails"
 import AlbumAside from "./AlbumAside"
 import "./AlbumDetails.css"
-// todo figure out how to set banner image to fill the div its in
-// * need to set the upper section as well as the others to some defined size and make responsive
-// todo section three aside align the content properly
-// * I think instead of aligning items center, we should probably align the content at flex start/left and then mess with the width settings or put margin auto so we get a centered position while keeping the text in line with the divs above it
-//* may have to put each small section into divs idk
 
 function AlbumDetails() {
     const { albumId } = useParams();

@@ -1,22 +1,24 @@
-import { useEffect, useState} from "react"
-import { useDispatch, useSelector } from "react-redux"
+// import { useEffect, useState} from "react"
+import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { fetchAlbums, fetchAlbum } from "../../redux/albumReducer"
+// import { fetchAlbum } from "../../redux/albumReducer"
 import "./AlbumDetails.css"
 
 function AlbumAside() {
     const { albumId } = useParams();
-    const dispatch = useDispatch();
+
     let album = useSelector(state => state.album);
+    // const { albumId } = useParams();
+    // const dispatch = useDispatch();
     // album = Object.values(album);
-    let [isLoaded, setIsLoaded] = useState(false)
-    // console.log("ALBUM", album)
-    useEffect(() => {
-        dispatch(fetchAlbum(albumId)).then(() =>
-            setIsLoaded(true));
-    }, [dispatch, albumId]);
+    // let [isLoaded, setIsLoaded] = useState(false)
+    // // console.log("ALBUM", album)
+    // useEffect(() => {
+    //     dispatch(fetchAlbum(albumId)).then(() =>
+    //         setIsLoaded(true));
+    // }, [dispatch, albumId]);
     // if (!album || !album.Album) return
-    return isLoaded && (
+    return  (
         <>
         <div>
             {/* how to access users profile img */}

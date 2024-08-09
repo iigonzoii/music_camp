@@ -16,15 +16,10 @@ function LandingAside() {
         dispatch(fetchAlbum(albumId)).then(() =>
             setIsLoaded(true));
     }, [dispatch]);
-    // let duration = 0
-    // for (let i = 0; i <= album.Album.tracks.length; i++) {
-    //     duration = duration + album.Album.tracks[i][duration]
-    // }
-    // console.log("duration", duration)
     return (
         isLoaded && (
             <div>
-                <div >album data div</div>
+                <div className="LPasideContainer">
 
                 <img className="LPasideimg" src={album[albumId].cover_image_url} />
                 <div className="LPasideButtons">
@@ -38,10 +33,13 @@ function LandingAside() {
                 <div>
                     <img />
                     <p>image band name , city and country will go here</p>
-                    <p>`Random Review` and random reviewer name will go here</p>
+                    <p>{album[albumId].band}</p>
+                    <p>`{album[albumId].reviews[0].review}`</p>
+                    <p></p>
                 </div>
 
 
+            </div>
             </div>
         )
 

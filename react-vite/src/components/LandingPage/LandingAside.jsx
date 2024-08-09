@@ -28,7 +28,7 @@ function LandingAside({ data }) {
             {data.tracks.map((track) => (
               <li key={track.id}>
                 {" "}
-                <strong>{track.name}</strong> - {track.duration}mins
+                <strong>{track.name}</strong> - {track.duration}secs
               </li>
             ))}
           </ul>

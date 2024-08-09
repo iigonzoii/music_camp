@@ -10,8 +10,6 @@ function AlbumDetails() {
     const { albumId } = useParams();
     const dispatch = useDispatch();
     let album = useSelector(state => state.album);
-    console.log("SELECTOR",album)
-
     let [isLoaded, setIsLoaded] = useState(false)
         useEffect(() => {
             dispatch(fetchAlbum(+albumId)).then(() =>

@@ -3,7 +3,8 @@ import { fetchAlbums, fetchAlbum } from "../../redux/albumReducer";
 import { useDispatch, useSelector } from "react-redux";
 import "./LandingPage.css";
 import CardMapper from "./CardMapper";
-import LandingUpper from "./LandingUpper";
+// import * as landingUpper from "./LandingUpper"
+import LandingUpper from "./LandingUpper"
 import LandingAside from "./LandingAside";
 
 function LandingPage() {
@@ -12,7 +13,16 @@ function LandingPage() {
 
   // Get the album data from Redux state
   const albumData = useSelector((state) => state.album);
+  // const albums = Object.values(albumData)
 
+  // let genreFilter = () => {}
+    // function genreFilter(genre) {
+    //   let result = albums.filter((album) => album.genre === genre)
+
+    //   return result
+    // }
+
+// console.log("ALBUMDATA",albumData)
   useEffect(() => {
     dispatch(fetchAlbums());
   }, [dispatch]);

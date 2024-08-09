@@ -1,49 +1,60 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { fetchAlbum } from "../../redux/albumReducer"
-import "./LandingPage.css"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchAlbum } from "../../redux/albumReducer";
+import "./LandingPage.css";
 
+function LandingAside({ data }) {
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  console.log(data)
+  const navigate = useNavigate();
+  return (
+    <div>
+      <div className="LPasideContainer">
+        <img className="LPasideimg" src={data.cover_image_url} />
+        <div className="LPasideButtons">
+          <button onClick={() => navigate(`/albums/${+data.id}`)}>
+            Go to Album
+          </button>
+          <button>Wishlist</button>
+        </div>
+        <p>{data.band}</p>
 
-function LandingAside() {
-    let albumId = 2
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    let album = useSelector(state => state.album);
-    let [isLoaded, setIsLoaded] = useState(false)
-    console.log("ALBUMS", album[albumId])
-    useEffect(() => {
-        dispatch(fetchAlbum(albumId)).then(() =>
-            setIsLoaded(true));
-    }, [dispatch]);
-    return (
-        isLoaded && (
-            <div>
-                <div className="LPasideContainer">
+        <div>Tracks</div>
+        {data.tracks && data.tracks.length > 0 ? (
+          <ul>
+            {data.tracks.map((track) => (
+              <li key={track.id}>
+                {" "}
+                <strong>{track.name}</strong> - {track.duration}mins
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No tracks available</p>
+        )}
 
-                <img className="LPasideimg" src={album[albumId].cover_image_url} />
-                <div className="LPasideButtons">
-                    <button onClick={() => navigate(`/albums/${albumId}`)}>Go to album</button>
-                    <button>Wishlist</button>
-                </div>
+        <div>
+            <div>Reviews</div>
+            {data.reviews && data.reviews.length > 0 ? (
+          <ul>
+            {data.reviews.map((review) => (
+              <li key={review.id}>
+                {" "}
+                <strong>{review.review}</strong> 
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No reviews available</p>
+        )}
+        </div>
+      </div>
+    </div>
+  );
 
-                <div>{`${album[albumId].tracks.length} Tracks`}</div>
-                {/* idk how to get duration */}
-                <div>{`Released ${album[albumId].created_at.split(" ")[2]} ${album[albumId].created_at.split(" ")[3]} `}</div>
-                <div>
-                    <img />
-                    <p>image band name , city and country will go here</p>
-                    <p>{album[albumId].band}</p>
-                    <p>`{album[albumId].reviews[0].review}`</p>
-                    <p></p>
-                </div>
-
-
-            </div>
-            </div>
-        )
-
-    )
 }
 
-export default LandingAside
+export default LandingAside;

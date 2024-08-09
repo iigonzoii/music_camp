@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+// import { useEffect, useState } from "react"
+import { useSelector} from "react-redux"
 import { useParams } from "react-router-dom"
-import { fetchAlbum } from "../../redux/albumReducer"
+// import { fetchAlbum } from "../../redux/albumReducer"
 // import { fetchReviews } from "../../store/reviewReducer"
 import "./AlbumDetails.css"
 
 function MajorityDetails() {
     const { albumId } = useParams()
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     let album = useSelector(state => state.album);
-    let [isLoaded, setIsLoaded] = useState(false)
-        useEffect(() => {
-            dispatch(fetchAlbum(+albumId)).then(() =>
-                setIsLoaded(true));
-        }, [dispatch]);
-        // if (!album || !album.Album) return
-        console.log("ALBUM", album)
-    return isLoaded && (
+    // let [isLoaded, setIsLoaded] = useState(false)
+    //     useEffect(() => {
+    //         dispatch(fetchAlbum(+albumId)).then(() =>
+    //             setIsLoaded(true));
+    //     }, [dispatch]);
+    //     // if (!album || !album.Album) return
+    //     console.log("ALBUM", album)
+    return (
 
         <>
             <div className="ADalbumData">

@@ -16,11 +16,6 @@ function LandingAside() {
         dispatch(fetchAlbum(albumId)).then(() =>
             setIsLoaded(true));
     }, [dispatch]);
-    // let duration = 0
-    // for (let i = 0; i <= album.Album.tracks.length; i++) {
-    //     duration = duration + album.Album.tracks[i][duration]
-    // }
-    // console.log("duration", duration)
     return (
         isLoaded && (
             <div>

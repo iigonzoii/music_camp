@@ -20,10 +20,10 @@ function MajorityDetails() {
 
         <>
             <div className="ADalbumData">
-                <p>{album && album[albumId].title}</p>
-                <p>{`by ${album[albumId].band}`}</p>
+                <p>{album && album[albumId].Album.title}</p>
+                <p>{`by ${album[albumId].Album.band}`}</p>
                 <div className="V2Play">version2 play button and song</div>
-                <p>{album[albumId].description}</p>
+                <p>{album[albumId].Album.description}</p>
 
                 {album && album[albumId].Album.product_types.map((ptype, index) => (
                         <button key={index}>
@@ -39,8 +39,8 @@ function MajorityDetails() {
                             </li>
                     ))}
                 </ol>
-                <p>{`Produced by ${album[albumId].producer}`}</p>
-                <p>{`Released ${album[albumId].created_at}`}</p>
+                <p>{`Produced by ${album[albumId].Album.producer}`}</p>
+                <p>{`Released ${album[albumId].Album.created_at}`}</p>
             </div>
 
             <div className="ADalbumArea">

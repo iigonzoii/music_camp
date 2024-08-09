@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
+import { fetchAlbums } from "../../redux/albumReducer"
+import { useDispatch } from 'react-redux';
 import "./LandingPage.css"
 import CardMapper from "./CardMapper"
 import LandingUpper from "./LandingUpper"
 import LandingAside from "./LandingAside"
 
 function LandingPage() {
-
-
+    const dispatch = useDispatch();
+    // * going into the global state and accessing the spot slice of state from my combine reducer
+    useEffect(() => {
+        // * on load we dispatch fetchSpots thunk from our store/spots
+        dispatch(fetchAlbums());
+    }, [dispatch]);
 
     return (
         <>

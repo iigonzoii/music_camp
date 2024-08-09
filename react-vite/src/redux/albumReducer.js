@@ -107,7 +107,12 @@ const albumReducer = (state = initialState, action) => {
             return newState
         }
         case LOAD_ALBUM:
-            return { ...state, albumDetail: {...action.album}};
+            {console.log(action.album.Album.id);
+            const newState = { ...state };
+            action.album.Album.UserAlbums = action.album.UserAlbums;
+            newState[action.album.Album.id] = action.album.Album;
+            return newState;}
+            // return { ...state, albumDetail: {...action.album}};
         case UPDATE_ALBUM:
             return {...state, albumDetail: action.album}
         default:

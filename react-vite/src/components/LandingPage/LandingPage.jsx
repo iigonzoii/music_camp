@@ -9,7 +9,7 @@ import LandingAside from "./LandingAside";
 function LandingPage() {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
-  
+
   // Get the album data from Redux state
   const albumData = useSelector((state) => state.album);
 
@@ -18,16 +18,16 @@ function LandingPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    // Fetch a random album if albumData is not empty
+    //* Fetch a random album if albumData is not empty
     if (albumData && Object.keys(albumData).length > 0) {
-      // Get all album IDs from the albumData
+      //* Get all album IDs from the albumData
       const albumIds = Object.keys(albumData);
-      // Generate a random index
+      //* Generate a random index
       const randomIndex = Math.floor(Math.random() * albumIds.length);
-      // Get a random album ID
+      //* Get a random album ID
       const randomAlbumId = albumIds[randomIndex];
 
-      // Dispatch fetchAlbum only if it's not already fetching or loaded
+      //* Dispatch fetchAlbum only if it's not already fetching or loaded
       if (!albumData[randomAlbumId]) {
         dispatch(fetchAlbum(randomAlbumId));
       }
@@ -35,8 +35,7 @@ function LandingPage() {
   }, [albumData, dispatch]);
 
   useEffect(() => {
-    const randomAlbumId = Object.keys(albumData)[0]; 
-
+    const randomAlbumId = Object.keys(albumData)[0];
     if (albumData[randomAlbumId]) {
       setData(albumData[randomAlbumId]);
     }

@@ -1,4 +1,4 @@
-// import "./LandingPage.css"
+import "./LandingPage.css"
 
 function LandingUpper() {
 

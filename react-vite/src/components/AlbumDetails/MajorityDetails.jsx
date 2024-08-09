@@ -45,7 +45,7 @@ function MajorityDetails() {
 
             <div className="ADalbumArea">
 
-                <img src={album[albumId].cover_image_url} />
+                <img src={album[albumId].Album.cover_image_url} />
 
                 <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                 <p>Supported by</p>

@@ -25,14 +25,14 @@ function MajorityDetails() {
                 <div className="V2Play">version2 play button and song</div>
                 <p>{album[albumId].description}</p>
 
-                {album && album[albumId].product_types.map((ptype, index) => (
+                {album && album[albumId].Album.product_types.map((ptype, index) => (
                         <button key={index}>
                             {`Buy ${ptype.type}`}
                             </button>
                     ))}
 
                 <ol className="ADtrackList">
-                    {album && album[albumId].tracks.map((track, index) => (
+                    {album && album[albumId].Album.tracks.map((track, index) => (
                         <li key={index}>
                             <i className="fa-regular fa-circle-play"></i>
                             {track.name} {track.duration}

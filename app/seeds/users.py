@@ -27,7 +27,9 @@ def seed_users():
         first_name="Artist", last_name='Two', email='demoartest5@aa.io', city='Boston', state='Massachusetts', username='DemoArtist2', password='password',
         bio='This is where band bio goes', website='artistWebSite',
         spotify="spotifyUserName",instagram='instagramUrl', facebook='facebookprofileUrl',
-        profile_img_url='imgUrlHere', banner_img_url='imgUrlHere', background_img_url="imgUrlHere",
+        profile_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc',
+        banner_img_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/bannerDark.jpg?alt=media&token=29d23da4-1850-40a4-a776-991471c4a0f4',
+        background_img_url="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847"
         )
     artist_three=User(
         first_name="Artist", last_name='Three', email='demoartest6@aa.io', city='New Orleans', state='Louisiana', username='DemoArtist3', password='password',

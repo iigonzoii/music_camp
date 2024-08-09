@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { fetchAlbum } from "../../redux/albumReducer"
 import MajorityDetails from "./MajorityDetails"
@@ -9,6 +9,9 @@ import "./AlbumDetails.css"
 function AlbumDetails() {
     const { albumId } = useParams();
     const dispatch = useDispatch();
+    let album = useSelector(state => state.album);
+    console.log("SELECTOR",album)
+
     let [isLoaded, setIsLoaded] = useState(false)
         useEffect(() => {
             dispatch(fetchAlbum(+albumId)).then(() =>
@@ -17,7 +20,7 @@ function AlbumDetails() {
     return isLoaded &&(
         <>
             <section className="ADsection1">
-                <img className="ADbanner" src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBackground.jpg?alt=media&token=df57940f-056e-468f-aae7-dfe860753847" />
+                <img className="ADbanner" src={album[albumId].UserInfo[0].banner_img_url} />
             </section>
 
             <div className="ADcontainer">

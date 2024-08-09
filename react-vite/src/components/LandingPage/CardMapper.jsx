@@ -10,7 +10,7 @@ function CardMapper() {
     return (
         <div className="CMcontainer">
             {albums && albums.map((album, index) => (
-                <div
+                <div className='pointer'
                     title={`${album.title}`}
                     onClick={() => navigate(`/albums/${album.id}`)}
                     key={index}>

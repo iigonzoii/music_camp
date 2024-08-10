@@ -4,19 +4,19 @@ from sqlalchemy.sql import text
 
 def seed_albums():
     album_one = Album(
-        user_id=4, band='ArtistOne', title='Artist1Al1',
+        user_id=4, band='ArtistOne', title='albumOne',
         cover_image_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampRockAlbumCover.jpg?alt=media&token=3d36d4a9-7fab-4f37-ac7d-e677d5a94495',
         description='This is a description about a rock album',
         producer='awesome producer', genre='rock', tags='hard rock',
     )
     album_two = Album(
-        user_id=5, band='ArtistTwo', title='Artist2Al1',
+        user_id=5, band='ArtistTwo', title='albumTwo',
         cover_image_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampElectronicAlbumCover.jpg?alt=media&token=3f64c61d-5852-4c61-a080-7736041cc47d',
         description='This is a description about an electronic album',
         producer='awesome producer', genre='electronic', tags='ambient',
     )
     album_three = Album(
-        user_id=6, band='ArtistThree', title='Artist3Al1',
+        user_id=6, band='ArtistThree', title='albumThree',
         cover_image_url='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampHipHopVinylCover.jpg?alt=media&token=d379f3e9-15bb-4045-ac4d-fee49461ea35',
         description='This is a description about a rap album',
         producer='awesome producer', genre='hip-hop/rap', tags='trap',

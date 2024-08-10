@@ -9,6 +9,7 @@ class PurchaseItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
+    type = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
@@ -24,6 +25,7 @@ class PurchaseItem(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'album_id': self.album_id,
+            'type': self.type,
             'quantity': self.quantity,
             'price': self.price,
         }

@@ -11,6 +11,9 @@ const CartPage = () => {
 
     const [items, setItems] = useState([])
 
+    // hashing function to get a unique cart item identifier to use
+    // the key for each item in the cart
+
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items))
         console.log(items)

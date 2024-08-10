@@ -10,26 +10,22 @@ function AlbumAside() {
     return  (
         <>
         <div>
-                        <img className="ADasideImg" src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc" />
-                        <div>Artist/Band Name</div>
-                        <div>{album[albumId].band}</div>
-
-                        <div>Artist City</div>
-                        <div>Artist Country</div>
-                    </div>
-                    <div>
-                    <div>Artist Website</div>
-                    <div>Discography</div>
-
-                    </div>
-                    {album && album[albumId].UserAlbums.map((album, index) => (
-                    <div key={index}>
-                    <img className="ADasideDiscoImgs" src={album.cover_image_url}/>
-                    <div>{album.title}</div>
-                    <div>{`Released ${album.created_at.split(" ")[2]} ${album.created_at.split(" ")[3]} `}</div>
-
-                </div>
-                    ))}
+            <img className="ADasideImg" src={album[albumId].UserInfo[0].profile_img_url} />
+            <div>{album[albumId].Album.band}</div>
+            <div>{album[albumId].UserInfo[0].city}</div>
+            <div>{album[albumId].UserInfo[0].state}</div>
+        </div>
+        <div>
+            <div>{album[albumId].UserInfo[0].website}</div>
+            <div>Discography</div>
+        </div>
+            {album && album[albumId].UserAlbums.map((album, index) => (
+            <div key={index}>
+            <img className="ADasideDiscoImgs" src={album.cover_image_url}/>
+            <div>{album.title}</div>
+            <div>{`Released ${album.created_at.split(" ")[2]} ${album.created_at.split(" ")[3]} `}</div>
+        </div>
+            ))}
         </>
     )
 }

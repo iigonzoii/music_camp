@@ -3,10 +3,11 @@ import "./LandingPage.css";
 
 function LandingAside({ data }) {
     const navigate = useNavigate();
+    
     if (!data) {
         return <div>Loading...</div>;
     }
-    console.log(data)
+
     return (
         <div>
             <div className="LPasideContainer">

@@ -57,7 +57,7 @@ function LandingPage() {
               <button onClick={() => setGenre("jazz")}>Jazz</button>
           </div>
           <div className="LPcategory">
-              <button>all categories</button>
+              <button onClick={() => setCat("all-categories")}>all categories</button>
               <button onClick={() => setCat("Digital")}>Digital</button>
               <button onClick={() => setCat("Vinyl")}>Vinyl</button>
               <button onClick={() => setCat("CD")}>Compact Discs</button>

@@ -3,26 +3,15 @@ import { fetchAlbums, fetchAlbum } from "../../redux/albumReducer";
 import { useDispatch, useSelector } from "react-redux";
 import "./LandingPage.css";
 import CardMapper from "./CardMapper";
-// import * as landingUpper from "./LandingUpper"
-import LandingUpper from "./LandingUpper"
 import LandingAside from "./LandingAside";
 
 function LandingPage() {
+  const albumData = useSelector((state) => state.album);
   const [data, setData] = useState({});
+  const [genre, setGenre] = useState("all-genres")
+  const [cat, setCat] = useState("all-categories")
   const dispatch = useDispatch();
 
-  // Get the album data from Redux state
-  const albumData = useSelector((state) => state.album);
-  // const albums = Object.values(albumData)
-
-  // let genreFilter = () => {}
-    // function genreFilter(genre) {
-    //   let result = albums.filter((album) => album.genre === genre)
-
-    //   return result
-    // }
-
-// console.log("ALBUMDATA",albumData)
   useEffect(() => {
     dispatch(fetchAlbums());
   }, [dispatch]);
@@ -51,15 +40,36 @@ function LandingPage() {
     }
   }, [albumData]);
 
+  useEffect(() => {
+
+  })
+
   return (
     <>
       <section className="LPsection1">
-        <LandingUpper />
+
+        <div className="LPupperButtons">
+          <div className="LPgenre">
+              <button onClick={() => setGenre("all-genres")}>All Genres</button>
+              <button onClick={() => setGenre("rock")}>Rock</button>
+              <button onClick={() => setGenre("hip-hop/rap")}>Hip-Hop/Rap</button>
+              <button onClick={() => setGenre("electronic")}>Electronic</button>
+              <button onClick={() => setGenre("jazz")}>Jazz</button>
+          </div>
+          <div className="LPcategory">
+              <button>all categories</button>
+              <button onClick={() => setCat("Digital")}>Digital</button>
+              <button onClick={() => setCat("Vinyl")}>Vinyl</button>
+              <button onClick={() => setCat("CD")}>Compact Discs</button>
+              <button onClick={() => setCat("Cassette")}>Cassettes</button>
+          </div>
+        </div>
+
       </section>
 
       <div className="LPcontainer">
         <section className="LPsection2">
-          <CardMapper />
+          <CardMapper genre={genre} cat={cat}/>
         </section>
 
         <aside className="LPsection3">

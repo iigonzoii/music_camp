@@ -17,6 +17,7 @@ function AlbumDetails() {
         }, [dispatch]);
     return isLoaded &&(
         <>
+
             <section className="ADsection1">
                 <img className="ADbanner" src={album[albumId].UserInfo[0].banner_img_url} />
             </section>

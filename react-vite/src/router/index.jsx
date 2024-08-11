@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import LandingPage from "../components/LandingPage"
 import UserHome from '../components/UserHome';
 import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
+import CartPage from '../components/CartPage';
 import Layout from './Layout';
 import CreateAlbum from '../components/Navigation/CreateAlbum';
 
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
         path: '/albums/new',
         element: <CreateAlbum />
       },
+      {
+        path:"/shoppingCart",
+        element: <CartPage />
+      }
     ],
   },
 ]);

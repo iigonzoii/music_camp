@@ -11,18 +11,41 @@ const CartPage = () => {
 
     const [items, setItems] = useState([])
 
-    // hashing function to get a unique cart item identifier to use
-    // the key for each item in the cart
+    currCart = {}
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i); // Get the key at index i
+        const value = localStorage.getItem(key); // Get the value associated with the key
+        currCart[key] = value; // Store the key-value pair in the object
+    }
 
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items))
         console.log(items)
     }, [items])
 
+    const handleAddItemCount = (e) => {
+        "add +1 quantity of specific dict item"
+        // currCart[key].quantity += 1
+        // localStorage.setItem(key, currCart[key])
+    }
+
+    const handleRemoveItemCount = (e) => {
+        "remove -1 quantity of specific dict item"
+        // currCart[key].quantity -= 1
+        // localStorage.setItem(key, currCart[key])
+    }
+
+    const handleDeleteItem = (e) => {
+        "delete Item from cart"
+        // delete currCart[key]
+        // localStorage.removeItem('key')
+    }
 
     return (
-        <div>
-                {JSON.parse(localStorage.getItem('key'))}
+        <div id='cart-page-wrapper'>
+            <h1>Hello from Shopping Cart!</h1>
         </div>
     )
 }
+
+export default CartPage

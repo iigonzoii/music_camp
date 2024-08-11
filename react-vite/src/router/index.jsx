@@ -4,6 +4,7 @@ import LandingPage from "../components/LandingPage"
 import UserHome from '../components/UserHome';
 import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
 import Layout from './Layout';
+import CreateAlbum from '../components/Navigation/CreateAlbum';
 
 
 
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginFormPage />,
+      },
+      {
+        path: '/albums/new',
+        element: <CreateAlbum />
       },
     ],
   },

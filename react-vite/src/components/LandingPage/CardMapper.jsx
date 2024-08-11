@@ -7,9 +7,8 @@ function CardMapper({ genre, cat }) {
     
     let albums = useSelector(state => state.album);
     albums = Object.values(albums);
-
+    let filteredAlbums = albums
     function filterAlbums(albums, genre, cat) {
-        let filteredAlbums = albums;
 
         // Apply genre filter if genre is provided
         if (genre && genre !== "all-genres") {

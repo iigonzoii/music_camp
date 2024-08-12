@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { fetchAlbum } from "../../redux/albumReducer"
 import MajorityDetails from "./MajorityDetails"
 import AlbumAside from "./AlbumAside"
-import { createCartKey } from "../../../prettier"
+// import { createCartKey } from "../../../prettier"
 import "./AlbumDetails.css"
 
 function AlbumDetails() {
@@ -15,9 +15,9 @@ function AlbumDetails() {
         useEffect(() => {
             dispatch(fetchAlbum(+albumId)).then(() =>
                 setIsLoaded(true));
-        }, [dispatch]);
+        }, [dispatch, albumId]);
 
-    
+
 
 
     return isLoaded &&(

@@ -24,7 +24,7 @@ function ReviewCard({albumId}) {
                 <h2>Be the first to post a review!</h2>
             )}
             {albumReviews.map(({ id, review, User, createdAt }) => (
-            // Need to figure out whether to join user to the fetch all route in backend or grab that info here
+            // Got to decide whether to join user to the fetch all route in backend or grab that info here
                 <div key={id} className="review-card">
                     <div id="review-owner">
                         <h3>{User?.firstName}</h3>
@@ -35,6 +35,7 @@ function ReviewCard({albumId}) {
                     <div id="review-text">
                         <p>{review}</p>
                     </div>
+                    {sessionUser && sessionUser.id === User?.id && (
                         <div className="delete-review-button-container">
                             <OpenModalButton
                                 buttonText="Delete"

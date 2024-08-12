@@ -91,7 +91,7 @@ export const fetchCurrUserAlbums = () => async (dispatch) => {
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/albums`, {
+        const response = await csrfFetch(`/api/albums/`, {
             method: "POST",
             body: JSON.stringify(album),
             headers: { "Content-Type": "application/json" }
@@ -101,7 +101,7 @@ export const createAlbum = (album) => async (dispatch) => {
 
         if (response.ok) {
             const newAlbum = await response.json();
-            dispatch(addAlbum(newAlbum)); 
+            dispatch(addAlbum(newAlbum));
             return newAlbum;
         } else {
             const errors = await response.json();

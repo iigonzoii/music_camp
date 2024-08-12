@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+// import { csrfFetch } from "./csrf";
 
 
 const SET_USER = 'session/setUser';
@@ -44,7 +44,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 };
 
 export const thunkSignup = (user) => async (dispatch) => {
-  const response = await fetch("/api/auth/signup", {
+  const response = await fetch("/api/auth/signup/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)

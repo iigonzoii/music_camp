@@ -46,8 +46,8 @@ export const deleteReview = (reviewId) => {
 
 //* Get current users reviews
 export const fetchCurrUserReviews = () => async (dispatch) => {
-    const response = await csrfFetch("/api/reviews/current")
-    // csrfFetch
+    //csrfFetch
+    const response = await fetch("/api/reviews/current")
     const reviews = await response.json()
     dispatch(loadReviews(reviews.Reviews))
 }
@@ -61,7 +61,8 @@ export const fetchReviewsByAlbum = (albumId) => async (dispatch) => {
 
 //* Create a review by Album ID
 export const createReview = (albumId, review) => async (dispatch) => {
-    const response = await csrfFetch(`/api/albums/${albumId}/reviews`, {
+    //csrfFetch
+    const response = await fetch(`/api/albums/${albumId}/reviews`, {
         method: "POST",
         body: JSON.stringify(review),
         headers: { "Content-Type": "application/json" }
@@ -72,9 +73,10 @@ export const createReview = (albumId, review) => async (dispatch) => {
 }
 
 //* Update a review by ID
-export const editReview = (reviewId, review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-        method: 'Put',
+export const editReview = (reviewId, review) => async (dispatch) => {
+    //csrfFetch
+    const response = await fetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
         body: JSON.stringify(review)
     })
     if (response.ok) {
@@ -89,7 +91,8 @@ export const editReview = (reviewId, review) => async dispatch => {
 
 //* Delete a review by id
 export const removeReview = (reviewId) => async (dispatch) =>{
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    //csrfFetch
+    const response = await fetch(`/api/reviews/${reviewId}`, {
         method: "DELETE"
     })
     dispatch(deleteReview(reviewId))
@@ -120,7 +123,7 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 allReviews:{ ...state.allReviews, [action.review.id]: action.review },
             };
-        };
+        }
         case UPDATE_REVIEW:
             return { ...state, allReviews: {...state.allReviews, [action.review.id]: action.review }}
         case DELETE_REVIEW: {

@@ -1,3 +1,4 @@
+import { csrfFetch } from "./csrf";
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
@@ -35,7 +36,7 @@ export const addAlbum = (album) => ({
 
 //* Get all albums
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await fetch('/api/albums');
+    const response = await csrfFetch('/api/albums');
     // csrfFetch
     const albums = await response.json();
     // console.log(albums)
@@ -45,7 +46,7 @@ export const fetchAlbums = () => async (dispatch) => {
 
 //* Get album by ID
 export const fetchAlbum = (albumId) => async (dispatch) => {
-    const response = await fetch(`/api/albums/${albumId}`)
+    const response = await csrfFetch(`/api/albums/${albumId}`)
     // csrfFetch
     const album = await response.json()
     dispatch(loadAlbum(album))
@@ -81,7 +82,7 @@ export const deleteAlbum = albumId => async dispatch =>{
 
 //* Get current users albums
 export const fetchCurrUserAlbums = () => async (dispatch) => {
-    const response = await fetch("/api/albums/current")
+    const response = await csrfFetch("/api/albums/current")
     // csrfFetch
     const albums = await response.json()
     dispatch(loadAlbums(albums.Albums))
@@ -90,7 +91,7 @@ export const fetchCurrUserAlbums = () => async (dispatch) => {
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
     try {
-        const response = await fetch(`/api/albums`, {
+        const response = await csrfFetch(`/api/albums`, {
             method: "POST",
             body: JSON.stringify(album),
             headers: { "Content-Type": "application/json" }

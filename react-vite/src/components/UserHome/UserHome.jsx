@@ -24,7 +24,7 @@ function UserHome() {
     return isLoaded && (
         <>
         <button onClick={() => setShowWishlist(!showWishlist)}>
-            {showWishlist ? <h2>"Wishlist"</h2> : <h2>"Purchase History"</h2> : }
+            {showWishlist ? "Wishlist": "Purchase History"}
         </button>
         <div>
             <section className="UHsection1">

@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import "./CardMapper.css"
 
+
 function CardMapper({ genre, cat }) {
     const navigate = useNavigate();
 

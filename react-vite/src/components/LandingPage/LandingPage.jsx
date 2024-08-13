@@ -40,9 +40,6 @@ function LandingPage() {
     }
   }, [albumData]);
 
-  useEffect(() => {
-
-  })
 
   return (
     <>

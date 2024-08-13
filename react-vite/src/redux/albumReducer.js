@@ -1,8 +1,10 @@
+import { csrfFetch } from "./csrf";
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
 const LOAD_ALBUM = "album/loadAlbum"
 const UPDATE_ALBUM = "album/updateAlbum"
+const CREATE_ALBUM = "album/createAlbum"
 
 //*-------ACTION CREATORS---------
 export const loadAlbums = (albums) => {
@@ -24,12 +26,17 @@ export const update = (updatedAlbum) => {
         updatedAlbum
     }
 }
+export const addAlbum = (album) => ({
+    type: CREATE_ALBUM,
+    album
+});
+
 
 //*---------THUNKS------------
 
 //* Get all albums
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await fetch('/api/albums');
+    const response = await csrfFetch('/api/albums');
     // csrfFetch
     const albums = await response.json();
     // console.log(albums)
@@ -39,7 +46,7 @@ export const fetchAlbums = () => async (dispatch) => {
 
 //* Get album by ID
 export const fetchAlbum = (albumId) => async (dispatch) => {
-    const response = await fetch(`/api/albums/${albumId}`)
+    const response = await csrfFetch(`/api/albums/${albumId}`)
     // csrfFetch
     const album = await response.json()
     dispatch(loadAlbum(album))
@@ -48,7 +55,7 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
 
 //* update album by ID
 export const updateAlbum = (albumId, album) => async dispatch => {
-    const response = await (`/api/albums/${albumId}`, {
+    const response = await fetch(`/api/albums/${albumId}`, {
         // csrfFetch
         method: 'Put',
         body: JSON.stringify(album)
@@ -65,7 +72,7 @@ export const updateAlbum = (albumId, album) => async dispatch => {
 
 //* delete album by id
 export const deleteAlbum = albumId => async dispatch =>{
-    const response = await (`/api/albums/${albumId}`, {
+    const response = await fetch(`/api/albums/${albumId}`, {
         // csrfFetch
         method: "DELETE"
     })
@@ -75,7 +82,7 @@ export const deleteAlbum = albumId => async dispatch =>{
 
 //* Get current users albums
 export const fetchCurrUserAlbums = () => async (dispatch) => {
-    const response = await ("/api/albums/current")
+    const response = await csrfFetch("/api/albums/current")
     // csrfFetch
     const albums = await response.json()
     dispatch(loadAlbums(albums.Albums))
@@ -83,16 +90,28 @@ export const fetchCurrUserAlbums = () => async (dispatch) => {
 
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
-    const response = await (`/api/albums`, {
-        // csrfFetch
-        method: "POST",
-        body: JSON.stringify(album),
-        headers: { "Content-Type": "application/json" }
-    })
-    const newAlbum = await response.json()
-    dispatch(loadAlbum(newAlbum))
-    return newAlbum
-}
+    try {
+        const response = await csrfFetch(`/api/albums/`, {
+            method: "POST",
+            body: JSON.stringify(album),
+            headers: { "Content-Type": "application/json" }
+        });
+
+        console.log("FetchResponse", response);
+
+        if (response.ok) {
+            const newAlbum = await response.json();
+            dispatch(addAlbum(newAlbum));
+            return newAlbum;
+        } else {
+            const errors = await response.json();
+            throw errors;
+        }
+    } catch (err) {
+        console.error("Error creating album", err);
+    }
+};
+
 //*---------REDUCERS-----------
 
 const initialState = { albumDetail: {} };
@@ -118,6 +137,11 @@ const albumReducer = (state = initialState, action) => {
             // return { ...state, albumDetail: {...action.album}};
         case UPDATE_ALBUM:
             return {...state, albumDetail: action.album}
+            case CREATE_ALBUM:
+                return {
+                    ...state,
+                    [action.album.id]: action.album
+                };
         default:
             return state;
     }

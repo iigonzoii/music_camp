@@ -73,7 +73,7 @@ def create_album():
 
         db.session.add(new_album)
         db.session.commit()
-        
+
         return new_album.to_dict(), 201
 
     return {'errors': form.errors}, 400
@@ -196,7 +196,17 @@ def new_track(album_id):
         return theTrack.to_dict(), 201
     return form.errors, 401
 
-
+# Track route
+# Get all tracks by album id
+@album_routes.route('/<int:album_id>/tracks')
+def album_tracks(album_id):
+    """
+    Get all tracks for an album
+    """
+    tracks = Track.query.filter_by(album_id=album_id).all()
+    if not tracks:
+        return {'errors': {'message': 'No existing tracks'}}, 404
+    return {'tracks': [track.to_dict() for track in tracks]}
 
 
 # Review route

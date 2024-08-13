@@ -4,12 +4,12 @@ import "./AlbumDetails.css"
 
 function MajorityDetails() {
     const { albumId } = useParams()
-    // let tracks = useSelector(state => state.track)
+    let tracks = useSelector(state => state.track)
     let album = useSelector(state => state.album);
     let reviews = useSelector(state => state.review)
     reviews = Object.values(reviews)
-    // console.log("UseReview", reviews)
-    // console.log("UseTrack", tracks)
+    tracks = Object.values(tracks)
+
 
     return (
         <>
@@ -26,7 +26,7 @@ function MajorityDetails() {
                     ))}
 
                 <ol className="ADtrackList">
-                    {album && album[albumId].Album.tracks.map((track, index) => (
+                    {tracks && tracks.map((track, index) => (
                         <li key={index}>
                             <i className="fa-regular fa-circle-play"></i>
                             {track.name} {track.duration}

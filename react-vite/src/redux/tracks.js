@@ -89,7 +89,7 @@ const trackReducer = (state = initialState, action) => {
             //     newState.allTracks[track.id] = track
             // })
             console.log("ACTRACK",action.tracks)
-            action.tracks.allTracks.forEach(track => {
+            action.tracks.tracks.forEach(track => {
                 newState[track.id] = track
             })
             return newState

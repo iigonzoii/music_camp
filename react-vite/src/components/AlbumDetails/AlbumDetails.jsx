@@ -9,32 +9,11 @@ import AlbumAside from "./AlbumAside"
 // import { createCartKey } from "../../../prettier"
 import "./AlbumDetails.css"
 
-// todo fetch reviews using this album id
-//* fetchreviews by id first passing in the param and then fetch album passing in same param, then setIsLoaded to true
-// todo store the reviews to a variable
-//* useSelector and then console log. we want an array and may have to do the object.values thing to get what we need but do this in the majority details component
-//todo put albumId in the dependancy array
-
-
-//todo get tracks to log in console from LOAD_TRACKS case in the reducer
-//todo map tracks on majDetails
 function AlbumDetails() {
     const { albumId } = useParams();
     const dispatch = useDispatch();
-    // let review = useSelector(state => state.review)
-    // review = Object.values(review)
-    // console.log("UseReview", review)
-    let tracks = useSelector(state => state.track)
-    // console.log("UseTrack", tracks)
-    console.log("YEET", Object.values(tracks))
     let album = useSelector(state => state.album);
     let [isLoaded, setIsLoaded] = useState(false)
-    // useEffect(() => {
-    //     dispatch(fetchTracksbyAlbumId(+albumId))
-    //         .then(dispatch(fetchReviewsByAlbum(+albumId)))
-    //         .then(() => dispatch(fetchAlbum(+albumId)))
-    //         .then(() => setIsLoaded(true));
-    // }, [dispatch, albumId]);
     useEffect(() => {
         dispatch(fetchReviewsByAlbum(+albumId))
         .then(() => dispatch(fetchAlbum(+albumId)))

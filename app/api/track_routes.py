@@ -9,7 +9,7 @@ track_routes = Blueprint('tracks', __name__)
 
 
 # Get all tracks by album
-@track_routes.route('/current')
+@track_routes.route('/current/')
 @login_required
 def album_tracks():
     """

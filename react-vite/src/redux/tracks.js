@@ -40,7 +40,7 @@ export const deleteTrack = (trackId) => {
 export const fetchTracks = () => async (dispatch) => {
     const response = await fetch("/api/tracks/current")
     const tracks = await response.json()
-    dispatch(loadTracks(tracks.Tracks))
+    dispatch(loadTracks(tracks.Tracks)) 
 }
 
 //* Get all tracks by Album ID

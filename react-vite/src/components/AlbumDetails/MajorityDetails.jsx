@@ -15,7 +15,7 @@ function MajorityDetails() {
         return product
     }
 
-    // console.log("TEST", )
+    // console.log("TEST", album[albumId].Album)
 
     return (
         <>

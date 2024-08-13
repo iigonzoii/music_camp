@@ -1,31 +1,34 @@
 import { useState } from "react"
 import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
-// import cartItemsList from "./CartItems";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useModal } from "../../context/Modal";
 import { createCartKey } from "../../../prettier";
 
 import "./CartModal.css"
 
 const CartModal = ({albumData}) => {
-    // const navigate = useNavigate()
-    let albums = useSelector(state => state.album)
+    const { albumId } = useParams()
+    const navigate = useNavigate()
+    let albumById = useSelector(state => state.album[albumId]?.Album)
     let currUser = useSelector(state => state.session.user)
-    const albumById = albums[albumData.id].Album
+    const { closeModal } = useModal()
 
+    const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
+    const item = JSON.parse(localStorage.getItem(albumKey))
     // function for actually adding items to local storage
     const postToLocalStorage = (payload) => {
-        const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
         localStorage.setItem(albumKey, JSON.stringify(payload));
+        return payload
     }
 
     // const [items, setItems] = useState([]);
-    const [quantity, setQuantity] = useState(0);
-    const [price, setPrice] = useState(albumData.price);
+    const [quantity, setQuantity] = useState(item ? parseInt(item.quantity) : 1);
+    const [price, setPrice] = useState(parseInt(albumData.price));
+    const [navToCheckout, setNavToCheckout] = useState(false)
     const [errors, setErrors] = useState({})
 
     const handleQuantity = (e) => setQuantity(e.target.value);
-    const handlePrice = (e) => setPrice(e.target.value);
-
+    const handlePrice = (e) => setPrice(parseInt(e.target.value));
 
     const handleAddCartSubmit = (e) => {
         e.preventDefault()
@@ -33,10 +36,14 @@ const CartModal = ({albumData}) => {
         const error = {}
         if (price < albumData.price) {
             error.price = `The minimum price is $${albumData.price}`}
-        if (typeof price != Number) {
+        if (typeof price != "number") {
             error.price = 'Please provide a price'}
-        if (quantity < albumData.amount) {
+        if (quantity > albumData.amount) {
             error.quantity = "Not enough stock available"}
+
+        if (Object.keys(error).length > 0) {
+            setErrors({...error});
+        }
 
         const payload = {
             user_id: currUser.id,
@@ -47,43 +54,32 @@ const CartModal = ({albumData}) => {
         }
 
         try {
-            postToLocalStorage(payload)
+            //check to see if the item is already in cart. If it is,
+            const existingItem = JSON.parse(localStorage.getItem(albumKey))
+            if (existingItem) {
+                existingItem.quantity += 1
+                postToLocalStorage(existingItem)
+            } else {
+                postToLocalStorage(payload)
+            }
+
+            if (navToCheckout) {
+                navigate('/checkout')
+                closeModal()
+            }
         } catch (err) {
-            // for 08/12: to mimic the data = await res.json(); functionality,
-            // try pulling the item from localStorage like below:
-            // data = JSON.parse(localStorage.getItem('uniqueKey'))
-            // if (data?.errors) {setErrors etc etc}
-            setErrors({...error})
+            // get the stored item
+            const data = JSON.parse(localStorage.getItem(albumKey));
+
+            // check if data has any errors
+            if(data?.errors) {
+                setErrors({...error})
+            } else {
+                // if no set errors, but still errors persist, then generic message is thrown
+                setErrors({...err, message: "An unexpected error occurred."})
+            }
         }
-        // upon pressing add to cart button, add item to localStorage and closeModal
     }
-
-
-    console.log("TESTHERE", albumData)
-
-        // useEffect(() => {
-    //     localStorage.setItem('items', JSON.stringify(items))
-    //     console.log(items)
-    // }, [items])
-
-    // const handleAddItemCount = () => {
-    //     "add +1 quantity of specific dict item"
-    //     // currCart[key].quantity += 1
-    //     // localStorage.setItem(key, currCart[key])
-    // }
-
-    // const handleRemoveItemCount = () => {
-    //     "remove -1 quantity of specific dict item"
-    //     // currCart[key].quantity -= 1
-    //     // localStorage.setItem(key, currCart[key])
-    // }
-
-    // const handleDeleteItem = () => {
-    //     "delete Item from cart"
-    //     // delete currCart[key]
-    //     // localStorage.removeItem('key')
-    // }
-
 
     return (
     <div id='cart-modal-wrapper'>
@@ -112,8 +108,12 @@ const CartModal = ({albumData}) => {
                 ></input>
                 <p className="errors">{errors.quantity}</p>
             </div>
-            <button className="add-cart-btn" type='submit'>
+            <button className="add-cart-btn" type='submit' onClick={() => setNavToCheckout(false)}>
                 Add To Cart
+            </button>
+
+            <button className="checkout" type="submit" onClick={() => setNavToCheckout(true)}>
+                Checkout
             </button>
         </form>
     </div>

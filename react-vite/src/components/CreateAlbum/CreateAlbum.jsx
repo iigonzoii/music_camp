@@ -21,9 +21,6 @@ function CreateAlbum({ album }) {
   const [genre, setGenre] = useState(album ? album.genre : "");
   const [tags, setTags] = useState(album ? album.tags : "");
   const [errors, setErrors] = useState({});
-  const [productTypes, setProductTypes] = useState([
-    { type: "", price: "", amount: "" },
-  ]);
 
   const updateBand = (e) => setBand(e.target.value);
   const updateTitle = (e) => setTitle(e.target.value);
@@ -32,21 +29,6 @@ function CreateAlbum({ album }) {
   const updateGenre = (e) => setGenre(e.target.value);
   const updateTags = (e) => setTags(e.target.value);
   const updateProducer = (e) => setProducer(e.target.value)
-
-  const updateProductType = (index, field, value) => {
-    const updatedProductTypes = [...productTypes];
-    updatedProductTypes[index][field] = value;
-    setProductTypes(updatedProductTypes);
-  };
-
-  const addProductType = () => {
-    setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
-  };
-
-  const removeProductType = (index) => {
-    const updatedProductTypes = productTypes.filter((_, i) => i !== index);
-    setProductTypes(updatedProductTypes);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,26 +49,17 @@ function CreateAlbum({ album }) {
       setErrors(newErrors);
       return;
     }
-
-    // Prepare the product types data from state
-    const formattedProductTypes = productTypes.map((pt) => ({
-        type: pt.type,
-        price: pt.price,
-        amount: pt.amount,
-      }));
   
       const payload = {
         user_id: user.id,
         band,
         title,
-        coverImageUrl,
+        cover_image_url: coverImageUrl,
         description,
         producer,
         genre,
         tags,
-        product_types: formattedProductTypes, // Include product types in the payload
       };
-
 
     let newAlbum;
     try {
@@ -97,9 +70,9 @@ function CreateAlbum({ album }) {
         newAlbum = await dispatch(createAlbum(payload));
       }
       console.log({ newAlbum });
-    //   if (newAlbum) {
-    //     navigate(`/albums/${newAlbum.id}`);
-    //   }
+      if (newAlbum) {
+        navigate(`/albums/${newAlbum.id}/products`);
+      }
     } catch (err) {
       const data = await err.json();
       if (data?.errors) {
@@ -111,7 +84,6 @@ function CreateAlbum({ album }) {
   if (!user) {
     return <p>Please Login</p>;
   }
-
   return (
     <>
       <h1>{album ? "Update album" : "Create New album"}</h1>
@@ -174,43 +146,6 @@ function CreateAlbum({ album }) {
           {errors.description && (
             <p className="error-message">{errors.description}</p>
           )}
-
-          <h2>Product Types</h2>
-          {productTypes.map((productType, index) => (
-            <div key={index} className="price-section">
-              <input
-                value={productType.type}
-                onChange={(e) =>
-                  updateProductType(index, "type", e.target.value)
-                }
-                placeholder={`Type (e.g., Digital, Vinyl)`}
-                className="input-field"
-              />
-              <span>$</span>
-              <input
-                value={productType.price}
-                onChange={(e) =>
-                  updateProductType(index, "price", e.target.value)
-                }
-                placeholder="Price"
-                className="input-field"
-              />
-              <input
-                value={productType.amount}
-                onChange={(e) =>
-                  updateProductType(index, "amount", e.target.value)
-                }
-                placeholder="Quantity"
-                className="input-field"
-              />
-              <button type="button" onClick={() => removeProductType(index)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addProductType}>
-            Add Another Product Type
-          </button>
 
           <div className="button-group">
             <button type="submit" className="form-button">

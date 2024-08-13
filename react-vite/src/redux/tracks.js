@@ -53,7 +53,7 @@ export const fetchTracksbyAlbumId = (albumId) => async (dispatch) => {
 //* Create a track by Album ID
 // Requires attention
 export const createTrack = (track, albumId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/albums/${albumId}`, {
+    const response = await fetch(`/api/albums/${albumId}/`, {
         method: "POST",
         body: JSON.stringify(track),
         headers: { "Content-Type": "application/json" }
@@ -65,7 +65,7 @@ export const createTrack = (track, albumId) => async (dispatch) => {
 
 //* Delete a track by id
 export const removeTrack = (trackId) => async (dispatch) =>{
-    const response = await csrfFetch(`/api/tracks/${trackId}`, {
+    const response = await fetch(`/api/tracks/${trackId}/`, {
         method: "DELETE"
     })
     if (response.ok) {

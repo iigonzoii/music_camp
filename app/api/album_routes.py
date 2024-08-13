@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from sqlalchemy.orm import joinedload
 from flask_login import current_user, login_required
 from app.models import Album, Review, Track, PurchaseItem, ProductType, User, db
-from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm, TrackPostForm
+from app.forms import AlbumForm, UpdateAlbumForm, ReviewPostForm, TrackPostForm, ProductForm
 
 
 album_routes = Blueprint('albums', __name__)
@@ -34,7 +34,7 @@ def albums_by_user(user_id):
 def album_by_id(album_id):
     album_details = db.session.query(Album).options(
         joinedload(Album.tracks),
-        joinedload(Album.product_types),
+        joinedload(Album.products),
         joinedload(Album.reviews).joinedload(Review.reviewer),
         joinedload(Album.purchases).joinedload(PurchaseItem.user),
     ).filter(Album.id == album_id).first()
@@ -72,25 +72,50 @@ def create_album():
         )
 
         db.session.add(new_album)
-        db.session.flush()
-
-        product_types = []
-        if form.cd_amount.data:
-            product_types.append(ProductType(album_id=new_album.id, type='CD', amount=form.cd_amount.data, price=form.cd_price.data))
-        if form.vinyl_amount.data:
-            product_types.append(ProductType(album_id=new_album.id, type='Vinyl', amount=form.vinyl_amount.data, price=form.vinyl_price.data))
-        if form.cassette_amount.data:
-            product_types.append(ProductType(album_id=new_album.id, type='Cassette', amount=form.cassette_amount.data, price=form.cassette_price.data))
-        if form.digital_amount.data:
-            product_types.append(ProductType(album_id=new_album.id, type='Digital', amount=form.digital_amount.data, price=form.digital_price.data))
-
-        db.session.add_all(product_types)
         db.session.commit()
-
-
+        
         return new_album.to_dict(), 201
 
     return {'errors': form.errors}, 400
+
+
+# Post product_types
+@album_routes.route('/products/<int:album_id>/', methods=['POST'])
+@login_required
+def create_products(album_id):
+    data = request.get_json()
+
+    if not data or not isinstance(data, list):
+        return {'errors': 'Invalid data'}, 400
+
+    products = []
+    for item in data:
+        product_type = item.get('type')
+        amount = item.get('amount')
+        price = item.get('price')
+
+        if product_type and (amount is not None or price is not None):
+            try:
+                amount = int(amount) if amount is not None else None
+                price = float(price) if price is not None else None
+            except ValueError:
+                return {'errors': 'Invalid data type for amount or price'}, 400
+
+            product = ProductType(
+                album_id=album_id,
+                type=product_type,
+                amount=amount,
+                price=price
+            )
+            products.append(product)
+            db.session.add(product)
+
+    if products:
+        db.session.commit()
+        return {'products': [product.to_dict() for product in products]}, 201
+
+    return {'errors': 'No valid products provided'}, 400
+
 
 
 

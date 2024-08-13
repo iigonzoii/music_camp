@@ -1,10 +1,11 @@
-import { csrfFetch } from "./csrf";
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
 const LOAD_ALBUM = "album/loadAlbum"
 const UPDATE_ALBUM = "album/updateAlbum"
 const CREATE_ALBUM = "album/createAlbum"
+const CREATE_PRODUCTS = "album/createProducts"
+
 
 //*-------ACTION CREATORS---------
 export const loadAlbums = (albums) => {
@@ -13,6 +14,7 @@ export const loadAlbums = (albums) => {
         albums
     }
 }
+
 export const loadAlbum = (album) => {
     return {
         type: LOAD_ALBUM,
@@ -26,18 +28,24 @@ export const update = (updatedAlbum) => {
         updatedAlbum
     }
 }
+
 export const addAlbum = (album) => ({
     type: CREATE_ALBUM,
     album
 });
+
+export const addProducts = ( products) => ({
+    type: CREATE_PRODUCTS,
+    products
+});
+
 
 
 //*---------THUNKS------------
 
 //* Get all albums
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await csrfFetch('/api/albums');
-    // csrfFetch
+    const response = await fetch('/api/albums');
     const albums = await response.json();
     // console.log(albums)
     dispatch(loadAlbums(albums));
@@ -46,8 +54,7 @@ export const fetchAlbums = () => async (dispatch) => {
 
 //* Get album by ID
 export const fetchAlbum = (albumId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/albums/${albumId}`)
-    // csrfFetch
+    const response = await fetch(`/api/albums/${albumId}`)
     const album = await response.json()
     dispatch(loadAlbum(album))
     return album
@@ -55,8 +62,7 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
 
 //* update album by ID
 export const updateAlbum = (albumId, album) => async dispatch => {
-    const response = await fetch(`/api/albums/${albumId}`, {
-        // csrfFetch
+    const response = await fetch(`/api/albums/${albumId}/`, {
         method: 'Put',
         body: JSON.stringify(album)
     })
@@ -72,8 +78,7 @@ export const updateAlbum = (albumId, album) => async dispatch => {
 
 //* delete album by id
 export const deleteAlbum = albumId => async dispatch =>{
-    const response = await fetch(`/api/albums/${albumId}`, {
-        // csrfFetch
+    const response = await fetch(`/api/albums/${albumId}/`, {
         method: "DELETE"
     })
     dispatch(fetchCurrUserAlbums())
@@ -82,8 +87,7 @@ export const deleteAlbum = albumId => async dispatch =>{
 
 //* Get current users albums
 export const fetchCurrUserAlbums = () => async (dispatch) => {
-    const response = await csrfFetch("/api/albums/current")
-    // csrfFetch
+    const response = await fetch("/api/albums/current")
     const albums = await response.json()
     dispatch(loadAlbums(albums.Albums))
 }
@@ -91,7 +95,7 @@ export const fetchCurrUserAlbums = () => async (dispatch) => {
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/albums/`, {
+        const response = await fetch(`/api/albums/`, {
             method: "POST",
             body: JSON.stringify(album),
             headers: { "Content-Type": "application/json" }
@@ -111,6 +115,26 @@ export const createAlbum = (album) => async (dispatch) => {
         console.error("Error creating album", err);
     }
 };
+
+//* Create a product by Album ID
+export const createProducts = (albumId, products) => async (dispatch) => {
+    const productData = products.product_types
+    const response = await fetch(`/api/albums/products/${albumId}/`, {
+        method: "POST",
+        body: JSON.stringify(productData),
+        headers: { "Content-Type": "application/json" }
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to create products');
+    }
+
+    const newProducts = await response.json();
+    dispatch(addProducts(newProducts));
+    return newProducts;
+};
+
 
 //*---------REDUCERS-----------
 
@@ -137,11 +161,20 @@ const albumReducer = (state = initialState, action) => {
             // return { ...state, albumDetail: {...action.album}};
         case UPDATE_ALBUM:
             return {...state, albumDetail: action.album}
-            case CREATE_ALBUM:
+        case CREATE_ALBUM:
                 return {
                     ...state,
                     [action.album.id]: action.album
                 };
+                case CREATE_PRODUCTS: {
+                    const newState = { ...state };
+                    action.products.products.forEach(product => {
+                        newState[product.id] = product;
+                    });
+                    return newState;
+                }
+                
+        
         default:
             return state;
     }

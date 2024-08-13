@@ -5,7 +5,8 @@ import UserHome from '../components/UserHome';
 import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
 import CartPage from '../components/CartPage';
 import Layout from './Layout';
-import CreateAlbum from '../components/Navigation/CreateAlbum';
+import CreateAlbum from '../components/CreateAlbum/CreateAlbum'
+import AddProducts from '../components/AddProducts/AddProducts';
 
 
 
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path:"/shoppingCart",
         element: <CartPage />
+      },
+      {
+        path:"/albums/:album_id/products",
+        element: <AddProducts />
       }
     ],
   },

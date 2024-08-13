@@ -6,14 +6,10 @@ import configureStore from "./redux/store";
 import { router } from "./router";
 import * as sessionActions from "./redux/session";
 import "./index.css";
-import { restoreCSRF, csrfFetch } from './redux/csrf';
 
 const store = configureStore();
 
 if (import.meta.env.MODE !== "production") {
-  restoreCSRF();
-
-  window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions;
 }

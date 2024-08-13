@@ -36,12 +36,13 @@ export const deleteTrack = (trackId) => {
 
 //*---------THUNKS------------
 
-//* Get all tracks
-export const fetchTracks = () => async (dispatch) => {
-    const response = await fetch("/api/tracks/current")
-    const tracks = await response.json()
-    dispatch(loadTracks(tracks.Tracks))
-}
+// //* Get all tracks
+// //* Not an MVP feature
+// export const fetchTracks = () => async (dispatch) => {
+//     const response = await fetch("/api/tracks/current")
+//     const tracks = await response.json()
+//     dispatch(loadTracks(tracks.Tracks))
+// }
 
 //* Get all tracks by Album ID
 export const fetchTracksbyAlbumId = (albumId) => async (dispatch) => {
@@ -82,9 +83,14 @@ const initialState = { allTracks: {} };
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
-            const newState = { ...state, allTracks: {}}
-            action.tracks.forEach(track => {
-                newState.allTracks[track.id] = track
+            // const newState = { ...state, allTracks: {}}
+            const newState = {}
+            // action.tracks.allTracks.forEach(track => {
+            //     newState.allTracks[track.id] = track
+            // })
+            console.log("ACTRACK",action.tracks)
+            action.tracks.tracks.forEach(track => {
+                newState[track.id] = track
             })
             return newState
         }

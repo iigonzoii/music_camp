@@ -4,7 +4,12 @@ import "./AlbumDetails.css"
 
 function MajorityDetails() {
     const { albumId } = useParams()
+    let tracks = useSelector(state => state.track)
     let album = useSelector(state => state.album);
+    let reviews = useSelector(state => state.review)
+    reviews = Object.values(reviews)
+    tracks = Object.values(tracks)
+
 
     return (
         <>
@@ -21,7 +26,7 @@ function MajorityDetails() {
                     ))}
 
                 <ol className="ADtrackList">
-                    {album && album[albumId].Album.tracks.map((track, index) => (
+                    {tracks && tracks.map((track, index) => (
                         <li key={index}>
                             <i className="fa-regular fa-circle-play"></i>
                             {track.name} {track.duration}
@@ -39,10 +44,11 @@ function MajorityDetails() {
                 <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                 <p>Supported by</p>
                 <ul>
-                    <li>reviewer profile image and their review</li>
-                    <li>reviewer profile image and their review</li>
-                    <li>reviewer profile image and their review</li>
-                    <li>reviewer profile image and their review</li>
+                {reviews && reviews.map((review, index) => (
+                        <li key={index}>
+                            {`UserId-${review.user_id}-${review.review}`}
+                            </li>
+                    ))}
                     <li>Version 2 probably make this box scroll and seethrough to show the background img?</li>
                 </ul>
                 <div className="ADv2supporters">

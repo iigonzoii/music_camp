@@ -1,10 +1,12 @@
-import { useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { fetchAlbum } from "../../redux/albumReducer"
+import { fetchReviewsByAlbum } from "../../redux/reviews"
+import { fetchTracksbyAlbumId } from "../../redux/tracks"
 import MajorityDetails from "./MajorityDetails"
 import AlbumAside from "./AlbumAside"
-import { createCartKey } from "../../../prettier"
+// import { createCartKey } from "../../../prettier"
 import "./AlbumDetails.css"
 
 function AlbumDetails() {
@@ -12,15 +14,14 @@ function AlbumDetails() {
     const dispatch = useDispatch();
     let album = useSelector(state => state.album);
     let [isLoaded, setIsLoaded] = useState(false)
-        useEffect(() => {
-            dispatch(fetchAlbum(+albumId)).then(() =>
-                setIsLoaded(true));
-        }, [dispatch]);
+    useEffect(() => {
+        dispatch(fetchReviewsByAlbum(+albumId))
+        .then(() => dispatch(fetchAlbum(+albumId)))
+        .then(() => dispatch(fetchTracksbyAlbumId(+albumId)))
+        .then(() => setIsLoaded(true));
+    }, [dispatch, albumId]);
 
-    
-
-
-    return isLoaded &&(
+    return isLoaded && (
         <>
 
             <section className="ADsection1">

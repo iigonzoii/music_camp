@@ -14,7 +14,7 @@ function MajorityDetails() {
                 <div className="V2Play">version2 play button and song</div>
                 <p>{album[albumId].Album.description}</p>
 
-                {album && album[albumId].Album.product_types.map((ptype, index) => (
+                {album && album[albumId].Album.products.map((ptype, index) => (
                         <button key={index}>
                             {`Buy ${ptype.type}`}
                             </button>

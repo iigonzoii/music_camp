@@ -8,8 +8,10 @@ function CardMapper({ genre, cat }) {
     let albums = useSelector(state => state.album);
     albums = Object.values(albums);
     let filteredAlbums = albums
-    function filterAlbums(albums, genre, cat) {
 
+
+
+    function filterAlbums(genre, cat) {
         // Apply genre filter if genre is provided
         if (genre && genre !== "all-genres") {
             filteredAlbums = filteredAlbums.filter(album => album.genre === genre);
@@ -21,18 +23,18 @@ function CardMapper({ genre, cat }) {
                 .map(album => {
                     return {
                         ...album,
-                        product_types: album.product_types.filter(
+                        products: album.products.filter(
                             product => product.type === cat
                         )
                     };
                 })
-                .filter(album => album.product_types.length > 0);
+                .filter(album => album.products.length > 0);
         }
 
         return filteredAlbums;
     }
 
-    albums = filterAlbums(albums, genre, cat);
+    albums = filterAlbums(genre, cat);
 
     console.log(albums);
 

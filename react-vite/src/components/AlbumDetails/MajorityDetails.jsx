@@ -6,7 +6,7 @@ import "./AlbumDetails.css"
 import ReviewButton from "../ReviewFormModal/ReviewButton";
 import EditReviewModal from "../ReviewFormModal/EditReviewModal"
 import DeleteReviewModal from "../ReviewFormModal/DeleteReviewModal"
-import OpenModalButton from "../OpenModalButton";
+// import OpenModalButton from "../OpenModalButton";
 
 function MajorityDetails() {
     const { albumId } = useParams()

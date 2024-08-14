@@ -93,7 +93,7 @@
     width: 100px;
     object-fit: cover;
     /* margin-top: 20px; */
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 
 .ADasideDiscoImgs {
@@ -101,7 +101,7 @@
     width: 100px;
     object-fit: cover;
     /* margin-top: 20px; */
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 
 .ADsection3>div {

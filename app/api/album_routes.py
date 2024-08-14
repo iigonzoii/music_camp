@@ -19,10 +19,10 @@ def all_albums():
 
 
 # Get all albums by User
-@album_routes.route('/user/<int:user_id>', methods=['GET'])
-def albums_by_user(user_id):
-    albums = db.session.query(Album).filter(Album.user_id == user_id).all()
-
+@album_routes.route('/current', methods=['GET'])
+def albums_by_user():
+    user_id = current_user.id
+    albums = Album.query.filter_by(user_id=user_id).all()
     if not albums:
         return {'errors': {'message': 'No albums found for this user'}}, 404
 
@@ -123,20 +123,25 @@ def create_products(album_id):
 @album_routes.route('/<int:album_id>', methods=['DELETE'])
 @login_required
 def delete_album(album_id):
-    kill_album = Album.query.filter_by(id=album_id, user_id=current_user.id).first()
-    if not kill_album:
-        return {'errors': {'message': 'Album not found or not authorized'}}, 404
+    album = Album.query.get(album_id)
+    if not album or album.user_id != current_user.id:
+        return {'errors': 'Album not found or unauthorized'}, 404
 
-    db.session.delete(kill_album)
+    # Delete all related product types first
+    ProductType.query.filter_by(album_id=album_id).delete()
+
+    # Then delete the album
+    db.session.delete(album)
     db.session.commit()
-    return {'message': "Album successfully deleted"}, 200
+
+    return {'message': 'Album and related products deleted successfully'}, 200
 
 
-# Update album by id
-@album_routes.route('/<int:album_id>', methods=['PUT'])
+@album_routes.route('/<int:album_id>/', methods=['PUT'])
 @login_required
 def update_album(album_id):
-    album_update = Album.query.filter_by(id=album_id, user_id=current_user.id).first()
+    album_update = Album.query.filter(Album.id == album_id).first()
+
     if not album_update:
         return {'errors': {'message': 'Album not found'}}, 404
     if album_update.user_id != current_user.id:
@@ -146,24 +151,18 @@ def update_album(album_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        album = Album(
-            user_id=current_user.id,
-            band=form.band.data,
-            title=form.title.data,
-            product_type=form.product_type.data,
-            cover_image_url=form.cover_image_url.data,
-            description=form.description.data,
-            producer=form.producer.data,
-            genre=form.genre.data,
-            tags=form.tags.data,
-            price=form.price.data,
-            stock=form.stock.data
-        )
+        album_update.band = form.band.data
+        album_update.title = form.title.data
+        album_update.cover_image_url = form.cover_image_url.data
+        album_update.description = form.description.data
+        album_update.producer = form.producer.data
+        album_update.genre = form.genre.data
+        album_update.tags = form.tags.data
 
-        db.session.add(album)
         db.session.commit()
-        return album.to_dict()
+        return album_update.to_dict()
     return form.errors, 401
+
 
 
 # Track route

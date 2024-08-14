@@ -7,7 +7,7 @@ class ProductType(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id'), ondelete='CASCADE'), nullable=False)
     type = db.Column(db.String, nullable=False)
     amount = db.Column(db.Integer, default=0)
     price = db.Column(db.Float, nullable=False, default=0)

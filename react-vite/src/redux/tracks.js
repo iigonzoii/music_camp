@@ -78,17 +78,12 @@ export const removeTrack = (trackId) => async (dispatch) =>{
 
 //*---------REDUCERS-----------
 
-const initialState = { allTracks: {} };
+const initialState = { trackDetail: {} };
 
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
-            // const newState = { ...state, allTracks: {}}
             const newState = {}
-            // action.tracks.allTracks.forEach(track => {
-            //     newState.allTracks[track.id] = track
-            // })
-            console.log("ACTRACK",action.tracks)
             action.tracks.tracks.forEach(track => {
                 newState[track.id] = track
             })
@@ -96,12 +91,11 @@ const trackReducer = (state = initialState, action) => {
         }
         case ADD_TRACK:
             return {
-                ...state,
-                allTracks: { ...state.allTracks, [action.track.id]: action.track },
+                ...state, [action.track.id]: action.track,
             };
         case DELETE_TRACK: {
             const newState = { ...state };
-            delete newState.allTracks[action.trackId];
+            delete newState[action.trackId];
             return newState;
         }
         default:

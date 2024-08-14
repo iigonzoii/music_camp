@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import OpenModalButton from "../OpenModalButton";
 import PostReviewModal from "./PostReviewModal"
 
-function ReviewButton({reviews}) {
+function ReviewButton({reviews, albumId}) {
   const sessionUser = useSelector((state) => state.session.user);
   // const { albumId } = useParams()
   // const albumId = album.id

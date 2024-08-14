@@ -60,7 +60,7 @@ function MajorityDetails() {
                                     />
                                     <OpenModalButton
                                         buttonText="Delete"
-                                        modalComponent={<DeleteReviewModal review={review} albumId={albumId} />}
+                                        modalComponent={<DeleteReviewModal reviewId={review.id} />}
                                     />
                                 </>
                             )}
@@ -70,7 +70,7 @@ function MajorityDetails() {
                 </ul>
                 <div className="AD-review-button">
                     {(
-                        <ReviewButton reviews={reviews}/>
+                        <ReviewButton reviews={reviews} albumId={albumId}/>
                     )}
                 </div>
                 <div className="ADv2supporters">

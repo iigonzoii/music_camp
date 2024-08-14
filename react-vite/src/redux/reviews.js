@@ -90,7 +90,7 @@ export const editReview = (reviewId, review) => async dispatch => {
 
 //* Delete a review by id
 export const removeReview = (reviewId) => async (dispatch) =>{
-    const response = await fetch(`/api/reviews/${reviewId}/`, {
+    const response = await fetch(`/api/reviews/${reviewId}`, {
         // csrfFetch
         method: "DELETE"
     })

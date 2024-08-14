@@ -1,7 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
+import LandingPage from "../components/LandingPage"
+import UserHome from '../components/UserHome';
+import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
+import CheckoutPage from '../components/CheckoutPage';
 import Layout from './Layout';
+import CreateAlbum from '../components/CreateAlbum/CreateAlbum'
+import AddProducts from '../components/AddProducts/AddProducts';
+import UpdateAlbum from '../components/UpdateAlbum/UpdateAlbum';
+// import CartModal from '../components/CartModal/CartModal';
+import CartItemsList from '../components/CartModal/CartItems';
+
+
 
 export const router = createBrowserRouter([
   {
@@ -9,16 +19,40 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <LandingPage />,
+      },
+      {
+        path:"/home",
+        element:<UserHome />
+      },
+      {
+        path:"/albums/:albumId",
+        element:<AlbumDetails />
       },
       {
         path: "login",
-        element: <LoginFormPage />,
+        element: <LoginFormPage />
       },
       {
-        path: "signup",
-        element: <SignupFormPage />,
+        path: '/albums/new',
+        element: <CreateAlbum />
       },
+      {
+        path:"/checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path:"/albums/:album_id/products",
+        element: <AddProducts />
+      },
+      {
+        path:"/albums/:album_id/edit",
+        element: <UpdateAlbum />
+      },
+      {
+        path:"/shoppingCart",
+        element: <CartItemsList />
+      }
     ],
   },
 ]);

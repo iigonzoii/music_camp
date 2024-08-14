@@ -1,0 +1,36 @@
+/* .UHcontainer {
+    display: flex;
+    flex-direction: column;
+} */
+
+.UHsection1{
+    border: 5px solid blue;
+    margin: 0px 20px 0px 20px;
+    display: flex;
+}
+
+.UHsection2{
+    border: 5px solid rgb(82, 239, 35);
+    margin: 0px 20px 0px 20px;
+
+}
+
+.UHBannerImg {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.UHmainImg{
+    height: 150px;
+    width: 150px;
+    z-index: 1;
+}
+.UHuserName{
+    margin-top: 30px;
+}
+
+.album-card {
+    border: 5px white solid;
+}

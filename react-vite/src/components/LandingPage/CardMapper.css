@@ -1,0 +1,34 @@
+.CMcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    justify-content: flex-start;
+    margin:auto;
+    width: 1060px;
+}
+
+.poniter{
+    cursor: pointer;
+}
+
+.CMImg {
+    height: 100px;
+    width: 100px;
+    object-fit:cover;
+    margin-top: 10px;
+    border: solid #4C4C4C 1px;
+}
+.album-data-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.data-container-item{
+    margin: 0px 0px 0px 0px;
+    font-size: 12px;
+}
+.bottom-item{
+    margin-top: 8px;
+    font-size: 10px;
+}

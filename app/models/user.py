@@ -2,9 +2,9 @@ from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from .associations import wishlist_items, shoppingcart_items, purchase_items
+from .associations import wishlist
+from .purchase_item import PurchaseItem
 
-# * db is being called on another page and we import it on line one
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
+    city = db.Column(db.String(40), nullable=False)
+    state = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
@@ -28,17 +30,17 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    #* album relation
+    # Relationships
     albums = db.relationship('Album', back_populates='artist')
-    #* review relation
     reviews = db.relationship('Review', back_populates='reviewer')
-    #* track relation
     tracks = db.relationship('Track', back_populates='user')
 
     #* Association table relations with User
-    wishlisted_albums = db.relationship('Album', secondary=wishlist_items, backref='user_wishlist')
-    cart_albums = db.relationship('Album', secondary=shoppingcart_items, backref='user_cart')
-    purchased_albums = db.relationship('Album', secondary=purchase_items, backref='user_purchases')
+    wishlisted_albums = db.relationship('Album', secondary=wishlist, backref='user_wishlist')
+    # cart_albums = db.relationship('Album', secondary=cart_items, backref='user_cart')
+    # purchase_items = db.relationship('Album', secondary=PurchaseItem, backref='user')
+    purchases = db.relationship('PurchaseItem', back_populates='user')
+
 
 
     @property
@@ -55,6 +57,20 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'city': self.city,
+            'state': self.state,
+            'email': self.email,
             'username': self.username,
-            'email': self.email
+            'bio': self.bio,
+            'spotify': self.spotify,
+            'instagram': self.instagram,
+            'website': self.website,
+            'facebook': self.facebook,
+            'profile_img_url': self.profile_img_url,
+            'banner_img_url': self.banner_img_url,
+            'background_img_url': self.background_img_url,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

@@ -6,30 +6,46 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    username: '',
+    password: '',
+    bio: '',
+    spotify: '',
+    instagram: '',
+    website: '',
+    facebook: '',
+    profile_img_url: '',
+    banner_img_url: '',
+    background_img_url: '',
+  });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (formData.password !== confirmPassword) {
       return setErrors({
         confirmPassword:
           "Confirm Password field must be the same as the Password field",
       });
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-      })
-    );
+    const serverResponse = await dispatch(thunkSignup(formData));
 
     if (serverResponse) {
       setErrors(serverResponse);
@@ -44,35 +60,65 @@ function SignupFormModal() {
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
+          First Name
+          <input
+            type="text"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.first_name && <p>{errors.first_name}</p>}
+
+        <label>
+          Last Name
+          <input
+            type="text"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.last_name && <p>{errors.last_name}</p>}
+
+        <label>
           Email
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
+
         <label>
           Username
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
             required
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
+
         <label>
           Password
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
+
         <label>
           Confirm Password
           <input
@@ -83,6 +129,95 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+
+        <label>
+          Bio
+          <input
+            type="text"
+            name="bio"
+            value={formData.bio}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.bio && <p>{errors.bio}</p>}
+
+        <label>
+          Spotify
+          <input
+            type="text"
+            name="spotify"
+            value={formData.spotify}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.spotify && <p>{errors.spotify}</p>}
+
+        <label>
+          Instagram
+          <input
+            type="text"
+            name="instagram"
+            value={formData.instagram}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.instagram && <p>{errors.instagram}</p>}
+
+        <label>
+          Website
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.website && <p>{errors.website}</p>}
+
+        <label>
+          Facebook
+          <input
+            type="text"
+            name="facebook"
+            value={formData.facebook}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.facebook && <p>{errors.facebook}</p>}
+
+        <label>
+          Profile Image URL
+          <input
+            type="text"
+            name="profile_img_url"
+            value={formData.profile_img_url}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.profile_img_url && <p>{errors.profile_img_url}</p>}
+
+        <label>
+          Banner Image URL
+          <input
+            type="text"
+            name="banner_img_url"
+            value={formData.banner_img_url}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.banner_img_url && <p>{errors.banner_img_url}</p>}
+
+        <label>
+          Background Image URL
+          <input
+            type="text"
+            name="background_img_url"
+            value={formData.background_img_url}
+            onChange={handleChange}
+          />
+        </label>
+        {errors.background_img_url && <p>{errors.background_img_url}</p>}
+
         <button type="submit">Sign Up</button>
       </form>
     </>

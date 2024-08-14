@@ -13,8 +13,7 @@ function MajorityDetails() {
     tracks = Object.values(tracks)
 
 
-
-    const albumProducts = album[albumId].Album.product_types
+    const albumProducts = album[albumId].Album.products
     const findProduct = (type) => {
         const product = albumProducts.find(product => product.type == type)
         return product

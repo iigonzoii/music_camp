@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import { createCartKey } from "../../../prettier";
 
+import CartItemsList from "./CartItems";
 import "./CartModal.css"
 
 const CartModal = ({albumData}) => {
@@ -15,16 +16,17 @@ const CartModal = ({albumData}) => {
 
     const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
     const item = JSON.parse(localStorage.getItem(albumKey))
-    // function for actually adding items to local storage
+
     const postToLocalStorage = (payload) => {
         localStorage.setItem(albumKey, JSON.stringify(payload));
         return payload
     }
 
-    // const [items, setItems] = useState([]);
     const [quantity, setQuantity] = useState(item ? parseInt(item.quantity) : 1);
     const [price, setPrice] = useState(parseInt(albumData.price));
     const [navToCheckout, setNavToCheckout] = useState(false)
+
+    const [message, setMessage] = useState('')
     const [errors, setErrors] = useState({})
 
     const handleQuantity = (e) => setQuantity(e.target.value);
@@ -48,6 +50,11 @@ const CartModal = ({albumData}) => {
         const payload = {
             user_id: currUser.id,
             album_id: albumData.id,
+            album_details: {
+                band: albumById.band,
+                title: albumById.title,
+                image: albumById.cover_image_url
+            },
             type: albumData.type,
             quantity,
             price
@@ -59,8 +66,12 @@ const CartModal = ({albumData}) => {
             if (existingItem) {
                 existingItem.quantity += 1
                 postToLocalStorage(existingItem)
+                setMessage('Quantity updated successfully!')
+                setTimeout(() => setMessage(''), 5000)
             } else {
                 postToLocalStorage(payload)
+                setMessage('Item successfully added to cart!')
+                setTimeout(() => setMessage(''), 5000)
             }
 
             if (navToCheckout) {
@@ -88,34 +99,45 @@ const CartModal = ({albumData}) => {
             {/* <p>{albumData}</p> */}
         </div>
 
-        <form onSubmit={handleAddCartSubmit}>
-            <div className="set-price">
-                <h4>Enter Amount:</h4>
-                <input
-                    onChange={handlePrice}
-                    placeholder={`$${albumData.price}`}
-                ></input>
-                <p>US (${albumData.price} or more)</p>
-                <p className="errors">{errors.price}</p>
-            </div>
-            <div className="set-quantity">
-                <h4>Quantity:</h4>
-                <input
-                    onChange={handleQuantity}
-                    type="number"
-                    min="1" max={albumData.amount}
-                    defaultValue="1"
-                ></input>
-                <p className="errors">{errors.quantity}</p>
-            </div>
-            <button className="add-cart-btn" type='submit' onClick={() => setNavToCheckout(false)}>
-                Add To Cart
-            </button>
+        <div className='cart-form-and-list'>
+            <form className='cartModal-forms' onSubmit={handleAddCartSubmit}>
+                <div className="cartModal-form-field">
+                    <h4>Enter Amount:</h4>
+                    <input
+                        onChange={handlePrice}
+                        placeholder={`$${albumData.price}`}
+                    ></input>
+                    <p>USD (${albumData.price} or more)</p>
+                    <p className="errors">{errors.price}</p>
+                </div>
+                <div className="cartModal-form-field">
+                    <h4>Quantity:</h4>
+                    <input
+                        onChange={handleQuantity}
+                        type="number"
+                        min="1" max={albumData.amount}
+                        defaultValue="1"
+                    ></input>
+                    <p className="errors">{errors.quantity}</p>
+                </div>
 
-            <button className="checkout" type="submit" onClick={() => setNavToCheckout(true)}>
-                Checkout
-            </button>
-        </form>
+                <div className='cart-modal-btns'>
+                    <button className="checkout-btn" type="submit" onClick={() => setNavToCheckout(true)}>
+                        Checkout
+                    </button>
+                    <button className="add-cart-btn" type='submit' onClick={() => setNavToCheckout(false)}>
+                    🛒  Add To Cart
+                    </button>
+
+                </div>
+
+                <p>{message}</p>
+            </form>
+
+            <div>
+                <CartItemsList />
+            </div>
+        </div>
     </div>
     )
 }

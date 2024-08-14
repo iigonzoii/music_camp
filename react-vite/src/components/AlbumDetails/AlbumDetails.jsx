@@ -6,7 +6,6 @@ import { fetchReviewsByAlbum } from "../../redux/reviews"
 import { fetchTracksbyAlbumId } from "../../redux/tracks"
 import MajorityDetails from "./MajorityDetails"
 import AlbumAside from "./AlbumAside"
-// import { createCartKey } from "../../../prettier"
 import "./AlbumDetails.css"
 
 function AlbumDetails() {
@@ -14,6 +13,7 @@ function AlbumDetails() {
     const dispatch = useDispatch();
     let album = useSelector(state => state.album);
     let [isLoaded, setIsLoaded] = useState(false)
+
     useEffect(() => {
         dispatch(fetchReviewsByAlbum(+albumId))
         .then(() => dispatch(fetchAlbum(+albumId)))
@@ -23,7 +23,6 @@ function AlbumDetails() {
 
     return isLoaded && (
         <>
-
             <section className="ADsection1">
                 <img className="ADbanner" src={album[albumId].UserInfo[0].banner_img_url} />
             </section>

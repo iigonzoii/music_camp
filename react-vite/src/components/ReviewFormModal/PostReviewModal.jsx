@@ -2,12 +2,10 @@ import { useState } from 'react';
 import { createReview } from '../../redux/reviews';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { useParams } from "react-router-dom"
 import "./ReviewForm.css"
 
 
-function PostReviewModal() {
-  const { albumId } = useParams();
+function PostReviewModal({ albumId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
@@ -43,25 +41,23 @@ function PostReviewModal() {
 
 
     return (
-      <>
+      <div className="review-parent-container">
         <h1 className="review-form-heading">Share your review</h1>
-        <div className="review-parent-container">
           {errors.server && <p>{errors.server}</p>}
-            <form onSubmit={handleSubmit}>
-              <label>
-                Review
-                <textarea
-                  name="review"
-                  value={formData.review}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-              {errors.review && <p>{errors.review}</p>}
-              <button className="submit-button" type="submit" disabled={review.length < 1 }>Submit Your Review</button>
-            </form>
-        </div>
-      </>
+          <form className="review-form-body" onSubmit={handleSubmit}>
+            <label>
+              Review
+              <textarea
+                name="review"
+                value={formData.review}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            {errors.review && <p>{errors.review}</p>}
+            <button className="submit-button" type="submit" disabled={formData.review.length < 2 }>Submit Your Review</button>
+          </form>
+      </div>
     )
 }
 

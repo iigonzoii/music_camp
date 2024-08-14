@@ -11,6 +11,12 @@
     margin-left: 20px;
 }
 
+button {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    border: 2px red solid;
+}
+
 #review-owner, #review-date, #review-owner, #review-text {
     left: 0;
     text-align: left;

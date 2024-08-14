@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { editReview } from '../../redux/reviews';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 import "./ReviewForm.css"
 
 
-function EditReviewModal({ review }) {
-    const { albumId } = useParams();
+function EditReviewModal({ reviewId, review }) {
+    // const { albumId } = useParams();
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
@@ -21,7 +21,7 @@ function EditReviewModal({ review }) {
         e.preventDefault();
 
         const serverResponse = await dispatch(
-            editReview(albumId, review.id, formData)
+            editReview(reviewId, formData)
         );
 
         if (serverResponse) {
@@ -55,7 +55,7 @@ function EditReviewModal({ review }) {
                   />
                 </label>
                 {errors.review && <p>{errors.review}</p>}
-                <button className="submit-button" type="submit" disabled={review.length < 1}>Submit Your Change</button>
+                <button className="submit-button" type="submit" >Submit Your Change</button>
               </form>
           </div>
         </>

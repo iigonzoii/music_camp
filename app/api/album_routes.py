@@ -245,7 +245,7 @@ def new_review(album_id):
             user_id=current_user.id,
             album_id=album_id,
             review=form.data['review'],
-            stars=form.data['stars']
+            # stars=form.data['stars']
         )
         db.session.add(theReview)
         db.session.commit()

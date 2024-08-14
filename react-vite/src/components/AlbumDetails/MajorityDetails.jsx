@@ -1,9 +1,14 @@
 import { useSelector} from "react-redux"
 import { useParams } from "react-router-dom"
 import "./AlbumDetails.css"
+import ReviewButton from "../ReviewFormModal/ReviewButton";
+import EditReviewModal from "../ReviewFormModal/EditReviewModal"
+import DeleteReviewModal from "../ReviewFormModal/DeleteReviewModal"
+import OpenModalButton from "../OpenModalButton";
 
 function MajorityDetails() {
     const { albumId } = useParams()
+    const sessionUser = useSelector((state) => state.session.user);
     let tracks = useSelector(state => state.track)
     let album = useSelector(state => state.album);
     let reviews = useSelector(state => state.review)
@@ -44,13 +49,30 @@ function MajorityDetails() {
                 <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                 <p>Supported by</p>
                 <ul>
-                {reviews && reviews.map((review, index) => (
+                    {reviews && reviews.map((review, index) => (
                         <li key={index}>
                             {`UserId-${review.user_id}-${review.review}`}
-                            </li>
+                            {sessionUser && review.user_id === sessionUser.id && (
+                                <>
+                                    <OpenModalButton
+                                        buttonText="Edit"
+                                        modalComponent={<EditReviewModal reviewId={review.id} review={review} />}
+                                    />
+                                    <OpenModalButton
+                                        buttonText="Delete"
+                                        modalComponent={<DeleteReviewModal review={review} albumId={albumId} />}
+                                    />
+                                </>
+                            )}
+                        </li>
                     ))}
                     <li>Version 2 probably make this box scroll and seethrough to show the background img?</li>
                 </ul>
+                <div className="AD-review-button">
+                    {(
+                        <ReviewButton reviews={reviews}/>
+                    )}
+                </div>
                 <div className="ADv2supporters">
                     Version2 where we showed a tiled list of supporters profile images
                 </div>

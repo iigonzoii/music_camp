@@ -20,7 +20,6 @@ export const addOrder = (order) => {
 }
 
 
-
 //*---------THUNKS------------
 
 // Get all Orders
@@ -68,3 +67,5 @@ const orderReducer = (state=initialState, action) => {
         default: return state;
     }
 }
+
+export default orderReducer

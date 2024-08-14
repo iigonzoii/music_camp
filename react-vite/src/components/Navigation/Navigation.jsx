@@ -1,12 +1,13 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+// import OpenModalButton from "../OpenModalButton/OpenModalButton";
+// import CartItemsList from "../CartModal/CartItems";
 import "./Navigation.css";
 
 function Navigation() {
   const sessionUser = useSelector((store) => store.session.user);
 
-  let navigate = useNavigate()
   return (
     <nav>
       <div>
@@ -24,7 +25,10 @@ function Navigation() {
       </div>
       </>
       )}
-      <i className="fa-solid fa-cart-shopping pointer cartIcon" onClick={() => navigate(`/shoppingCart`)}></i>
+      <i className="fa-solid fa-cart-shopping pointer cartIcon"
+        // onClick={OpenModalButton}
+      >
+      </i>
         <i className="fa-regular fa-heart pointer heartIcon " ></i>
         <ProfileButton />
       </div>

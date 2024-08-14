@@ -1,0 +1,75 @@
+#cart-modal-wrapper {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    height: 450px;
+}
+
+.cart-product-info {
+    display: flex;
+    padding-left: 50px;
+    color: black;
+    font-size: 12px;
+    background-color: rgb(245, 245, 245);
+    border-bottom: solid 1px rgb(228, 228, 228);
+}
+
+.cart-form-and-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 10%;
+}
+
+
+.cartModal-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    top: 5px;
+}
+
+
+.cartModal-form-field > h4 {
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.cartModal-form-field > p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.cart-modal-btns {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 35px;
+}
+
+.cart-modal-btns > button {
+    font-size: 14px;
+    width: 190px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    padding: 0%;
+    color: white;
+}
+
+.add-cart-btn {
+    background-color: rgb(6, 135, 245);
+    margin-left: 30px;
+}
+.checkout-btn {
+    background-color: rgb(78, 142, 37);
+    margin-right: 30px;
+}
+
+.errors {
+    color: red;
+    font-size: 12px;
+}

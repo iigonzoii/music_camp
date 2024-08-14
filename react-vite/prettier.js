@@ -38,7 +38,7 @@ function hashString(str) {
 }
 
 const createCartKey = (userId, albumId, type) => {
-    newKey = `${userId}${albumId}${type}`
+    let newKey = `${userId}${albumId}${type}`
 
     return hashString(newKey)
 }

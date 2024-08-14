@@ -13,7 +13,6 @@ function UpdateAlbum() {
 
   // Find the album to edit by its ID
   const editAlbum = Object.values(usersAlbums).find(item => item.id)
-  console.log(editAlbum)
 
   // Initialize state with album data if it exists
   const [band, setBand] = useState(editAlbum ? editAlbum.band : "");
@@ -21,7 +20,6 @@ function UpdateAlbum() {
   const [coverImageUrl, setCoverImageUrl] = useState(
     editAlbum ? editAlbum.cover_image_url : ""
   );
-  
   const [description, setDescription] = useState(
     editAlbum ? editAlbum.description : ""
   );
@@ -87,9 +85,10 @@ function UpdateAlbum() {
       genre,
       tags,
     };
-    console.log(payload)
     try {
-      const updatedAlbum = await dispatch(fetchUpdateAlbum(editAlbum, payload));
+        console.log(band)
+
+      const updatedAlbum = await dispatch(fetchUpdateAlbum(payload));
       console.log({ updatedAlbum });
       if (updatedAlbum) {
         navigate(`/albums/${updatedAlbum.id}/products/edit`);

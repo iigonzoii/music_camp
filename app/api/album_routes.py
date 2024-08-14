@@ -132,7 +132,6 @@ def delete_album(album_id):
     return {'message': "Album successfully deleted"}, 200
 
 
-# Update album by id
 @album_routes.route('/<int:album_id>/', methods=['PUT'])
 @login_required
 def update_album(album_id):
@@ -146,21 +145,18 @@ def update_album(album_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        album = Album(
-            user_id=current_user.id,
-            band=form.band.data,
-            title=form.title.data,
-            cover_image_url=form.cover_image_url.data,
-            description=form.description.data,
-            producer=form.producer.data,
-            genre=form.genre.data,
-            tags=form.tags.data,
-        )
+        album_update.band = form.band.data
+        album_update.title = form.title.data
+        album_update.cover_image_url = form.cover_image_url.data
+        album_update.description = form.description.data
+        album_update.producer = form.producer.data
+        album_update.genre = form.genre.data
+        album_update.tags = form.tags.data
 
-        db.session.add(album)
         db.session.commit()
-        return album.to_dict()
+        return album_update.to_dict()
     return form.errors, 401
+
 
 
 # Track route

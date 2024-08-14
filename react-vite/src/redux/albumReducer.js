@@ -1,3 +1,4 @@
+import { compose } from "redux"
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
@@ -75,6 +76,7 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
 
 //* Update album by ID
 export const fetchUpdateAlbum = (album) => async (dispatch) => {
+    console.log('Album',album);
     try {
         const res = await fetch(`/api/albums/${album.id}/`, {
             method: 'PUT',
@@ -84,7 +86,7 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
             body: JSON.stringify(album),
         });
 
-        console.log('Res',res);
+        
         if (res.ok) {
             const data = await res.json();
             console.log('Data',data)
@@ -199,8 +201,14 @@ const albumReducer = (state = initialState, action) => {
             return newState;
         }
             // return { ...state, albumDetail: {...action.album}};
-        case UPDATE_ALBUM:
-            return {...state, albumDetail: action.album}
+            case UPDATE_ALBUM: {
+                console.log(action.payload)
+                return {
+                    ...state,
+                    albumDetail: action.payload
+                };
+            }
+            
         case CREATE_ALBUM:
                 return {
                     ...state,
@@ -225,13 +233,7 @@ const albumReducer = (state = initialState, action) => {
             delete newState[action.albumId];
             return newState;
         } 
-        case UPDATE_ALBUM: {
-            console.log(action.payload)
-            return {
-                ...state,
-                [action.albumId]: action.payload,
-            };
-        }
+        
         
         default:
             return state;

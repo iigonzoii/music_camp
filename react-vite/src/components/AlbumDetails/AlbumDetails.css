@@ -53,7 +53,7 @@
     width: 250px;
     height: 180px;
     max-width: 100%;
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 
 .ADtrackList {
@@ -62,19 +62,19 @@
     flex-direction: column;
     border: solid;
     /* background-color: lightslategray; */
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 
 .V2Play {
     /* background-color: lightslategray; */
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
     height: 50px;
 }
 
 .ADv2supporters {
     height: 100px;
     width: 200px;
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 
 .ADsection3 {

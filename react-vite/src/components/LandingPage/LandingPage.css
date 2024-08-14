@@ -59,7 +59,7 @@ margin-right: 50px;
     height: 150px;
     width: 150px;
     object-fit: cover;
-    border: solid lightgray 1px;
+    border: solid #4C4C4C 1px;
 }
 .LPasideButtons{
     display: flex;

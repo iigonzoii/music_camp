@@ -4,16 +4,76 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: flex-start;
-  right: 30px;
+  right: 20px;
   font-size: 10px;
+  background-color: #307efd96;
+  border: solid 0.5px black;
+  border-radius: 6px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+  margin-top: 30px;
+  padding: 5px 0 5px;
+  width: 110px;
+  height: 80px;
+  z-index: 1;
+  color: rgb(255, 253, 253);
+  align-items: center;
+  justify-content:space-evenly;
+}
+
+.profile-dropdown button {
+  font-size: 13px ;
+  font-weight:bold;
+  border-radius: 20px;
+  background-color: #f75b34;
+  width: 75px;
+  height: 22px;
+  box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 1);
+  margin-bottom: 5px;
+
+}
+
+#profile-username {
+  font-weight: bold;
+  font-size: 12px;
+  margin-top: 6px;
+  text-decoration: none;
+  color: white;
+
+}
+#profile-username:hover {
+  color: rgb(255, 41, 41);
+  cursor: pointer;
+}
+
+#profile-email {
+  font-size: 11px;
+
 }
 
 .logo{
   text-decoration: none;
-  color:#280dae;
+  /* color:#280dae; */
+  color: white;
   font-size: 15px;
+  padding-right: 10px;
 }
+
+.profile-button {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  height: auto;
+  width: auto;
+  /* background-color: transparent; */
+  border-radius: 3px;
+  border: none;
+}
+
+.profile-logo {
+  color: rgb(0, 98, 255);
+ */
+  /* justify-items: center; */
+}
+
 .navSearch{
   border: solid 1px lightgrey;
   border-radius: 5px;
@@ -48,6 +108,7 @@ nav{
 .createAlbum{
   text-decoration: none;
   margin-right: 10px;
+  color: white;
 }
 
 .cartIcon{

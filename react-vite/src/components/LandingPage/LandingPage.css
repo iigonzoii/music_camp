@@ -62,6 +62,16 @@ margin-right: 50px;
 }
 .LPasideButtons{
     display: flex;
+
+}
+.LPasideButtons > button {
+        cursor: pointer;
+    margin: 2px 5px 5px 0px;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: small;
+    color: lightgray;
 }
 /* .LPupperButtons{
     padding: 0px 0px 5px 0px;

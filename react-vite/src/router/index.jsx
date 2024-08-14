@@ -8,6 +8,8 @@ import Layout from './Layout';
 import CreateAlbum from '../components/CreateAlbum/CreateAlbum'
 import AddProducts from '../components/AddProducts/AddProducts';
 import UpdateAlbum from '../components/UpdateAlbum/UpdateAlbum';
+// import CartModal from '../components/CartModal/CartModal';
+import CartItemsList from '../components/CartModal/CartItems';
 
 
 
@@ -46,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path:"/albums/:album_id/edit",
         element: <UpdateAlbum />
+      },
+      {
+        path:"/shoppingCart",
+        element: <CartItemsList />
       }
     ],
   },

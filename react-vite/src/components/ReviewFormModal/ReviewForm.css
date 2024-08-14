@@ -1,12 +1,15 @@
 .review-form-parent {
     max-width: 800px;
+    min-width: 350px;
+    width: auto;
+    min-height: 200px;
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    justify-content: space-between;
-    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -19,12 +22,6 @@
     color: red;
 }
 
-.yes-no-buttons-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    gap: 2px;
-}
 
 .ADalbumArea button {
     background-color: white;
@@ -40,14 +37,37 @@
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
-.submit-button {
-    margin-top: 10px;
-    width: 100%;
+.review-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-.submit-button:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.review-buttons button{
+    display: inline-flex;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
+
+
+.submit-button, .cancel-button {
+    width: 45%;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 0%;
+    border: 1px solid rgb(13, 0, 0);
+    box-shadow: 1.5px 1.5px 0.5px 0px rgba(0, 0, 0, 1);
+    border: 1px solid black;
+}
+
+.submit-button:hover, .cancel-button:hover {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
 
 .review-form-body {
     display: flex;
@@ -64,7 +84,9 @@
 }
 
 .review-form-body textarea {
-    height: 50px;
+    border-radius: 3px;
+    height: 80px;
+
 }
 
 .reviews-list button {

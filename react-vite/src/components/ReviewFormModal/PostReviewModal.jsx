@@ -53,7 +53,10 @@ function PostReviewModal({ albumId }) {
                 required
               />
             {errors.review && <p>{errors.review}</p>}
-            <button className="submit-button" type="submit" disabled={formData.review.length < 2 }>Submit Your Review</button>
+            <div className="review-buttons">
+              <button className="submit-button" type="submit" disabled={formData.review.length < 2 }>Submit Your Review</button>
+              <button onClick={() => closeModal()} className="cancel-button">Cancel</button>
+            </div>
           </form>
       </div>
     )

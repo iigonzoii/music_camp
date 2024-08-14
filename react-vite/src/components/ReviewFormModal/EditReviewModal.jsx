@@ -42,19 +42,18 @@ function EditReviewModal({ reviewId, review }) {
       <div className='review-form-parent'>
         <h1 className="review-form-heading">Edit your review</h1>
         {errors.server && <p>{errors.server}</p>}
-          <form onSubmit={handleSubmit}>
-            <label>
-              Review
-              <input
-                type="text"
+          <form className="review-form-body" onSubmit={handleSubmit}>
+              <textarea
                 name="review"
                 value={formData.review}
                 onChange={handleChange}
                 required
               />
-            </label>
             {errors.review && <p>{errors.review}</p>}
-            <button className="submit-button" type="submit" >Submit Your Change</button>
+            <div className="review-buttons">
+              <button className="submit-button" type="submit" >Submit</button>
+              <button onClick={() => closeModal()} className="cancel-button">Cancel</button>
+            </div>
           </form>
       </div>
     )

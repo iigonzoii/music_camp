@@ -78,7 +78,7 @@ export const removeTrack = (trackId) => async (dispatch) =>{
 
 //*---------REDUCERS-----------
 
-const initialState = { trackDetail: {} };
+const initialState = {};
 
 const trackReducer = (state = initialState, action) => {
     switch (action.type) {

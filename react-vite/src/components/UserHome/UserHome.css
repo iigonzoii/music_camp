@@ -15,10 +15,22 @@
 
 }
 
+.UHBannerImg {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .UHmainImg{
     height: 150px;
     width: 150px;
+    z-index: 1;
 }
 .UHuserName{
     margin-top: 30px;
+}
+
+.album-card {
+    border: 5px white solid;
 }

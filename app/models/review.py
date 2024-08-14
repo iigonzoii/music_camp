@@ -10,7 +10,7 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
     review = db.Column(db.String(250), nullable=False)
-    stars = db.Column(db.Integer, nullable=False)
+    # stars = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
@@ -27,7 +27,7 @@ class Review(db.Model):
                 'user_id': self.user_id,
                 'album_id': self.album_id,
                 'review': self.review,
-                'stars': self.stars,
+                # 'stars': self.stars,
                 'created_at': self.created_at,
                 'updated_at': self.updated_at
             }

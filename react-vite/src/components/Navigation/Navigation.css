@@ -4,16 +4,78 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: flex-start;
-  right: 30px;
+  right: 20px;
   font-size: 10px;
+  background-color: #307efd96;
+  border: solid 0.5px rgb(255, 255, 255);
+  border-radius: 6px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
+  margin-top: 23px;
+  padding: 5px 0 5px;
+  width: 120px;
+  height: 90px;
+  z-index: 1;
+  color: rgb(255, 253, 253);
+  align-items: center;
+  /* justify-content:space-around; */
+}
+
+.profile-dropdown button {
+  font-size: 13px ;
+  font-weight:bold;
+  border-radius: 3px;
+  background-color: #ff7350;
+  width: 72px;
+  height: 20px;
+  box-shadow: 0px 0px 1px 0px rgb(0, 0, 0);
+
+  border: 1px solid black;
+  margin: 10px 0 0 0;
+  /* color: white; */
+}
+
+#profile-username {
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 13px;
+  text-decoration: none;
+  color: white;
+
+}
+#profile-username:hover {
+  color: rgb(255, 41, 41);
+  cursor: pointer;
+}
+
+#profile-email {
+  margin-top: 2px;
+  font-size: 12px;
+
 }
 
 .logo{
   text-decoration: none;
-  color:#280dae;
+  /* color:#280dae; */
+  color: white;
   font-size: 15px;
+  padding-right: 10px;
 }
+
+.profile-button {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  height: auto;
+  width: auto;
+  /* background-color: transparent; */
+  border-radius: 3px;
+  border: none;
+}
+
+.profile-logo {
+  color: rgb(0, 98, 255);
+
+}
+
 .navSearch{
   border: solid 1px lightgrey;
   border-radius: 5px;
@@ -29,18 +91,33 @@ nav{
 .pointer{
   cursor:pointer;
 }
-.logInn{
+
+.profile-session-items{
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px;
   text-decoration: none;
-  background: none;
-  color: blue;
-  border: none;
-  padding: 0;
-  font: inherit;
+  color: white;
   cursor: pointer;
-  outline: inherit;
-  margin-bottom: 10px;
+  align-content: center;
+  text-align: center;
+  border-bottom: 1px solid white;
+  width: 120px;
+  height: 45px;
 
 }
+
+.profile-session-items:last-child {
+  border-bottom: none;
+}
+
+.profile-session-items:hover {
+  text-decoration:rgb(255, 2, 2) underline;
+  font-weight: bold;
+}
+
 .navRight{
   display: flex;
 }
@@ -48,6 +125,7 @@ nav{
 .createAlbum{
   text-decoration: none;
   margin-right: 10px;
+  color: white;
 }
 
 .cartIcon{

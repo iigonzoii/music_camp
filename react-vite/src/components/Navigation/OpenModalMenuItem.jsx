@@ -15,7 +15,7 @@ function OpenModalMenuItem({
   };
 
   return (
-    <li className='logInn' onClick={onClick}>{itemText}</li>
+    <li className='profile-session-items' onClick={onClick}>{itemText}</li>
   );
 }
 

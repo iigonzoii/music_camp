@@ -1,0 +1,112 @@
+.review-form-parent {
+    max-width: 800px;
+    min-width: 350px;
+    width: auto;
+    min-height: 200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.review-form-heading {
+    color: black;
+}
+
+#delete-subheading {
+    font-size: 20px;
+    color: red;
+}
+
+
+.ADalbumArea button {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.ADalbumArea button:active {
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.review-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.review-buttons button{
+    display: inline-flex;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+
+.submit-button, .cancel-button {
+    width: 45%;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 0%;
+    border: 1px solid rgb(13, 0, 0);
+    box-shadow: 1.5px 1.5px 0.5px 0px rgba(0, 0, 0, 1);
+    border: 1px solid black;
+}
+
+.submit-button:hover, .cancel-button:hover {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+
+.review-form-body {
+    display: flex;
+    flex-direction: column;
+    /* width: 800px; */
+
+    /* justify-content: space-between; */
+    /* margin-top: 20px; */
+}
+
+.review-form-body label {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form-body textarea {
+    border-radius: 3px;
+    height: 80px;
+
+}
+
+.reviews-list button {
+    background-color: transparent;
+    color: white;
+    border: 0.5px solid white ;
+    /* width: 100%; */
+    font-size: 11px;
+    border-radius: 10px;
+}
+.review-modify-buttons {
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-edit-button button:hover {
+    background-color: green;
+}
+.review-delete-button button:hover {
+    background-color: red;
+}

@@ -5,15 +5,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchUpdateAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 
 function UpdateAlbum() {
+  const { album_id } = useParams(); 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { albumId } = useParams(); // Extract the albumId from URL params
   const user = useSelector((state) => state.session.user);
   const usersAlbums = useSelector((state) => state.album);
-
+console.log(album_id)
   // Find the album to edit by its ID
-  const editAlbum = Object.values(usersAlbums).find(item => item.id)
-
+  const editAlbum = Object.values(usersAlbums).find(item => item.id === parseInt(album_id));
+  console.log(editAlbum)
   // Initialize state with album data if it exists
   const [band, setBand] = useState(editAlbum ? editAlbum.band : "");
   const [title, setTitle] = useState(editAlbum ? editAlbum.title : "");

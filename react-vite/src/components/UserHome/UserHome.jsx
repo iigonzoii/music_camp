@@ -14,13 +14,17 @@ function UserHome() {
   let albums = useSelector((state) => state.album);
 //   const [showModal, setShowModal] = useState(false);
 //   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
+const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
 
-
-  useEffect(() => {
+useEffect(() => {
     if (user) {
       dispatch(fetchCurrUserAlbums());
     }
-  }, [dispatch, user]);
+  }, [dispatch]);
+
+  if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
+    return <div>No albums found for this user.</div>;
+  }
 
 
 //   useEffect(() => {
@@ -41,7 +45,7 @@ function UserHome() {
     dispatch(deleteAlbum(albumId));
   };
 
-  if (!albums) {
+  if (!filteredAlbums) {
     return <div>Loading...</div>;
   }
 
@@ -82,7 +86,7 @@ function UserHome() {
             Manage Products for {user.firstName} {user.lastName}
           </h1>
           <div className="spot-card">
-            {Object.values(albums).map((album) => (
+            {Object.values(filteredAlbums).map((album) => (
               <div key={album.id}>
                 <img
                   className="CMImg"

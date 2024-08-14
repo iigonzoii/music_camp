@@ -15,9 +15,14 @@ function Navigation() {
       </div>
       <div className="navRight" >
       {sessionUser && (
+        <>
         <div>
           <NavLink className="createAlbum" to={"/albums/new"}>Create Album</NavLink>
         </div>
+        <div>
+        <NavLink className="createAlbum" to={"/home"}>My Music</NavLink>
+      </div>
+      </>
       )}
       <i className="fa-solid fa-cart-shopping pointer cartIcon" onClick={() => navigate(`/shoppingCart`)}></i>
         <i className="fa-regular fa-heart pointer heartIcon " ></i>

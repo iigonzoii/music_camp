@@ -123,19 +123,25 @@ def create_products(album_id):
 @album_routes.route('/<int:album_id>', methods=['DELETE'])
 @login_required
 def delete_album(album_id):
-    kill_album = Album.query.filter_by(id=album_id, user_id=current_user.id).first()
-    if not kill_album:
-        return {'errors': {'message': 'Album not found or not authorized'}}, 404
+    album = Album.query.get(album_id)
+    if not album or album.user_id != current_user.id:
+        return {'errors': 'Album not found or unauthorized'}, 404
 
-    db.session.delete(kill_album)
+    # Delete all related product types first
+    ProductType.query.filter_by(album_id=album_id).delete()
+
+    # Then delete the album
+    db.session.delete(album)
     db.session.commit()
-    return {'message': "Album successfully deleted"}, 200
+
+    return {'message': 'Album and related products deleted successfully'}, 200
 
 
 @album_routes.route('/<int:album_id>/', methods=['PUT'])
 @login_required
 def update_album(album_id):
-    album_update = Album.query.filter_by(id=album_id, user_id=current_user.id).first()
+    album_update = Album.query.filter(Album.id == album_id).first()
+
     if not album_update:
         return {'errors': {'message': 'Album not found'}}, 404
     if album_update.user_id != current_user.id:

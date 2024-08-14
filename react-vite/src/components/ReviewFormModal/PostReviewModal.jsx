@@ -41,19 +41,17 @@ function PostReviewModal({ albumId }) {
 
 
     return (
-      <div className="review-parent-container">
+      <div className="review-form-parent">
         <h1 className="review-form-heading">Share your review</h1>
           {errors.server && <p>{errors.server}</p>}
           <form className="review-form-body" onSubmit={handleSubmit}>
-            <label>
-              Review
               <textarea
                 name="review"
                 value={formData.review}
                 onChange={handleChange}
+                placeholder='Your feedback...'
                 required
               />
-            </label>
             {errors.review && <p>{errors.review}</p>}
             <button className="submit-button" type="submit" disabled={formData.review.length < 2 }>Submit Your Review</button>
           </form>

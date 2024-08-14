@@ -1,4 +1,4 @@
-.review-parent-container {
+.review-form-parent {
     max-width: 800px;
     margin: auto;
     padding: 20px;
@@ -6,7 +6,38 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
+    border-radius: 10px;
 
+}
+
+.review-form-heading {
+    color: black;
+}
+
+#delete-subheading {
+    font-size: 20px;
+    color: red;
+}
+
+.yes-no-buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 2px;
+}
+
+.ADalbumArea button {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.ADalbumArea button:active {
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .submit-button {
@@ -15,7 +46,7 @@
 }
 
 .submit-button:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .review-form-body {
@@ -34,4 +65,26 @@
 
 .review-form-body textarea {
     height: 50px;
+}
+
+.reviews-list button {
+    background-color: transparent;
+    color: white;
+    border: 0.5px solid white ;
+    /* width: 100%; */
+    font-size: 11px;
+    border-radius: 10px;
+}
+.review-modify-buttons {
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-edit-button button:hover {
+    background-color: green;
+}
+.review-delete-button button:hover {
+    background-color: red;
 }

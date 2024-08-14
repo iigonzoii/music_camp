@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-// import { useParams } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton";
 import PostReviewModal from "./PostReviewModal"
 
@@ -15,7 +14,7 @@ function ReviewButton({reviews, albumId}) {
     <div className="review-button-container" >
       {sessionUser && !userAlreadyReviewed && (
         <OpenModalButton
-          buttonText="Post A Review"
+          buttonText="Post a Review"
           modalComponent={<PostReviewModal albumId={albumId} />}
         />
       )}

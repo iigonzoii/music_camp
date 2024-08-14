@@ -48,21 +48,25 @@ function MajorityDetails() {
 
                 <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                 <p>Supported by</p>
-                <ul>
+                <ul className="reviews-list">
                     {reviews && reviews.map((review, index) => (
                         <li key={index}>
                             {`UserId-${review.user_id}-${review.review}`}
                             {sessionUser && review.user_id === sessionUser.id && (
-                                <>
-                                    <OpenModalButton
-                                        buttonText="Edit"
-                                        modalComponent={<EditReviewModal reviewId={review.id} review={review} />}
-                                    />
-                                    <OpenModalButton
-                                        buttonText="Delete"
-                                        modalComponent={<DeleteReviewModal reviewId={review.id} />}
-                                    />
-                                </>
+                                <div className="review-modify-buttons">
+                                    <div className="review-edit-button">
+                                        <OpenModalButton
+                                            buttonText="EDIT"
+                                            modalComponent={<EditReviewModal reviewId={review.id} review={review} />}
+                                        />
+                                    </div>
+                                    <div className="review-delete-button">
+                                        <OpenModalButton
+                                            buttonText="DELETE"
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                                        />
+                                    </div>
+                                </div>
                             )}
                         </li>
                     ))}

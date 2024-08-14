@@ -60,14 +60,14 @@ export const fetchReviewsByAlbum = (albumId) => async (dispatch) => {
 
 //* Create a review by Album ID
 export const createReview = (albumId, review) => async (dispatch) => {
-    const response = await fetch(`/api/albums/${albumId}/reviews/`, {
+    const response = await fetch(`/api/albums/${albumId}/reviews`, {
         method: "POST",
         body: JSON.stringify(review),
         headers: { "Content-Type": "application/json" }
     })
     const newReview = await response.json()
     dispatch(addReview(newReview))
-    return newReview
+    // return newReview
 }
 
 //* Update a review by ID

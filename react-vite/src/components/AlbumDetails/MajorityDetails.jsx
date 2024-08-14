@@ -1,5 +1,7 @@
 import { useSelector} from "react-redux"
 import { useParams } from "react-router-dom"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import CartModal from "../CartModal/CartModal"
 import "./AlbumDetails.css"
 import ReviewButton from "../ReviewFormModal/ReviewButton";
 import EditReviewModal from "../ReviewFormModal/EditReviewModal"
@@ -16,6 +18,14 @@ function MajorityDetails() {
     tracks = Object.values(tracks)
 
 
+    const albumProducts = album[albumId].Album.products
+    const findProduct = (type) => {
+        const product = albumProducts.find(product => product.type == type)
+        return product
+    }
+
+    // console.log("TEST", album[albumId].Album)
+
     return (
         <>
             <div className="ADalbumData">
@@ -24,10 +34,14 @@ function MajorityDetails() {
                 <div className="V2Play">version2 play button and song</div>
                 <p>{album[albumId].Album.description}</p>
 
-                {album && album[albumId].Album.products.map((ptype, index) => (
-                        <button key={index}>
-                            {`Buy ${ptype.type}`}
-                            </button>
+                {album && albumProducts.map((ptype, index) => (
+                        <OpenModalButton key={index}
+                            id='purchaseButton'
+                            buttonText={`Buy ${ptype.type}`}
+                            modalComponent={<CartModal
+                                albumData={findProduct(ptype.type)}
+                            />}
+                        />
                     ))}
 
                 <ol className="ADtrackList">

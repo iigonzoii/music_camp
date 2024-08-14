@@ -1,12 +1,11 @@
 import { useSelector} from "react-redux"
 import { useParams } from "react-router-dom"
-import OpenModalButton from "../OpenModalButton/OpenModalButton"
 import CartModal from "../CartModal/CartModal"
 import "./AlbumDetails.css"
 import ReviewButton from "../ReviewFormModal/ReviewButton";
 import EditReviewModal from "../ReviewFormModal/EditReviewModal"
 import DeleteReviewModal from "../ReviewFormModal/DeleteReviewModal"
-// import OpenModalButton from "../OpenModalButton";
+import OpenModalButton from "../OpenModalButton";
 
 function MajorityDetails() {
     const { albumId } = useParams()

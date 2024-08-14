@@ -84,7 +84,7 @@ const trackReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_TRACKS: {
             const newState = {}
-            action.tracks.tracks.forEach(track => {
+            action.tracks.tracks?.forEach(track => {
                 newState[track.id] = track
             })
             return newState

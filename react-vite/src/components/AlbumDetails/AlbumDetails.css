@@ -53,6 +53,7 @@
     width: 250px;
     height: 180px;
     max-width: 100%;
+    border: solid #4C4C4C 1px;
 }
 
 .ADtrackList {
@@ -60,18 +61,20 @@
     flex-wrap: wrap;
     flex-direction: column;
     border: solid;
-    background-color: lightslategray;
+    /* background-color: lightslategray; */
+    border: solid #4C4C4C 1px;
 }
 
 .V2Play {
-    background-color: lightslategray;
+    /* background-color: lightslategray; */
+    border: solid #4C4C4C 1px;
     height: 50px;
 }
 
 .ADv2supporters {
     height: 100px;
     width: 200px;
-    border: solid;
+    border: solid #4C4C4C 1px;
 }
 
 .ADsection3 {
@@ -90,6 +93,7 @@
     width: 100px;
     object-fit: cover;
     /* margin-top: 20px; */
+    border: solid #4C4C4C 1px;
 }
 
 .ADasideDiscoImgs {
@@ -97,6 +101,7 @@
     width: 100px;
     object-fit: cover;
     /* margin-top: 20px; */
+    border: solid #4C4C4C 1px;
 }
 
 .ADsection3>div {

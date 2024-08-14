@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
@@ -43,6 +43,11 @@ function ProfileButton() {
     navigate('/');
   };
 
+  const handleClick = () => {
+    closeMenu();
+    navigate('/home');
+  };
+
   return (
     <>
       <button className="profile-button" onClick={toggleMenu}>
@@ -53,8 +58,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <Link to="/home" id="profile-username">{user.username}</Link>
-              <li id="profile-email"> {user.email}</li>
+              <a id="profile-username" onClick={handleClick}>{user.username}</a>              <li id="profile-email"> {user.email}</li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>

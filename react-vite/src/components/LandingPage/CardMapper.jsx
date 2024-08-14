@@ -4,12 +4,14 @@ import "./CardMapper.css"
 
 function CardMapper({ genre, cat }) {
     const navigate = useNavigate();
-    
+
     let albums = useSelector(state => state.album);
     albums = Object.values(albums);
     let filteredAlbums = albums
-    function filterAlbums(albums, genre, cat) {
 
+
+
+    function filterAlbums(genre, cat) {
         // Apply genre filter if genre is provided
         if (genre && genre !== "all-genres") {
             filteredAlbums = filteredAlbums.filter(album => album.genre === genre);
@@ -21,18 +23,18 @@ function CardMapper({ genre, cat }) {
                 .map(album => {
                     return {
                         ...album,
-                        product_types: album.product_types.filter(
+                        products: album.products.filter(
                             product => product.type === cat
                         )
                     };
                 })
-                .filter(album => album.product_types.length > 0); 
+                .filter(album => album.products.length > 0);
         }
 
         return filteredAlbums;
     }
-    
-    albums = filterAlbums(albums, genre, cat);
+
+    albums = filterAlbums(genre, cat);
 
     console.log(albums);
 
@@ -44,10 +46,10 @@ function CardMapper({ genre, cat }) {
                     onClick={() => navigate(`/albums/${album.id}`)}
                     key={index}>
                     <img className="CMImg" src={album.cover_image_url} alt={`${album.title} cover`} />
-                    <div className="spot-data-container">
-                        <p>{album.title}</p>
-                        <p>{`by ${album.band}`}</p>
-                        <p>{album.tags}</p>
+                    <div className="album-data-container">
+                        <p className='data-container-item'>{album.title}</p>
+                        <p className='data-container-item'>{`by ${album.band}`}</p>
+                        <p className='data-container-item bottom-item'>{album.tags}</p>
                     </div>
                 </div>
             ))}
@@ -65,7 +67,7 @@ export default CardMapper;
 
 // function CardMapper({genre, cat}) {
 //     const navigate = useNavigate();
-    
+
 //     let albums = useSelector(state => state.album);
 //     albums = Object.values(albums)
 
@@ -77,7 +79,7 @@ export default CardMapper;
 //     albums = genreFilter(genre)
 
 
-//     const filteredAlbums = albums.filter(album => album.product_types); 
+//     const filteredAlbums = albums.filter(album => album.product_types);
 
 
 //     const catFilter = filteredAlbums.map(album => {
@@ -86,9 +88,9 @@ export default CardMapper;
 //           product_types: album.product_types.filter(product => product.type === cat)
 //         };
 //       }).filter(album => album.product_types.length > 0);
-    
-    
-    
+
+
+
 
 //     return (
 //         <div className="CMcontainer">
@@ -142,7 +144,7 @@ export default CardMapper;
 //           (product) => product.type === cat
 //         ),
 //       }))
-//       .filter((album) => album.product_types.length > 0);  
+//       .filter((album) => album.product_types.length > 0);
 //   }
 
 //   console.log({filteredAlbums})
@@ -169,4 +171,3 @@ export default CardMapper;
 // }
 
 // export default CardMapper;
-

@@ -10,7 +10,7 @@ class Album(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     band = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(50), nullable=False)
-    cover_image_url = db.Column(db.String, nullable=False)
+    cover_image_url = db.Column(db.String)
     description = db.Column(db.String, nullable=False)
     producer = db.Column(db.String, nullable=False)
     genre = db.Column(db.String, nullable=False)
@@ -28,7 +28,7 @@ class Album(db.Model):
     # relationship to purchases
     purchases = db.relationship('PurchaseItem', back_populates='album')
     # relationship to product_types
-    product_types = db.relationship('ProductType', back_populates='album')
+    products = db.relationship('ProductType', back_populates='album')
 
 
     def to_dict(self):
@@ -42,7 +42,7 @@ class Album(db.Model):
             'producer': self.producer,
             'genre': self.genre,
             'tags': self.tags,
-            'product_types': [pt.to_dict() for pt in self.product_types],
+            'products': [pt.to_dict() for pt in self.products],
             'tracks': [track.to_dict() for track in self.tracks],
             'reviews': [review.to_dict() for review in self.reviews],
             'purchases': [purchase.to_dict() for purchase in self.purchases],

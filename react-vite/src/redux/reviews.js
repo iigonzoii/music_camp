@@ -81,7 +81,7 @@ export const editReview = (reviewId, review) => async dispatch => {
     if (response.ok) {
         const updatedReview = await response.json()
         dispatch(updateReview(updatedReview))
-        return updatedReview
+        // return updatedReview
     } else {
         const errors = await response.json()
         return errors
@@ -101,10 +101,7 @@ export const removeReview = (reviewId) => async (dispatch) =>{
 
 //*---------REDUCERS-----------
 
-const initialState = {
-    // allReviews: {},
-    reviewDetail: {}
-};
+const initialState = {};
 
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -123,8 +120,12 @@ const reviewReducer = (state = initialState, action) => {
                 [action.review.id]: action.review ,
             };
         }
-        case UPDATE_REVIEW:
-            return { ...state, reviewDetail: action.review }
+        case UPDATE_REVIEW: {
+            const updatedState = { ...state };
+            updatedState[action.review.id] = action.review;
+            return updatedState;
+
+        }
         case DELETE_REVIEW: {
             const newState = { ...state };
             delete newState[action.reviewId];

@@ -5,6 +5,8 @@ const LOAD_ALBUM = "album/loadAlbum"
 const UPDATE_ALBUM = "album/updateAlbum"
 const CREATE_ALBUM = "album/createAlbum"
 const CREATE_PRODUCTS = "album/createProducts"
+const USER_ALBUMS =    "album/loadUserAlbums"
+const DELETE_ALBUM = "album/deleteAlbum"
 
 
 //*-------ACTION CREATORS---------
@@ -22,12 +24,14 @@ export const loadAlbum = (album) => {
     }
 }
 
-export const update = (updatedAlbum) => {
+export const updateAlbum = (albumId, payload) => {
     return {
         type: UPDATE_ALBUM,
-        updatedAlbum
-    }
-}
+        albumId, 
+        payload,
+    };
+};
+
 
 export const addAlbum = (album) => ({
     type: CREATE_ALBUM,
@@ -39,6 +43,15 @@ export const addProducts = ( products) => ({
     products
 });
 
+export const loadUserAlbums = (albums) => ({
+    type: USER_ALBUMS,
+    albums
+});
+
+export const removeAlbum = (albumId) => ({
+    type: DELETE_ALBUM,
+    albumId
+})
 
 
 //*---------THUNKS------------
@@ -60,37 +73,64 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
     return album
 }
 
-//* update album by ID
-export const updateAlbum = (albumId, album) => async dispatch => {
-    const response = await fetch(`/api/albums/${albumId}/`, {
-        method: 'Put',
-        body: JSON.stringify(album)
-    })
-    if (response.ok) {
-        const updatedAlbum = await response.json()
-        dispatch(update(updatedAlbum))
-        return updatedAlbum
-    } else {
-        const errors = await response.json()
-        return errors
+//* Update album by ID
+export const fetchUpdateAlbum = (album) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/albums/${album.id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(album),
+        });
+
+        console.log('Res',res);
+        if (res.ok) {
+            const data = await res.json();
+            console.log('Data',data)
+            dispatch(updateAlbum(album.id, data));  
+        } else {
+            console.error("Failed to load album");
+        }
+    } catch (err) {
+        console.error("Error loading album", err);
+    }
+};
+
+
+//* delete album by id
+export const deleteAlbum = (albumId) => async (dispatch) =>{
+    try {
+        const res = await fetch(`/api/albums/${albumId}`, {
+            method: 'DELETE'
+        });
+
+        if (res.ok) {
+            dispatch(removeAlbum(albumId));
+        }
+    } catch (err) {
+        console.error("Error deleting album", err);
     }
 }
 
-//* delete album by id
-export const deleteAlbum = albumId => async dispatch =>{
-    const response = await fetch(`/api/albums/${albumId}/`, {
-        method: "DELETE"
-    })
-    dispatch(fetchCurrUserAlbums())
-    return response
-}
-
-//* Get current users albums
+//* Get current user's albums
 export const fetchCurrUserAlbums = () => async (dispatch) => {
-    const response = await fetch("/api/albums/current")
-    const albums = await response.json()
-    dispatch(loadAlbums(albums.Albums))
-}
+    try {
+        const res = await fetch("/api/albums/current", {
+            headers: { "Content-Type": "application/json" }
+        });
+        if (res.ok) {
+            const data = await res.json();
+            dispatch(loadUserAlbums(data));
+        } else {
+            const errorData = await res.json();
+            throw new Error(errorData.message || "Failed to fetch albums");
+        }
+    } catch (err) {
+        console.error("Error loading albums", err);
+    }
+};
+
 
 //* Create an album
 export const createAlbum = (album) => async (dispatch) => {
@@ -166,14 +206,32 @@ const albumReducer = (state = initialState, action) => {
                     ...state,
                     [action.album.id]: action.album
                 };
-                case CREATE_PRODUCTS: {
+        case CREATE_PRODUCTS: {
                     const newState = { ...state };
                     action.products.products.forEach(product => {
                         newState[product.id] = product;
                     });
                     return newState;
                 }
-                
+        case USER_ALBUMS: {
+                    const newState = {};
+                    action.albums.albums.forEach(album => {
+                        newState[album.id] = album
+                    })
+                    return {  ...newState}
+                }   
+        case DELETE_ALBUM: {
+            const newState = { ...state };
+            delete newState[action.albumId];
+            return newState;
+        } 
+        case UPDATE_ALBUM: {
+            console.log(action.payload)
+            return {
+                ...state,
+                [action.albumId]: action.payload,
+            };
+        }
         
         default:
             return state;
@@ -181,3 +239,5 @@ const albumReducer = (state = initialState, action) => {
 };
 
 export default albumReducer;
+
+

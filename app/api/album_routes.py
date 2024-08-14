@@ -19,10 +19,10 @@ def all_albums():
 
 
 # Get all albums by User
-@album_routes.route('/user/<int:user_id>', methods=['GET'])
-def albums_by_user(user_id):
-    albums = db.session.query(Album).filter(Album.user_id == user_id).all()
-
+@album_routes.route('/current', methods=['GET'])
+def albums_by_user():
+    user_id = current_user.id
+    albums = Album.query.filter_by(user_id=user_id).all()
     if not albums:
         return {'errors': {'message': 'No albums found for this user'}}, 404
 
@@ -133,7 +133,7 @@ def delete_album(album_id):
 
 
 # Update album by id
-@album_routes.route('/<int:album_id>', methods=['PUT'])
+@album_routes.route('/<int:album_id>/', methods=['PUT'])
 @login_required
 def update_album(album_id):
     album_update = Album.query.filter_by(id=album_id, user_id=current_user.id).first()
@@ -150,14 +150,11 @@ def update_album(album_id):
             user_id=current_user.id,
             band=form.band.data,
             title=form.title.data,
-            product_type=form.product_type.data,
             cover_image_url=form.cover_image_url.data,
             description=form.description.data,
             producer=form.producer.data,
             genre=form.genre.data,
             tags=form.tags.data,
-            price=form.price.data,
-            stock=form.stock.data
         )
 
         db.session.add(album)

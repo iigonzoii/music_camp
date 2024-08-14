@@ -7,6 +7,7 @@ import CartPage from '../components/CartPage';
 import Layout from './Layout';
 import CreateAlbum from '../components/CreateAlbum/CreateAlbum'
 import AddProducts from '../components/AddProducts/AddProducts';
+import UpdateAlbum from '../components/UpdateAlbum/UpdateAlbum';
 
 
 
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path:"/albums/:album_id/products",
         element: <AddProducts />
+      },
+      {
+        path:"/albums/:album_id/edit",
+        element: <UpdateAlbum />
       }
     ],
   },

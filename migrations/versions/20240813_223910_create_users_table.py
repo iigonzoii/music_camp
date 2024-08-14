@@ -1,14 +1,8 @@
 """create users table
 
-<<<<<<<< HEAD:migrations/versions/20240812_162744_create_users_table.py
-Revision ID: 5ac62b8485ee
+Revision ID: bec3de66dd39
 Revises: 
-Create Date: 2024-08-12 16:27:44.957551
-========
-Revision ID: 8f2029838489
-Revises: 
-Create Date: 2024-08-12 17:49:17.899024
->>>>>>>> b3c084bac0085c2a60111063573bb62ba44bc669:migrations/versions/20240812_174917_create_users_table.py
+Create Date: 2024-08-13 22:39:10.794673
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/20240812_162744_create_users_table.py
-revision = '5ac62b8485ee'
-========
-revision = '8f2029838489'
->>>>>>>> b3c084bac0085c2a60111063573bb62ba44bc669:migrations/versions/20240812_174917_create_users_table.py
+revision = 'bec3de66dd39'
 down_revision = None
 branch_labels = None
 depends_on = None

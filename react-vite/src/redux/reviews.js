@@ -46,10 +46,6 @@ export const deleteReview = (reviewId) => {
 
 //* Get current users reviews
 export const fetchCurrUserReviews = () => async (dispatch) => {
-<<<<<<< HEAD
-    //csrfFetch
-=======
->>>>>>> b3c084bac0085c2a60111063573bb62ba44bc669
     const response = await fetch("/api/reviews/current")
     const reviews = await response.json()
     dispatch(loadReviews(reviews.Reviews))
@@ -64,12 +60,7 @@ export const fetchReviewsByAlbum = (albumId) => async (dispatch) => {
 
 //* Create a review by Album ID
 export const createReview = (albumId, review) => async (dispatch) => {
-<<<<<<< HEAD
-    //csrfFetch
-    const response = await fetch(`/api/albums/${albumId}/reviews`, {
-=======
     const response = await fetch(`/api/albums/${albumId}/reviews/`, {
->>>>>>> b3c084bac0085c2a60111063573bb62ba44bc669
         method: "POST",
         body: JSON.stringify(review),
         headers: { "Content-Type": "application/json" }
@@ -105,13 +96,8 @@ export const editReview = (reviewId, review) => async dispatch => {
 
 //* Delete a review by id
 export const removeReview = (reviewId) => async (dispatch) =>{
-<<<<<<< HEAD
-    //csrfFetch
-    const response = await fetch(`/api/reviews/${reviewId}`, {
-=======
     const response = await fetch(`/api/reviews/${reviewId}/`, {
         // csrfFetch
->>>>>>> b3c084bac0085c2a60111063573bb62ba44bc669
         method: "DELETE"
     })
     dispatch(deleteReview(reviewId))

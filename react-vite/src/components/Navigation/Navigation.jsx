@@ -1,17 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 function Navigation() {
-  // let navigate = useNavigate()
+  const sessionUser = useSelector((store) => store.session.user);
+
+  let navigate = useNavigate()
   return (
     <nav>
       <div>
         <NavLink to="/" className={"logo"}>Music Camp</NavLink>
-        <input type="text" placeholder="Search"></input>
+        <input className="navSearch" type="text" placeholder="Search"></input>
       </div>
-      <div >
-        <i className="fa-regular fa-heart pointer " ></i>
+      <div className="navRight" >
+      {sessionUser && (
+        <div>
+          <NavLink className="createAlbum" to={"/albums/new"}>Create Album</NavLink>
+        </div>
+      )}
+      <i className="fa-solid fa-cart-shopping pointer cartIcon" onClick={() => navigate(`/shoppingCart`)}></i>
+        <i className="fa-regular fa-heart pointer heartIcon " ></i>
         <ProfileButton />
       </div>
 

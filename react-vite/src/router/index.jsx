@@ -5,6 +5,8 @@ import UserHome from '../components/UserHome';
 import AlbumDetails from '../components/AlbumDetails/AlbumDetails';
 import CheckoutPage from '../components/CheckoutPage';
 import Layout from './Layout';
+import CreateAlbum from '../components/CreateAlbum/CreateAlbum'
+import AddProducts from '../components/AddProducts/AddProducts';
 
 
 
@@ -15,7 +17,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
-
       },
       {
         path:"/home",
@@ -27,11 +28,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginFormPage />,
+        element: <LoginFormPage />
+      },
+      {
+        path: '/albums/new',
+        element: <CreateAlbum />
       },
       {
         path:"/checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path:"/albums/:album_id/products",
+        element: <AddProducts />
       },
     ]
   },

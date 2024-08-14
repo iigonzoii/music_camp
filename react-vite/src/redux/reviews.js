@@ -46,8 +46,7 @@ export const deleteReview = (reviewId) => {
 
 //* Get current users reviews
 export const fetchCurrUserReviews = () => async (dispatch) => {
-    const response = await csrfFetch("/api/reviews/current")
-    // csrfFetch
+    const response = await fetch("/api/reviews/current")
     const reviews = await response.json()
     dispatch(loadReviews(reviews.Reviews))
 }
@@ -61,7 +60,7 @@ export const fetchReviewsByAlbum = (albumId) => async (dispatch) => {
 
 //* Create a review by Album ID
 export const createReview = (albumId, review) => async (dispatch) => {
-    const response = await csrfFetch(`/api/albums/${albumId}/reviews`, {
+    const response = await fetch(`/api/albums/${albumId}/reviews/`, {
         method: "POST",
         body: JSON.stringify(review),
         headers: { "Content-Type": "application/json" }
@@ -73,7 +72,8 @@ export const createReview = (albumId, review) => async (dispatch) => {
 
 //* Update a review by ID
 export const editReview = (reviewId, review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}/`, {
+        // csrfFetch
         method: 'Put',
         body: JSON.stringify(review)
     })
@@ -89,7 +89,8 @@ export const editReview = (reviewId, review) => async dispatch => {
 
 //* Delete a review by id
 export const removeReview = (reviewId) => async (dispatch) =>{
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}/`, {
+        // csrfFetch
         method: "DELETE"
     })
     dispatch(deleteReview(reviewId))
@@ -107,9 +108,14 @@ const initialState = {
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
-            const newState = { ...state, allReviews: {} };
-            action.reviews.forEach((review) => {
-                newState.allReviews[review.id] = review
+            // const newState = { ...state, allReviews: {} };
+            const newState = {}
+            // action.reviews.forEach((review) => {
+            //     newState.allReviews[review.id] = review
+            // });
+            // console.log("ACREV",action.reviews)
+            action.reviews.reviews.forEach((review) => {
+                newState[review.id] = review
             });
             return newState;
         }
@@ -120,7 +126,7 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 allReviews:{ ...state.allReviews, [action.review.id]: action.review },
             };
-        };
+        }
         case UPDATE_REVIEW:
             return { ...state, allReviews: {...state.allReviews, [action.review.id]: action.review }}
         case DELETE_REVIEW: {

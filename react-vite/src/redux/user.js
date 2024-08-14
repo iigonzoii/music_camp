@@ -1,23 +1,16 @@
 //*------ACTION TYPES---------
-const GET_ORDERS = "orders/GET_ORDERS"
-const ADD_ORDER = "orders/ADD_ORDER"
+const GET_USER = "users/GET_USER"
 
 
 
 //*-------ACTION CREATORS---------
-export const getOrders = (orders) => {
+export const getUser = (user) => {
     return {
-        type: GET_ORDERS,
-        orders
+        type: GET_USER,
+        user
     }
 }
 
-export const addOrder = (order) => {
-    return {
-        type: ADD_ORDER,
-        order
-    }
-}
 
 
 //*---------THUNKS------------
@@ -67,5 +60,3 @@ const orderReducer = (state=initialState, action) => {
         default: return state;
     }
 }
-
-export default orderReducer

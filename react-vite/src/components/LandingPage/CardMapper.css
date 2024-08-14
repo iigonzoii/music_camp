@@ -15,5 +15,19 @@
     height: 100px;
     width: 100px;
     object-fit:cover;
-    /* margin-top: 20px; */
+    margin-top: 10px;
+}
+.album-data-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.data-container-item{
+    margin: 0px 0px 0px 0px;
+    font-size: 12px;
+}
+.bottom-item{
+    margin-top: 8px;
+    font-size: 10px;
 }

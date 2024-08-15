@@ -7,7 +7,7 @@ import LandingAside from "./LandingAside";
 
 function LandingPage() {
   const albumData = useSelector((state) => state.album);
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [genre, setGenre] = useState("all-genres")
   const [cat, setCat] = useState("all-categories")
   const dispatch = useDispatch();
@@ -33,12 +33,12 @@ function LandingPage() {
     }
   }, [albumData, dispatch]);
 
-  useEffect(() => {
-    const randomAlbumId = Object.keys(albumData)[0];
-    if (albumData[randomAlbumId]) {
-      setData(albumData[randomAlbumId]);
-    }
-  }, [albumData]);
+  // useEffect(() => {
+  //   const randomAlbumId = Object.keys(albumData)[0];
+  //   if (albumData[randomAlbumId]) {
+  //     setData(albumData[randomAlbumId]);
+  //   }
+  // }, [albumData]);
 
 
   return (
@@ -70,7 +70,8 @@ function LandingPage() {
         </section>
 
         <aside className="LPsection3">
-          <LandingAside data={data} />
+          <LandingAside  />
+          {/* data={data} */}
         </aside>
       </div>
     </>

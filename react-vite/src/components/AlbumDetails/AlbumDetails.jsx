@@ -22,7 +22,7 @@ function AlbumDetails() {
     }, [dispatch, albumId]);
 
     return isLoaded && (
-        <>
+        <div className="margin">
             <section className="ADsection1">
                 <img className="ADbanner" src={album[albumId].UserInfo[0].banner_img_url} />
             </section>
@@ -37,7 +37,7 @@ function AlbumDetails() {
                 </aside>
 
             </div>
-        </>
+        </div>
     )
 }
 

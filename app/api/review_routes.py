@@ -38,7 +38,7 @@ def update_review(review_id):
 
     if form.validate_on_submit():
         theReview.review=form.data['review']
-        theReview.stars=form.data['stars']
+        # theReview.stars=form.data['stars']
         db.session.add(theReview)
         db.session.commit()
         return theReview.to_dict()

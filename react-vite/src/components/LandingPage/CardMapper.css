@@ -16,6 +16,7 @@
     width: 100px;
     object-fit:cover;
     margin-top: 10px;
+    border: solid #4C4C4C 1px;
 }
 .album-data-container{
     display: flex;

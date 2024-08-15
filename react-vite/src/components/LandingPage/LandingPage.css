@@ -29,10 +29,11 @@ display: flex;
 .LPgenre > button{
     cursor: pointer;
     margin: 0px 5px 5px 5px;
-    border: solid 1px lightgray;
+    border: solid 1px #4C4C4C;
     border-radius: 5px;
     background-color: transparent;
     font-size: small;
+    color: lightgray;
 }
 .LPcategory {
     display: flex;
@@ -40,10 +41,11 @@ display: flex;
 .LPcategory > button{
     cursor: pointer;
     margin: 0px 5px 5px 5px;
-    border: solid 1px lightgray;
+    border: solid 1px #4C4C4C;
     border-radius: 5px;
     background-color: transparent;
     font-size: small;
+    color: lightgray;
 }
 .LPasideContainer{
 display: flex;
@@ -57,9 +59,20 @@ margin-right: 50px;
     height: 150px;
     width: 150px;
     object-fit: cover;
+    border: solid #4C4C4C 1px;
 }
 .LPasideButtons{
     display: flex;
+
+}
+.LPasideButtons > button {
+        cursor: pointer;
+    margin: 2px 5px 5px 0px;
+    border: solid 1px #4C4C4C;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: small;
+    color: lightgray;
 }
 /* .LPupperButtons{
     padding: 0px 0px 5px 0px;

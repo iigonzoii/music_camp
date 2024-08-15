@@ -75,9 +75,14 @@ useEffect(() => {
       {/* className="UHcontainer" */}
       <section className="UHsection1">
         <img
-          className="UHmainImg"
-          src="https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampUserProfileImg.jpg?alt=media&token=949d5249-d3c3-4e79-a385-4f3e0774c6bc"
+          className="UHBannerImg"
+          src='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBand.jpg?alt=media&token=70d07189-3781-4ddd-a803-da95edc9e302'
         />
+        <img
+          className="UHmainImg"
+          src={user.profile_image_url}
+        />
+
         <div>UserName</div>
       </section>
       <section className="UHsection2">
@@ -85,7 +90,7 @@ useEffect(() => {
           <h1>
             Manage Products for {user.firstName} {user.lastName}
           </h1>
-          <div className="spot-card">
+          <div className="album-card">
             {Object.values(filteredAlbums).map((album) => (
               <div key={album.id}>
                 <img

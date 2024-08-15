@@ -58,9 +58,8 @@ export const removeAlbum = (albumId) => ({
 //*---------THUNKS------------
 
 //* Get all albums
-// ! added foward slash and pushed to main
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await fetch('/api/albums/');
+    const response = await fetch('/api/albums');
     const albums = await response.json();
     // console.log(albums)
     dispatch(loadAlbums(albums));

@@ -1,4 +1,4 @@
-import { compose } from "redux"
+// import { compose } from "redux"
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
@@ -28,7 +28,7 @@ export const loadAlbum = (album) => {
 export const updateAlbum = (albumId, payload) => {
     return {
         type: UPDATE_ALBUM,
-        albumId, 
+        albumId,
         payload,
     };
 };
@@ -58,8 +58,9 @@ export const removeAlbum = (albumId) => ({
 //*---------THUNKS------------
 
 //* Get all albums
+// ! added foward slash and pushed to main
 export const fetchAlbums = () => async (dispatch) => {
-    const response = await fetch('/api/albums');
+    const response = await fetch('/api/albums/');
     const albums = await response.json();
     // console.log(albums)
     dispatch(loadAlbums(albums));
@@ -86,11 +87,11 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
             body: JSON.stringify(album),
         });
 
-        
+
         if (res.ok) {
             const data = await res.json();
             console.log('Data',data)
-            dispatch(updateAlbum(album.id, data));  
+            dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
         }
@@ -208,7 +209,7 @@ const albumReducer = (state = initialState, action) => {
                     albumDetail: action.payload
                 };
             }
-            
+
         case CREATE_ALBUM:
                 return {
                     ...state,
@@ -227,19 +228,17 @@ const albumReducer = (state = initialState, action) => {
                         newState[album.id] = album
                     })
                     return {  ...newState}
-                }   
+                }
         case DELETE_ALBUM: {
             const newState = { ...state };
             delete newState[action.albumId];
             return newState;
-        } 
-        
-        
+        }
+
+
         default:
             return state;
     }
 };
 
 export default albumReducer;
-
-

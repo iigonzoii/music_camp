@@ -21,8 +21,6 @@ function CartItemsList() {
 
     const currCart = getCartItems()
 
-    console.log("HERE", currCart)
-
     return (
         <div className='cartItems-wrapper'>
             <h4>Your Shopping Cart</h4>

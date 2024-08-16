@@ -129,14 +129,14 @@ function UserHome() {
                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
                  <div className="album-card" >
                     <img
-                    className="CMImg"
+                    className="UH-CMImg"
                     src={album.cover_image_url}
                     alt={`${album.title} cover`}
                     />
-                    <div className="album-data-container">
-                    <p className="data-container-album">{album.title}</p>
-                    <p className="data-container-artist">{`by ${album.band}`}</p>
-                    <p className="data-container-tag">{album.tags}</p>
+                    <div className="UH-album-data-container">
+                    <p className="UH-data-container-album">{album.title}</p>
+                    <p className="UH-data-container-artist">{`by ${album.band}`}</p>
+                    <p className="UH-data-container-tag">{album.tags}</p>
                     </div>
 
                     <div className="button-group-update">

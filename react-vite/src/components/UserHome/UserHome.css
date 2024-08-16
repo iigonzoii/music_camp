@@ -127,7 +127,7 @@
     width: 100%;
 }
 
-.CMImg {
+.UH-CMImg {
     width: 100%;
     max-width: 250px;
     height: auto;
@@ -138,20 +138,20 @@
     object-fit: cover;
     margin: 0;
 }
-.album-data-container p{
+.UH-album-data-container p{
     display: flex;
     flex-direction: row;
     height: 0px;
     /* margin-top: 7px; */
 }
-.data-container-album {
+.UH-data-container-album {
     font-size: 14px;
     font-weight: bold;
 }
-.data-container-artist {
+.UH-data-container-artist {
     font-size: 10px;
 }
-.data-container-tag {
+.UH-data-container-tag {
     font-size: 10px;
 }
 

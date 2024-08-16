@@ -42,18 +42,17 @@ function LandingPage() {
 
 
   return (
-    <>
-      <section className="LPsection1">
-
-        <div className="LPupperButtons">
-          <div className="LPgenre">
+    <div className="lp-margin">
+      <section className="lp-section1">
+        <div>
+          <div className="lp-genre">
               <button onClick={() => setGenre("all-genres")}>All Genres</button>
               <button onClick={() => setGenre("rock")}>Rock</button>
               <button onClick={() => setGenre("hip-hop/rap")}>Hip-Hop/Rap</button>
               <button onClick={() => setGenre("electronic")}>Electronic</button>
               <button onClick={() => setGenre("jazz")}>Jazz</button>
           </div>
-          <div className="LPcategory">
+          <div className="lp-category">
               <button onClick={() => setCat("all-categories")}>all categories</button>
               <button onClick={() => setCat("Digital")}>Digital</button>
               <button onClick={() => setCat("Vinyl")}>Vinyl</button>
@@ -64,18 +63,18 @@ function LandingPage() {
 
       </section>
 
-      <div className="LPcontainer">
-        <section className="LPsection2">
+      <div className="lp-container">
+        <section className="lp-section2">
           <CardMapper genre={genre} cat={cat}/>
         </section>
 
-        <aside className="LPsection3">
-          <LandingAside data={data}/>
 
+        <aside className="lp-section3">
+          <LandingAside data={data} />
 
         </aside>
       </div>
-    </>
+    </div>
   );
 }
 

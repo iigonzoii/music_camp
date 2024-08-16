@@ -23,7 +23,7 @@ function UserHome() {
         if (user) {
             dispatch(fetchCurrUserAlbums());
         }
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     useEffect(() => {
         if (selectedAlbumId) {
@@ -140,7 +140,7 @@ function UserHome() {
                     </div>
 
                     <div className="button-group-update">
-                        <NavLink to={`/albums/${album.id}/edit`}>
+                        <NavLink to={`/albums/${album.id}/edit-albums`}>
                             <button className="update-button">Update</button>
                         </NavLink>
                         <button

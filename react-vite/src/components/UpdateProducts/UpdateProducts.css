@@ -1,0 +1,104 @@
+/* SpotForm.css */
+
+.form-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-top: 20px;
+  }
+  
+  p {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .input-field, .textarea-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  
+  .textarea-field {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+  
+  .price-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .price-section span {
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  
+  .image-section {
+    margin-top: 20px;
+  }
+  
+  .image-input {
+    margin-bottom: 10px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .form-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  @media (max-width: 600px) {
+    .form-container {
+      padding: 15px;
+    }
+  
+    .button-group {
+      flex-direction: column;
+    }
+  
+    .form-button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+  

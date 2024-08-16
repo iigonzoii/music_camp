@@ -1,4 +1,4 @@
-import { compose } from "redux"
+// import { compose } from "redux"
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
@@ -8,6 +8,7 @@ const CREATE_ALBUM = "album/createAlbum"
 const CREATE_PRODUCTS = "album/createProducts"
 const USER_ALBUMS =    "album/loadUserAlbums"
 const DELETE_ALBUM = "album/deleteAlbum"
+const UPDATE_PRODUCTS = "album/updateProducts"
 
 
 //*-------ACTION CREATORS---------
@@ -28,10 +29,18 @@ export const loadAlbum = (album) => {
 export const updateAlbum = (albumId, payload) => {
     return {
         type: UPDATE_ALBUM,
-        albumId, 
+        albumId,
         payload,
     };
 };
+
+export const updateProducts = (albumId, payload) => {
+    return {
+        type: UPDATE_PRODUCTS,
+        albumId,
+        payload,
+    }
+}
 
 
 export const addAlbum = (album) => ({
@@ -86,11 +95,11 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
             body: JSON.stringify(album),
         });
 
-        
+
         if (res.ok) {
             const data = await res.json();
             console.log('Data',data)
-            dispatch(updateAlbum(album.id, data));  
+            dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
         }
@@ -178,6 +187,30 @@ export const createProducts = (albumId, products) => async (dispatch) => {
 };
 
 
+export const fetchUpdateProducts = (albumId, payload) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/albums/${albumId}/products`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload.product_types),
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            console.log('Updated product types:', data);
+            dispatch(updateProducts(albumId, data.product_types));  
+        } else {
+            console.error("Failed to update product types");
+        }
+    } catch (err) {
+        console.error("Error updating product types", err);
+    }
+};
+
+
+
 //*---------REDUCERS-----------
 
 const initialState = { albumDetail: {} };
@@ -208,7 +241,17 @@ const albumReducer = (state = initialState, action) => {
                     albumDetail: action.payload
                 };
             }
-            
+            case UPDATE_PRODUCTS: {
+                const { albumId, payload } = action;
+                console.log("Payload:", payload)
+                return {
+                    ...state,
+                    [albumId]: {
+                        ...state[albumId],
+                        products: payload
+                    }
+                };
+            }
         case CREATE_ALBUM:
                 return {
                     ...state,
@@ -227,19 +270,17 @@ const albumReducer = (state = initialState, action) => {
                         newState[album.id] = album
                     })
                     return {  ...newState}
-                }   
+                }
         case DELETE_ALBUM: {
             const newState = { ...state };
             delete newState[action.albumId];
             return newState;
-        } 
-        
-        
+        }
+
+
         default:
             return state;
     }
 };
 
 export default albumReducer;
-
-

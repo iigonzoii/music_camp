@@ -29,6 +29,7 @@ display: flex;
     background-color: transparent;
     font-size: small;
     color: lightgray;
+    height: 30px;
 }
 .lp-category {
     display: flex;
@@ -41,6 +42,7 @@ display: flex;
     background-color: transparent;
     font-size: small;
     color: lightgray;
+    height: 30px;
 }
 .lp-aside-container{
 display: flex;
@@ -49,8 +51,8 @@ align-items: flex-end;
 /* margin-right: 50px; */
 }
 .lp-aside-img{
-    height: 150px;
-    width: 150px;
+    height: 225px;
+    width: 225px;
     object-fit: cover;
     border: solid #4C4C4C 1px;
 }

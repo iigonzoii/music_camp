@@ -1,7 +1,8 @@
-/* .UHcontainer {
-    display: flex;
-    flex-direction: column;
-} */
+.uh-container {
+    /* display: flex;
+    flex-direction: column; */
+    margin: 0px 80px 0px 80px;
+}
 
 
 /* Profile images section */

@@ -47,9 +47,9 @@ function UserHome() {
 
 
 
-    if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
-        return <div>No albums found for this user.</div>;
-    }
+    // if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
+    //     return <div>No albums found for this user.</div>;
+    // }
 
 
 //   useEffect(() => {
@@ -99,7 +99,7 @@ function UserHome() {
 //   };
 
   return (
-    <div className="UH1-container">
+    <div className="uh-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}
       <section className="UHsection1">

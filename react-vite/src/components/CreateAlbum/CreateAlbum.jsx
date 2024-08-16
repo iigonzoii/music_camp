@@ -49,7 +49,7 @@ function CreateAlbum({ album }) {
       setErrors(newErrors);
       return;
     }
-  
+
       const payload = {
         user_id: user.id,
         band,
@@ -69,7 +69,7 @@ function CreateAlbum({ album }) {
       } else {
         newAlbum = await dispatch(createAlbum(payload));
       }
-      console.log({ newAlbum });
+      // console.log({ newAlbum });
       if (newAlbum) {
         navigate(`/albums/${newAlbum.id}/products`);
       }

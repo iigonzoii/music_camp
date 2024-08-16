@@ -123,13 +123,18 @@
 }
 
 .album-card {
-    height: 210px;
+    height: auto;
     width: 100%;
 }
 
 .CMImg {
-    height: 100px;
-    width: 100px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    /* height: auto; */
+    /* min-width: 100px; */
+    /* max-width: 150px; */
+    aspect-ratio: 1/1;
     object-fit: cover;
     margin: 0;
 }
@@ -181,7 +186,7 @@
     flex-direction: column;
     justify-items: flex-start;
     align-items: center;
-    margin-right: 30px;
+    margin-right: 60px;
     margin-top: 10px;
     width: 60%;
 }

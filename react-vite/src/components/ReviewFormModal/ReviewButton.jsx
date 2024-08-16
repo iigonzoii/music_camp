@@ -8,7 +8,7 @@ function ReviewButton({reviews, albumId}) {
   // const albumId = album.id
 
   const userAlreadyReviewed = sessionUser && reviews ? reviews.some((review) => review.user_id === sessionUser.id): false;
-  console.log(userAlreadyReviewed)
+  // console.log(userAlreadyReviewed)
 
   return (
     <div className="review-button-container" >

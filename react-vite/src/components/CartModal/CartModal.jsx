@@ -15,61 +15,82 @@ const CartModal = ({albumData}) => {
     const { closeModal } = useModal()
 
     const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
-    const item = JSON.parse(localStorage.getItem(albumKey))
+    // const item = JSON.parse(localStorage.getItem(albumKey))
 
     const postToLocalStorage = (payload) => {
         localStorage.setItem(albumKey, JSON.stringify(payload));
         return payload
     }
 
-    const [quantity, setQuantity] = useState(item ? parseInt(item.quantity) : 1);
-    const [price, setPrice] = useState(parseInt(albumData.price));
+    const [quantity, setQuantity] = useState(1);
+    const [price, setPrice] = useState(0);
     const [navToCheckout, setNavToCheckout] = useState(false)
 
     const [message, setMessage] = useState('')
     const [errors, setErrors] = useState({})
 
     const handleQuantity = (e) => setQuantity(e.target.value);
-    const handlePrice = (e) => setPrice(parseInt(e.target.value));
+    const handlePrice = (e) => {
+        // if the field is empty, then return
+        if (e.target.value == 0) {
+            return;
+        } else {
+            setPrice(parseInt(e.target.value));
+        }
+    }
 
     const handleAddCartSubmit = (e) => {
         e.preventDefault()
 
-        const error = {}
-        if (price < albumData.price) {
-            error.price = `The minimum price is $${albumData.price}`}
-        if (typeof price != "number") {
-            error.price = 'Please provide a price'}
-        if (quantity > albumData.amount) {
-            error.quantity = "Not enough stock available"}
-
-        if (Object.keys(error).length > 0) {
-            setErrors({...error});
-        }
-
-        const payload = {
-            user_id: currUser.id,
-            album_id: albumData.id,
-            album_details: {
-                band: albumById.band,
-                title: albumById.title,
-                image: albumById.cover_image_url
-            },
-            type: albumData.type,
-            quantity,
-            price
-        }
-
         try {
-            //check to see if the item is already in cart. If it is,
+            const error = {}
+            if (price < albumData.price) {
+                error.price = `The minimum price is $${albumData.price}`}
+            if (typeof price != "number") {
+                error.price = 'Please provide a price'}
+            if (quantity > albumData.amount) {
+                error.quantity = "Not enough stock available"}
+
+            if (Object.keys(error).length > 0) {
+                setErrors({...error});
+                setTimeout(() => setErrors({}), 7000)
+                return;
+            }
+
+            //check to see if the item is already in cart. If it is, increment quantity
             const existingItem = JSON.parse(localStorage.getItem(albumKey))
-            if (existingItem) {
-                existingItem.quantity += 1
+
+            //handle if desired price is different than what is in cart
+            if (existingItem && price != existingItem?.price) {
+                existingItem.price = price
                 postToLocalStorage(existingItem)
+                setPrice(parseInt(price))
+            }
+
+            const payload = {
+                user_id: currUser.id,
+                album_id: albumData.id,
+                album_details: {
+                    band: albumById.band,
+                    title: albumById.title,
+                    image: albumById.cover_image_url
+                },
+                type: albumData.type,
+                quantity,
+                price
+            }
+
+            // handle if item is already existing in cart
+            if (existingItem) {
+                existingItem.quantity += parseInt(quantity)
+                postToLocalStorage(existingItem)
+
+                setErrors({})
                 setMessage('Quantity updated successfully!')
                 setTimeout(() => setMessage(''), 5000)
             } else {
                 postToLocalStorage(payload)
+
                 setMessage('Item successfully added to cart!')
                 setTimeout(() => setMessage(''), 5000)
             }
@@ -79,14 +100,8 @@ const CartModal = ({albumData}) => {
                 closeModal()
             }
         } catch (err) {
-            // get the stored item
-            const data = JSON.parse(localStorage.getItem(albumKey));
-
-            // check if data has any errors
-            if(data?.errors) {
-                setErrors({...error})
-            } else {
-                // if no set errors, but still errors persist, then generic message is thrown
+            // if no set errors, but still errors persist, then generic message is thrown
+            if(err) {
                 setErrors({...err, message: "An unexpected error occurred."})
             }
         }

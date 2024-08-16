@@ -6,6 +6,7 @@ import ReviewButton from "../ReviewFormModal/ReviewButton";
 import EditReviewModal from "../ReviewFormModal/EditReviewModal"
 import DeleteReviewModal from "../ReviewFormModal/DeleteReviewModal"
 import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
 
 function MajorityDetails() {
     const { albumId } = useParams()
@@ -33,15 +34,22 @@ function MajorityDetails() {
                 <div className="V2Play">version2 play button and song</div>
                 <p>{album[albumId].Album.description}</p>
 
-                {album && albumProducts.map((ptype, index) => (
-                        <OpenModalButton key={index}
-                            id='purchaseButton'
-                            buttonText={`Buy ${ptype.type}`}
-                            modalComponent={<CartModal
-                                albumData={findProduct(ptype.type)}
-                            />}
-                        />
-                    ))}
+                <div>
+                    {sessionUser ? album && albumProducts.map((ptype, index) => (
+                            <OpenModalButton key={index}
+                                id='purchaseButton'
+                                buttonText={`Buy ${ptype.type}`}
+                                modalComponent={<CartModal albumData={findProduct(ptype.type)}/>}
+                            />
+                        // if no user is logged in
+                        )) : album && albumProducts.map((ptype, index) => (
+                            <OpenModalButton key={index}
+                                id='purchaseButton'
+                                buttonText={`Buy ${ptype.type}`}
+                                modalComponent={<LoginFormModal />}
+                            />
+                        ))}
+                </div>
 
                 <ol className="ADtrackList">
                     {tracks && tracks.map((track, index) => (

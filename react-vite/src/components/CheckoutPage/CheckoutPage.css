@@ -1,0 +1,15 @@
+.checkout-wrapper {
+    display: flex;
+    margin: 0% 10%;
+}
+
+.checkout-cart-list-item {
+    border: 1px white;
+    display: flex;
+    align-items: center;
+}
+
+#checkout-cart-list-img {
+    width: 120px;
+    height: 100px;
+}

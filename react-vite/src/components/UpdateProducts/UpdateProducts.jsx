@@ -1,19 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createProducts } from "../../redux/albumReducer";
-import "./AddProducts.css";
+import { fetchCurrUserAlbums, fetchUpdateProducts } from "../../redux/albumReducer";
 
-function AddProducts() {
+function UpdateProducts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { album_id } = useParams();
   const user = useSelector((state) => state.session.user);
+  const usersAlbums = useSelector((state) => state.album);
+
+  // Find the album by album_id
+  const album = usersAlbums[album_id];
+
+  // If album has products, use them as initial state, otherwise use default state
+  const initialProductTypes = album?.products?.length
+    ? album.products.map((product) => ({
+        type: product.type,
+        price: product.price,
+        amount: product.amount,
+      }))
+    : [{ type: "CD", price: "", amount: "" }];
 
   const [errors, setErrors] = useState({});
-  const [productTypes, setProductTypes] = useState([
-    { type: "CD", price: "", amount: "" },
-  ]);
+  const [productTypes, setProductTypes] = useState(initialProductTypes);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCurrUserAlbums()); // Fetch the user's albums on mount
+    }
+  }, [dispatch, user]);
 
   const updateProductType = (index, field, value) => {
     const updatedProductTypes = [...productTypes];
@@ -62,14 +78,13 @@ function AddProducts() {
       album_id: parseInt(album_id),
       product_types: formattedProductTypes, // Include product types in the payload
     };
+    // console.log(payload)
     let newProducts;
     try {
-      newProducts = await dispatch(createProducts(payload.album_id, payload));
+      newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
 
-      // console.log({ newProducts });
-        if (newProducts) {
           navigate(`/albums/${album_id}`);
-        }
+
     } catch (err) {
       console.error({ err });
     }
@@ -81,7 +96,7 @@ function AddProducts() {
 
   return (
     <>
-      <h1>{"Add Products"}</h1>
+      <h1>{"Update Products"}</h1>
       <section className="form-container">
         <form onSubmit={handleSubmit}>
           <h2>Product Types</h2>
@@ -127,7 +142,7 @@ function AddProducts() {
 
           <div className="button-group">
             <button type="submit" className="form-button">
-              {"Add Products"}
+              {"Update Products"}
             </button>
           </div>
         </form>
@@ -136,4 +151,4 @@ function AddProducts() {
   );
 }
 
-export default AddProducts;
+export default UpdateProducts;

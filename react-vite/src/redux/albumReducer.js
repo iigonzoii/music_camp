@@ -8,6 +8,7 @@ const CREATE_ALBUM = "album/createAlbum"
 const CREATE_PRODUCTS = "album/createProducts"
 const USER_ALBUMS =    "album/loadUserAlbums"
 const DELETE_ALBUM = "album/deleteAlbum"
+const UPDATE_PRODUCTS = "album/updateProducts"
 
 
 //*-------ACTION CREATORS---------
@@ -32,6 +33,14 @@ export const updateAlbum = (albumId, payload) => {
         payload,
     };
 };
+
+export const updateProducts = (albumId, payload) => {
+    return {
+        type: UPDATE_PRODUCTS,
+        albumId,
+        payload,
+    }
+}
 
 
 export const addAlbum = (album) => ({
@@ -76,7 +85,7 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
 
 //* Update album by ID
 export const fetchUpdateAlbum = (album) => async (dispatch) => {
-    console.log('Album',album);
+    // console.log('Album',album);
     try {
         const res = await fetch(`/api/albums/${album.id}/`, {
             method: 'PUT',
@@ -89,7 +98,9 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
 
         if (res.ok) {
             const data = await res.json();
-            console.log('Data',data)
+
+          // console.log('Data',data)
+
             dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
@@ -143,7 +154,7 @@ export const createAlbum = (album) => async (dispatch) => {
             headers: { "Content-Type": "application/json" }
         });
 
-        console.log("FetchResponse", response);
+        // console.log("FetchResponse", response);
 
         if (response.ok) {
             const newAlbum = await response.json();
@@ -178,6 +189,30 @@ export const createProducts = (albumId, products) => async (dispatch) => {
 };
 
 
+export const fetchUpdateProducts = (albumId, payload) => async (dispatch) => {
+    try {
+        const res = await fetch(`/api/albums/${albumId}/products`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload.product_types),
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            // console.log('Updated product types:', data);
+            dispatch(updateProducts(albumId, data.product_types));
+        } else {
+            console.error("Failed to update product types");
+        }
+    } catch (err) {
+        console.error("Error updating product types", err);
+    }
+};
+
+
+
 //*---------REDUCERS-----------
 
 const initialState = { albumDetail: {} };
@@ -202,10 +237,21 @@ const albumReducer = (state = initialState, action) => {
         }
             // return { ...state, albumDetail: {...action.album}};
             case UPDATE_ALBUM: {
-                console.log(action.payload)
+                // console.log(action.payload)
                 return {
                     ...state,
                     albumDetail: action.payload
+                };
+            }
+            case UPDATE_PRODUCTS: {
+                const { albumId, payload } = action;
+                // console.log("Payload:", payload)
+                return {
+                    ...state,
+                    [albumId]: {
+                        ...state[albumId],
+                        products: payload
+                    }
                 };
             }
 

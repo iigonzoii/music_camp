@@ -164,6 +164,66 @@ def update_album(album_id):
     return form.errors, 401
 
 
+@album_routes.route('/<int:album_id>/products', methods=['PUT'])
+@login_required
+def update_product_types(album_id):
+    print(f"Updating products for album ID: {album_id}")
+
+    # Fetch the album
+    album = Album.query.get(album_id)
+    if not album:
+        print(f"Album with ID {album_id} not found")
+        return {'errors': {'message': 'Album not found'}}, 404
+
+    if album.user_id != current_user.id:
+        print(f"User {current_user.id} is not authorized to update album ID {album_id}")
+        return {'errors': {'message': 'Unauthorized'}}, 401
+
+    # Get and print the request data
+    data = request.get_json()
+    print(f"Data received: {data}")
+
+    if not data or not isinstance(data, list):
+        print("Invalid data format. Expected a list of product types.")
+        return {'errors': 'Invalid data format. Expected a list of product types.'}, 400
+
+    # Print each product data
+    products_to_update = []
+    for index, product_data in enumerate(data):
+        print(f"Product {index}: {product_data}")
+
+        product_type = product_data.get('type')
+        amount = product_data.get('amount')
+        price = product_data.get('price')
+        
+        if not product_type or amount is None or price is None:
+            print(f"Missing required fields in product data: {product_data}")
+            return {'errors': 'Missing required fields in product data.'}, 400
+
+        # Create a new product type
+        product = ProductType(
+            album_id=album_id,
+            type=product_type,
+            amount=amount,
+            price=price
+        )
+        # Append to the list of products to update
+        products_to_update.append(product)
+        print(f"Created product: {product.to_dict()}")
+
+    # Delete existing product types for the album
+    ProductType.query.filter_by(album_id=album_id).delete()
+
+    # Add all new products to the session
+    db.session.bulk_save_objects(products_to_update)
+    db.session.commit()
+
+    # Print the final list of product types
+    updated_products = ProductType.query.filter_by(album_id=album_id).all()
+    print(f"Updated products: {[product.to_dict() for product in updated_products]}")
+
+    return {'album_id': album_id, 'product_types': [product.to_dict() for product in updated_products]}
+
 
 # Track route
 # Create a track by album id

@@ -164,6 +164,50 @@ def update_album(album_id):
     return form.errors, 401
 
 
+@album_routes.route('/<int:album_id>/products', methods=['PUT'])
+@login_required
+def update_product_types(album_id):
+    album = Album.query.get(album_id)
+
+    if not album:
+        return {'errors': {'message': 'Album not found'}}, 404
+
+    if album.user_id != current_user.id:
+        return {'errors': {'message': 'Unauthorized'}}, 401
+
+    data = request.get_json()
+
+    if not data or not isinstance(data, list):
+        return {'errors': 'Invalid data format. Expected a list of product types.'}, 400
+
+    # First, delete existing product types for the album
+    ProductType.query.filter_by(album_id=album_id).delete()
+
+    products_to_update = []
+    
+    for product_data in data:
+        product_type = product_data.get('type')
+        amount = product_data.get('amount')
+        price = product_data.get('price')
+        
+        if not product_type or amount is None or price is None:
+            return {'errors': 'Missing required fields in product data.'}, 400
+
+        # Create a new product type
+        product = ProductType(
+            album_id=album_id,
+            type=product_type,
+            amount=amount,
+            price=price
+        )
+        products_to_update.append(product)
+
+    # Add all new products to the session
+    db.session.bulk_save_objects(products_to_update)
+    db.session.commit()
+
+    return {'album_id': album_id, 'product_types': [product.to_dict() for product in ProductType.query.filter_by(album_id=album_id).all()]}
+
 
 # Track route
 # Create a track by album id

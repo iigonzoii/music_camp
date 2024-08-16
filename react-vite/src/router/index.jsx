@@ -10,7 +10,7 @@ import AddProducts from '../components/AddProducts/AddProducts';
 import UpdateAlbum from '../components/UpdateAlbum/UpdateAlbum';
 // import CartModal from '../components/CartModal/CartModal';
 import CartItemsList from '../components/CartModal/CartItems';
-
+import UpdateProducts from '../components/UpdateProducts/UpdateProducts';
 
 
 export const router = createBrowserRouter([
@@ -46,8 +46,12 @@ export const router = createBrowserRouter([
         element: <AddProducts />
       },
       {
-        path:"/albums/:album_id/edit",
+        path:"/albums/:album_id/edit-albums",
         element: <UpdateAlbum />
+      },
+      {
+        path:"/albums/:album_id/edit-products",
+        element: <UpdateProducts />
       },
       {
         path:"/shoppingCart",

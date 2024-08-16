@@ -126,8 +126,8 @@ function UserHome() {
         <div className="user-container">
           <div className="album-list-container">
             {Object.values(filteredAlbums).map((album) => (
-              <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
-                <div className="album-card" >
+               <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
+                 <div className="album-card" >
                     <img
                     className="CMImg"
                     src={album.cover_image_url}
@@ -150,10 +150,12 @@ function UserHome() {
                             Delete
                         </button>
                     </div>
-                </div>
+                 </div>
               </div>
             ))}
+           </div>
             <div className='tracks-card'>
+                <p>Album Track list</p>
                 {Object.values(tracks)
                     .filter(track => track.album_id === selectedAlbumId)
                     .map(track => (
@@ -163,7 +165,6 @@ function UserHome() {
                         </div>
                     ))}
             </div>
-          </div>
 
           {/* {showModal && (
             <ConfirmDeleteSpotModal

@@ -84,7 +84,7 @@
     align-items: end;
     justify-content: center;
     font-size: 16px;
-    margin-bottom: -15px;
+    margin-bottom: -10px;
     padding: 0px;
     /* height: 30px; */
     /* width: 100px; */
@@ -95,14 +95,14 @@
 
 /* Manage albums section */
 .UHsection2{
-    border: 5px solid rgb(82, 239, 35);
+    /* border: 5px solid rgb(82, 239, 35); */
     margin: 0px 20px 0px 20px;
     width: 97%;
 }
 
 
 .user-container {
-    display: row;
+    display: flex;
     flex-direction: row;
     width: 50%;
     gap: 10px;
@@ -115,7 +115,7 @@
 .album-list-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 40%;
     height: auto;
     border: 1px solid #ccc;
     margin-left: 10px;
@@ -124,7 +124,7 @@
 
 .album-card {
     height: 210px;
-    width: 33%;
+    width: 100%;
 }
 
 .CMImg {
@@ -137,6 +137,7 @@
     display: flex;
     flex-direction: row;
     height: 0px;
+    /* margin-top: 7px; */
 }
 .data-container-album {
     font-size: 14px;
@@ -178,14 +179,17 @@
     display: flex;
     /* position: relative; */
     flex-direction: column;
-    justify-items: start;
+    justify-items: flex-start;
     align-items: center;
     margin-right: 30px;
-    width: 100%;
+    margin-top: 10px;
+    width: 60%;
 }
 .track-item {
     display: flex;
     flex-direction: row;
-    font-size: 8px;
+    font-size: 10px;
+    width: 100%;
+    justify-content: space-evenly;
 
 }

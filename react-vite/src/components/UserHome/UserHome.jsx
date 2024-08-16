@@ -1,30 +1,55 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  NavLink } from "react-router-dom";
 import { deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
+import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
 // import { useModal } from "../../context/Modal";
 
 import "./UserHome.css";
 
 function UserHome() {
-  const dispatch = useDispatch();
-//   const { closeModal } = useModal();
-//   const ulRef = useRef();
-  const user = useSelector((state) => state.session.user);
-  let albums = useSelector((state) => state.album);
+    const dispatch = useDispatch();
+    //   const { closeModal } = useModal();
+    //   const ulRef = useRef();
+    const user = useSelector((state) => state.session.user);
+    let albums = useSelector((state) => state.album);
+    let tracks = useSelector((state) => state.track);
 //   const [showModal, setShowModal] = useState(false);
 //   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
-const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
+    const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
+    let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-useEffect(() => {
-    if (user) {
-      dispatch(fetchCurrUserAlbums());
+    useEffect(() => {
+        if (user) {
+            dispatch(fetchCurrUserAlbums());
+        }
+    }, [dispatch, user]);
+
+    useEffect(() => {
+        if (selectedAlbumId) {
+            dispatch(fetchTracksbyAlbumId(selectedAlbumId));
+        }
+    }, [dispatch, selectedAlbumId])
+
+    const handleAlbumClick = (albumId) => {
+        if (albumId !== selectedAlbumId) {
+            setSelectedAlbumId(albumId);
+        }
+    };
+
+    // useEffect(() => {
+    // if (filteredAlbums.length > 0) {
+    //     const firstAlbumId = filteredAlbums[0].id;
+    //     setSelectedAlbumId(firstAlbumId);
+    //     dispatch(fetchTracksbyAlbumId(firstAlbumId));
+    // }
+    // }, [dispatch, filteredAlbums]);
+
+
+
+    if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
+        return <div>No albums found for this user.</div>;
     }
-  }, [dispatch, user]);
-
-  if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
-    return <div>No albums found for this user.</div>;
-  }
 
 
 //   useEffect(() => {
@@ -41,13 +66,16 @@ useEffect(() => {
 //     return () => document.removeEventListener("click", closeMenu);
 //   }, [showModal]);
 
-  const handleDelete = (albumId) => {
-    dispatch(deleteAlbum(albumId));
-  };
+    const handleDelete = (albumId) => {
+        dispatch(deleteAlbum(albumId));
+        if (albumId === selectedAlbumId) {
+            const newSelectedAlbumId = filteredAlbums[0]?.id || null;
+            if (newSelectedAlbumId) {
+                dispatch(fetchTracksbyAlbumId(newSelectedAlbumId));
+            }
+        }
+    };
 
-  if (!filteredAlbums) {
-    return <div>Loading...</div>;
-  }
 
 //   const handleDeleteModal = (albumId) => {
 //     setSelectedAlbumId(albumId);
@@ -71,55 +99,72 @@ useEffect(() => {
 //   };
 
   return (
-    <div>
+    <div className="UH1-container">
+        <img id="background-image"></img>
       {/* className="UHcontainer" */}
       <section className="UHsection1">
-        <img
-          className="UHBannerImg"
-          src='https://firebasestorage.googleapis.com/v0/b/musiccamp-88aaa.appspot.com/o/musicCampBand.jpg?alt=media&token=70d07189-3781-4ddd-a803-da95edc9e302'
-        />
-        <img
-          className="UHmainImg"
-          src={user.profile_image_url}
-        />
+        <div className="banner-container">
+            <img
+            className="banner-img"
+            src={user.banner_img_url}
+            />
+        </div>
 
-        <div>UserName</div>
+        <div className='profile-details-container'>
+            <img
+            className="profile-img"
+            src={user.profile_img_url}
+            />
+        <div className="profile-username">{user.username}</div>
+        </div>
+        <h1 className='profile-header'>
+        Manage Products
+        </h1>
       </section>
+
       <section className="UHsection2">
         <div className="user-container">
-          <h1>
-            Manage Products for {user.firstName} {user.lastName}
-          </h1>
-          <div className="album-card">
+          <div className="album-list-container">
             {Object.values(filteredAlbums).map((album) => (
-              <div key={album.id}>
-                <img
-                  className="CMImg"
-                  src={album.cover_image_url}
-                  alt={`${album.title} cover`}
-                />
-                <div className="album-data-container">
-                  <p className="data-container-item">{album.title}</p>
-                  <p className="data-container-item">{`by ${album.band}`}</p>
-                  <p className="data-container-item bottom-item">
-                    {album.tags}
-                  </p>
-                </div>
+               <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
+                 <div className="album-card" >
+                    <img
+                    className="CMImg"
+                    src={album.cover_image_url}
+                    alt={`${album.title} cover`}
+                    />
+                    <div className="album-data-container">
+                    <p className="data-container-album">{album.title}</p>
+                    <p className="data-container-artist">{`by ${album.band}`}</p>
+                    <p className="data-container-tag">{album.tags}</p>
+                    </div>
 
-                <div className="button-group-update">
-                  <NavLink to={`/albums/${album.id}/edit-albums`}>
-                    <button className="update-button">Update</button>
-                  </NavLink>
-                  <button
-                    className="update-button"
-                    onClick={() => handleDelete(album.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
+                    <div className="button-group-update">
+                        <NavLink to={`/albums/${album.id}/edit-albums`}>
+                            <button className="update-button">Update</button>
+                        </NavLink>
+                        <button
+                            className="delete-button"
+                            onClick={() => handleDelete(album.id)}
+                            >
+                            Delete
+                        </button>
+                    </div>
+                 </div>
               </div>
             ))}
-          </div>
+           </div>
+            <div className='tracks-card'>
+                <p>Album Track list</p>
+                {Object.values(tracks)
+                    .filter(track => track.album_id === selectedAlbumId)
+                    .map(track => (
+                        <div className="track-item" key={track.id}>
+                            <p className="track-name">{track.name}</p>
+                            <p className="track-duration">{track.duration} s</p>
+                        </div>
+                    ))}
+            </div>
 
           {/* {showModal && (
             <ConfirmDeleteSpotModal

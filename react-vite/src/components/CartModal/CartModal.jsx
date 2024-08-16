@@ -39,24 +39,8 @@ const CartModal = ({albumData}) => {
         }
     }
 
-    console.log("QUANTITY", quantity)
-    console.log("price", price)
-
     const handleAddCartSubmit = (e) => {
         e.preventDefault()
-
-        const payload = {
-            user_id: currUser.id,
-            album_id: albumData.id,
-            album_details: {
-                band: albumById.band,
-                title: albumById.title,
-                image: albumById.cover_image_url
-            },
-            type: albumData.type,
-            quantity,
-            price
-        }
 
         try {
             const error = {}
@@ -77,21 +61,36 @@ const CartModal = ({albumData}) => {
             const existingItem = JSON.parse(localStorage.getItem(albumKey))
 
             //handle if desired price is different than what is in cart
-            if (price != existingItem?.price) {
+            if (existingItem && price != existingItem?.price) {
                 existingItem.price = price
                 postToLocalStorage(existingItem)
                 setPrice(parseInt(price))
+            }
+
+            const payload = {
+                user_id: currUser.id,
+                album_id: albumData.id,
+                album_details: {
+                    band: albumById.band,
+                    title: albumById.title,
+                    image: albumById.cover_image_url
+                },
+                type: albumData.type,
+                quantity,
+                price
             }
 
             // handle if item is already existing in cart
             if (existingItem) {
                 existingItem.quantity += parseInt(quantity)
                 postToLocalStorage(existingItem)
+
                 setErrors({})
                 setMessage('Quantity updated successfully!')
                 setTimeout(() => setMessage(''), 5000)
             } else {
                 postToLocalStorage(payload)
+
                 setMessage('Item successfully added to cart!')
                 setTimeout(() => setMessage(''), 5000)
             }
@@ -100,13 +99,9 @@ const CartModal = ({albumData}) => {
                 navigate('/checkout')
                 closeModal()
             }
-
         } catch (err) {
-            // get the stored item
-            const data = JSON.parse(localStorage.getItem(albumKey));
-
             // if no set errors, but still errors persist, then generic message is thrown
-            if(data?.errors) {
+            if(err) {
                 setErrors({...err, message: "An unexpected error occurred."})
             }
         }

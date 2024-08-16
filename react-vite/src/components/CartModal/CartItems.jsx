@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux'
 import './CartItems.css'
 
 function CartItemsList() {
+    const user = useSelector((state) => state.session.user);
 
     const getCartItems = () => {
         const cartItems = {}
@@ -9,7 +11,8 @@ function CartItemsList() {
             try {
                 const item = JSON.parse(localStorage.getItem(key));
                 if (item && Object.prototype.hasOwnProperty.call(item, "user_id") &&
-                            Object.prototype.hasOwnProperty.call(item, "album_id")) {
+                            Object.prototype.hasOwnProperty.call(item, "album_id") &&
+                            item.user_id == user.id) {
                     cartItems[key] = item;
                 }
             } catch (e) {

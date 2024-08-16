@@ -85,7 +85,7 @@ export const fetchAlbum = (albumId) => async (dispatch) => {
 
 //* Update album by ID
 export const fetchUpdateAlbum = (album) => async (dispatch) => {
-    console.log('Album',album);
+    // console.log('Album',album);
     try {
         const res = await fetch(`/api/albums/${album.id}/`, {
             method: 'PUT',
@@ -98,7 +98,7 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
 
         if (res.ok) {
             const data = await res.json();
-            console.log('Data',data)
+            // console.log('Data',data)
             dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
@@ -152,7 +152,7 @@ export const createAlbum = (album) => async (dispatch) => {
             headers: { "Content-Type": "application/json" }
         });
 
-        console.log("FetchResponse", response);
+        // console.log("FetchResponse", response);
 
         if (response.ok) {
             const newAlbum = await response.json();
@@ -199,8 +199,8 @@ export const fetchUpdateProducts = (albumId, payload) => async (dispatch) => {
 
         if (res.ok) {
             const data = await res.json();
-            console.log('Updated product types:', data);
-            dispatch(updateProducts(albumId, data.product_types));  
+            // console.log('Updated product types:', data);
+            dispatch(updateProducts(albumId, data.product_types));
         } else {
             console.error("Failed to update product types");
         }
@@ -235,7 +235,7 @@ const albumReducer = (state = initialState, action) => {
         }
             // return { ...state, albumDetail: {...action.album}};
             case UPDATE_ALBUM: {
-                console.log(action.payload)
+                // console.log(action.payload)
                 return {
                     ...state,
                     albumDetail: action.payload
@@ -243,7 +243,7 @@ const albumReducer = (state = initialState, action) => {
             }
             case UPDATE_PRODUCTS: {
                 const { albumId, payload } = action;
-                console.log("Payload:", payload)
+                // console.log("Payload:", payload)
                 return {
                     ...state,
                     [albumId]: {

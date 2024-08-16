@@ -87,7 +87,7 @@ function UpdateAlbum() {
     };
     try {
       const updatedAlbum = await dispatch(fetchUpdateAlbum(payload));
-      console.log({ updatedAlbum });
+      // console.log({ updatedAlbum });
       if (updatedAlbum) {
         navigate(`/albums/${updatedAlbum.id}/products/edit`);
       }

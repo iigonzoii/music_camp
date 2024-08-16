@@ -1,4 +1,4 @@
-import { compose } from "redux"
+// import { compose } from "redux"
 
 //*------ACTION TYPES---------
 const LOAD_ALBUMS = "album/loadAlbums"
@@ -29,7 +29,7 @@ export const loadAlbum = (album) => {
 export const updateAlbum = (albumId, payload) => {
     return {
         type: UPDATE_ALBUM,
-        albumId, 
+        albumId,
         payload,
     };
 };
@@ -95,11 +95,11 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
             body: JSON.stringify(album),
         });
 
-        
+
         if (res.ok) {
             const data = await res.json();
             console.log('Data',data)
-            dispatch(updateAlbum(album.id, data));  
+            dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
         }
@@ -241,6 +241,7 @@ const albumReducer = (state = initialState, action) => {
                     albumDetail: action.payload
                 };
             }
+<<<<<<< HEAD
             case 'UPDATE_PRODUCTS': {
                 const { albumId, payload } = action;
                 console.log("Payload:", payload)
@@ -253,6 +254,9 @@ const albumReducer = (state = initialState, action) => {
                 };
             }
             
+=======
+
+>>>>>>> dev
         case CREATE_ALBUM:
                 return {
                     ...state,
@@ -271,19 +275,17 @@ const albumReducer = (state = initialState, action) => {
                         newState[album.id] = album
                     })
                     return {  ...newState}
-                }   
+                }
         case DELETE_ALBUM: {
             const newState = { ...state };
             delete newState[action.albumId];
             return newState;
-        } 
-        
-        
+        }
+
+
         default:
             return state;
     }
 };
 
 export default albumReducer;
-
-

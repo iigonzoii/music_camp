@@ -15,7 +15,7 @@ const CartModal = ({albumData}) => {
     const { closeModal } = useModal()
 
     const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
-    const item = JSON.parse(localStorage.getItem(albumKey))
+    // const item = JSON.parse(localStorage.getItem(albumKey))
 
     const postToLocalStorage = (payload) => {
         localStorage.setItem(albumKey, JSON.stringify(payload));

@@ -5,7 +5,7 @@ import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { fetchUpdateAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 
 function UpdateAlbum() {
-  const { album_id } = useParams(); 
+  const { album_id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
@@ -112,7 +112,7 @@ function UpdateAlbum() {
       <h1>Update Album</h1>
       <section className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2>What's your album's new name?</h2>
+          <h2>What&apos;s your album&apos;s new name?</h2>
           <input
             value={band}
             onChange={updateBand}

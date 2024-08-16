@@ -189,7 +189,7 @@ export const createProducts = (albumId, products) => async (dispatch) => {
 
 export const fetchUpdateProducts = (albumId, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`/api/albums/${albumId}/`, {
+        const res = await fetch(`/api/albums/${albumId}/products`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -252,8 +252,6 @@ const albumReducer = (state = initialState, action) => {
                     }
                 };
             }
-            
-
         case CREATE_ALBUM:
                 return {
                     ...state,

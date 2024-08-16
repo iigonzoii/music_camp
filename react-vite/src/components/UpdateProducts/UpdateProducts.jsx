@@ -82,11 +82,9 @@ function UpdateProducts() {
     let newProducts;
     try {
       newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
-
-    //   console.log({ newProducts });
-    //     if (newProducts) {
-    //       navigate(`/albums/${album_id}`);
-    //     }
+        
+          navigate(`/albums/${album_id}`);
+        
     } catch (err) {
       console.error({ err });
     }

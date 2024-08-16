@@ -33,7 +33,7 @@ function UpdateProducts() {
 
   const updateProductType = (index, field, value) => {
     const updatedProductTypes = [...productTypes];
-  
+
     if (field === 'amount') {
       updatedProductTypes[index][field] = parseInt(value, 10);
     } else if (field === 'price') {
@@ -41,10 +41,10 @@ function UpdateProducts() {
     } else {
       updatedProductTypes[index][field] = value;
     }
-  
+
     setProductTypes(updatedProductTypes);
   };
-  
+
   const addProductType = () => {
     if(productTypes.length < 4){
         setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
@@ -78,13 +78,13 @@ function UpdateProducts() {
       album_id: parseInt(album_id),
       product_types: formattedProductTypes, // Include product types in the payload
     };
-    console.log(payload)
+    // console.log(payload)
     let newProducts;
     try {
       newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
-        
+
           navigate(`/albums/${album_id}`);
-        
+
     } catch (err) {
       console.error({ err });
     }

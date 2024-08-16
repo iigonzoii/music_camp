@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./UpdateAlbum.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { fetchUpdateAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 
 function UpdateAlbum() {
@@ -10,10 +10,10 @@ function UpdateAlbum() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const usersAlbums = useSelector((state) => state.album);
-console.log(album_id)
+
   // Find the album to edit by its ID
   const editAlbum = Object.values(usersAlbums).find(item => item.id === parseInt(album_id));
-  console.log(editAlbum)
+
   // Initialize state with album data if it exists
   const [band, setBand] = useState(editAlbum ? editAlbum.band : "");
   const [title, setTitle] = useState(editAlbum ? editAlbum.title : "");
@@ -86,8 +86,6 @@ console.log(album_id)
       tags,
     };
     try {
-        console.log(band)
-
       const updatedAlbum = await dispatch(fetchUpdateAlbum(payload));
       console.log({ updatedAlbum });
       if (updatedAlbum) {
@@ -175,6 +173,11 @@ console.log(album_id)
             <button type="submit" className="form-button">
               Update Album
             </button>
+            <NavLink to={`/albums/${album_id}/edit-products`}>
+            <button type="submit" className="form-button">
+              Update Products
+            </button>
+            </NavLink>
             <button
               type="button"
               onClick={() => navigate(-1)}

@@ -107,7 +107,7 @@ useEffect(() => {
                 </div>
 
                 <div className="button-group-update">
-                  <NavLink to={`/albums/${album.id}/edit`}>
+                  <NavLink to={`/albums/${album.id}/edit-albums`}>
                     <button className="update-button">Update</button>
                   </NavLink>
                   <button

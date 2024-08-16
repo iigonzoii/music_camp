@@ -70,7 +70,9 @@ function LandingPage() {
         </section>
 
         <aside className="LPsection3">
-          <LandingAside data={data} />
+          <LandingAside data={data}/>
+
+
         </aside>
       </div>
     </>

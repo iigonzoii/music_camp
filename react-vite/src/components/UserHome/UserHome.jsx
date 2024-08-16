@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  NavLink } from "react-router-dom";
 import { deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
+import { fetchOrders } from "../../redux/orderReducer";
 import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
 // import { useModal } from "../../context/Modal";
 
@@ -14,21 +15,29 @@ function UserHome() {
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
+    // let purchases = useSelector((state) => state.order)
 //   const [showModal, setShowModal] = useState(false);
 //   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
     const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
+    // const filteredPurchases = Object.values(purchases).allOrders.filter(purchase => purchase.user_id === user.id) ;
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
+
+    // console.log("FLAG:", purchases)
 
     useEffect(() => {
         if (user) {
             dispatch(fetchCurrUserAlbums());
+            dispatch(fetchOrders());
         }
     }, [dispatch, user]);
 
     useEffect(() => {
-        if (selectedAlbumId) {
+        if (filteredAlbums.length > 0) {
+            setSelectedAlbumId(filteredAlbums[0].id)
             dispatch(fetchTracksbyAlbumId(selectedAlbumId));
-        }
+        } else (
+            setSelectedAlbumId(null)
+        )
     }, [dispatch, selectedAlbumId])
 
     const handleAlbumClick = (albumId) => {
@@ -47,9 +56,9 @@ function UserHome() {
 
 
 
-    if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
-        return <div>No albums found for this user.</div>;
-    }
+    // if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
+    //     return <div>No albums found for this user.</div>;
+    // }
 
 
 //   useEffect(() => {
@@ -98,7 +107,7 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
-  return (
+  return albums? (
     <div className="UH1-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}
@@ -137,6 +146,7 @@ function UserHome() {
                     <p className="data-container-album">{album.title}</p>
                     <p className="data-container-artist">{`by ${album.band}`}</p>
                     <p className="data-container-tag">{album.tags}</p>
+                    {/* <p className="data-container-tag">{album.orders}</p> */}
                     </div>
 
                     <div className="button-group-update">
@@ -173,7 +183,41 @@ function UserHome() {
             />
           )} */}
         </div>
+
+        <div className="right-side-container">
+            <p>Purchase History</p>
+            {Object.values(filteredAlbums).map((album) => (
+                    <li className="purchase-items" key={album.id}>
+                        <p className="purchase-name">{album.name}</p>
+                        <p className="purchase-type">{album.order?.type}</p>
+                        <p className="purchase-quantity">{album.order?.quantity} s</p>
+                    </li>
+                ))}
+        </div>
       </section>
+    </div>
+    ) : (
+    <div className="UH1-container">
+        <img id="background-image"></img>
+        <section className="UHsection1">
+            <div className="banner-container">
+                <img
+                className="banner-img"
+                src={user.banner_img_url}
+                />
+            </div>
+
+            <div className='profile-details-container'>
+                <img
+                className="profile-img"
+                src={user.profile_img_url}
+                />
+            <div className="profile-username">{user.username}</div>
+            </div>
+            <h1 className='profile-header'>
+            Manage Products
+            </h1>
+        </section>
     </div>
   );
 }

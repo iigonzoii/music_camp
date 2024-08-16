@@ -42,6 +42,7 @@ function LandingAside({ data }) {
                     ) : (
                         <p>No reviews available</p>
                     )}
+
             </div>
         </div>
     );

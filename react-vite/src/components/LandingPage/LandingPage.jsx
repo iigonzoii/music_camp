@@ -44,7 +44,6 @@ function LandingPage() {
   return (
     <div className="lp-margin">
       <section className="lp-section1">
-
         <div>
           <div className="lp-genre">
               <button onClick={() => setGenre("all-genres")}>All Genres</button>

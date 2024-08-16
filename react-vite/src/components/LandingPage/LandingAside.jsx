@@ -3,16 +3,16 @@ import "./LandingPage.css";
 
 function LandingAside({ data }) {
     const navigate = useNavigate();
-    
+
     if (!data) {
         return <div>Loading...</div>;
     }
 
     return (
         <div>
-            <div className="LPasideContainer">
-                <img className="LPasideimg" src={data.cover_image_url} />
-                <div className="LPasideButtons">
+            <div className="lp-aside-container">
+                <img className="lp-aside-img" src={data.cover_image_url} />
+                <div className="lp-aside-buttons">
                     <button onClick={() => navigate(`/albums/${+data.id}`)}>
                         Go to Album
                     </button>
@@ -34,21 +34,14 @@ function LandingAside({ data }) {
                     <p>No tracks available</p>
                 )}
 
-                <div>
-                    <div>Reviews</div>
                     {data.reviews && data.reviews.length > 0 ? (
-                        <ul>
-                            {data.reviews.map((review) => (
-                                <li key={review.id}>
-                                    {" "}
-                                    <strong>{review.review}</strong>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="lp-reviews">
+                            {data.reviews[0].review}
+
+                        </div>
                     ) : (
                         <p>No reviews available</p>
                     )}
-                </div>
             </div>
         </div>
     );

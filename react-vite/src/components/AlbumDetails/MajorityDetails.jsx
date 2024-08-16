@@ -28,10 +28,10 @@ function MajorityDetails() {
 
     return (
         <>
-            <div className="ADalbumData">
+            <div className="ad-album-data">
                 <p>{album && album[albumId].Album.title}</p>
                 <p>{`by ${album[albumId].Album.band}`}</p>
-                <div className="V2Play">version2 play button and song</div>
+                <div className="V2-play">version2 play button and song</div>
                 <p>{album[albumId].Album.description}</p>
 
                 <div>
@@ -51,7 +51,7 @@ function MajorityDetails() {
                         ))}
                 </div>
 
-                <ol className="ADtrackList">
+                <ol className="ad-trackList">
                     {tracks && tracks.map((track, index) => (
                         <li key={index}>
                             <i className="fa-regular fa-circle-play"></i>
@@ -63,7 +63,7 @@ function MajorityDetails() {
                 <p>{`Released ${album[albumId].Album.created_at}`}</p>
             </div>
 
-            <div className="ADalbumArea">
+            <div className="ad-album-area">
 
                 <img src={album[albumId].Album.cover_image_url} />
 
@@ -98,7 +98,7 @@ function MajorityDetails() {
                         <ReviewButton reviews={reviews} albumId={albumId}/>
                     )}
                 </div>
-                <div className="ADv2supporters">
+                <div className="ad-v2-supporters">
                     Version2 where we showed a tiled list of supporters profile images
                 </div>
 

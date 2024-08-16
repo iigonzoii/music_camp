@@ -1,32 +1,27 @@
-.LPcontainer {
+.lp-container {
     display: flex;
 }
-
-.LPsection1 {
-margin: 0px 20px 0px 20px;
+.lp-section1 {
 display: flex;
 }
-.LPsection2 {
-    margin: 0px 0px 0px 20px;
+.lp-section2 {
     width: 80%;
     display: flex;
 }
-.LPsection3 {
-    width: 20%;
+.lp-section3 {
     width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 10px;
-    /* border-left: solid lightgrey 1px; */
 }
-.LPsection3 >div > button {
+.lp-section3 >div > button {
     cursor: pointer;
 }
-.LPgenre {
+.lp-genre {
     display: flex;
 }
-.LPgenre > button{
+.lp-genre > button{
     cursor: pointer;
     margin: 0px 5px 5px 5px;
     border: solid 1px #4C4C4C;
@@ -35,10 +30,10 @@ display: flex;
     font-size: small;
     color: lightgray;
 }
-.LPcategory {
+.lp-category {
     display: flex;
 }
-.LPcategory > button{
+.lp-category > button{
     cursor: pointer;
     margin: 0px 5px 5px 5px;
     border: solid 1px #4C4C4C;
@@ -47,25 +42,22 @@ display: flex;
     font-size: small;
     color: lightgray;
 }
-.LPasideContainer{
+.lp-aside-container{
 display: flex;
 flex-direction: column;
-align-items: flex-start;
+align-items: flex-end;
 margin-right: 50px;
-/* border-left: solid lightgray 1px; */
 }
-
-.LPasideimg{
+.lp-aside-img{
     height: 150px;
     width: 150px;
     object-fit: cover;
     border: solid #4C4C4C 1px;
 }
-.LPasideButtons{
+.lp-aside-buttons{
     display: flex;
-
 }
-.LPasideButtons > button {
+.lp-aside-buttons > button {
         cursor: pointer;
     margin: 2px 5px 5px 0px;
     border: solid 1px #4C4C4C;
@@ -74,6 +66,10 @@ margin-right: 50px;
     font-size: small;
     color: lightgray;
 }
-/* .LPupperButtons{
-    padding: 0px 0px 5px 0px;
-} */
+.lp-margin{
+    margin: 0px 60px 0px 60px;
+}
+.lp-reviews{
+    display: flex;
+    align-items: flex-end;
+}

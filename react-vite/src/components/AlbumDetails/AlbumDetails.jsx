@@ -22,17 +22,17 @@ function AlbumDetails() {
     }, [dispatch, albumId]);
 
     return isLoaded && (
-        <div className="margin">
-            <section className="ADsection1">
-                <img className="ADbanner" src={album[albumId].UserInfo[0].banner_img_url} />
+        <div className="ad-margin">
+            <section className="ad-section1">
+                <img className="ad-banner" src={album[albumId].UserInfo[0].banner_img_url} />
             </section>
 
-            <div className="ADcontainer">
+            <div className="ad-container">
 
-                <section className="ADsection2">
+                <section className="ad-section2">
                     <MajorityDetails />
                 </section>
-                <aside className="ADsection3">
+                <aside className="ad-section3">
                     <AlbumAside />
                 </aside>
 

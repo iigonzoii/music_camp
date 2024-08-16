@@ -68,8 +68,10 @@ function LandingPage() {
           <CardMapper genre={genre} cat={cat}/>
         </section>
 
+
         <aside className="lp-section3">
           <LandingAside data={data} />
+
         </aside>
       </div>
     </div>

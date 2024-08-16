@@ -98,7 +98,9 @@ export const fetchUpdateAlbum = (album) => async (dispatch) => {
 
         if (res.ok) {
             const data = await res.json();
-            // console.log('Data',data)
+
+          // console.log('Data',data)
+
             dispatch(updateAlbum(album.id, data));
         } else {
             console.error("Failed to load album");
@@ -252,6 +254,7 @@ const albumReducer = (state = initialState, action) => {
                     }
                 };
             }
+
         case CREATE_ALBUM:
                 return {
                     ...state,

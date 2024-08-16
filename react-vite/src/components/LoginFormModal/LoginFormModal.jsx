@@ -28,6 +28,8 @@ function LoginFormModal() {
     }
   };
 
+
+
   const demo = (e) => {
     e.preventDefault();
     setErrors({})
@@ -37,7 +39,7 @@ function LoginFormModal() {
             const data = await res.json();
             if (data?.errors) setErrors(data.errors)
         })
-}
+  }
 
   return (
     <>
@@ -64,6 +66,7 @@ function LoginFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
+        
         <button className='demo-user-btn' onClick={demo}>Demo User</button>
       </form>
     </>

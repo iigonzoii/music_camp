@@ -9,6 +9,8 @@ function SignupFormModal() {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
+    city: '',
+    state: '',
     email: '',
     username: '',
     password: '',
@@ -82,6 +84,30 @@ function SignupFormModal() {
           />
         </label>
         {errors.last_name && <p>{errors.last_name}</p>}
+
+        <label>
+          City
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.city && <p>{errors.city}</p>}
+
+        <label>
+          State
+          <input
+            type="text"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.state && <p>{errors.state}</p>}
 
         <label>
           Email

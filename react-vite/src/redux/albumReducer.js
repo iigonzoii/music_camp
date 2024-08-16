@@ -241,8 +241,7 @@ const albumReducer = (state = initialState, action) => {
                     albumDetail: action.payload
                 };
             }
-<<<<<<< HEAD
-            case 'UPDATE_PRODUCTS': {
+            case UPDATE_PRODUCTS: {
                 const { albumId, payload } = action;
                 console.log("Payload:", payload)
                 return {
@@ -254,9 +253,7 @@ const albumReducer = (state = initialState, action) => {
                 };
             }
             
-=======
 
->>>>>>> dev
         case CREATE_ALBUM:
                 return {
                     ...state,

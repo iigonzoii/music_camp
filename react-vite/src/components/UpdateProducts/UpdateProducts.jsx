@@ -60,35 +60,36 @@ function UpdateProducts() {
     e.preventDefault();
     setErrors({});
 
-    // const newErrors = {};
+    const newErrors = {};
 
-    // if (Object.keys(newErrors).length > 0) {
-    //   setErrors(newErrors);
-    //   return;
-    // }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-    // // Prepare the product types data from state
-    // const formattedProductTypes = productTypes.map((pt) => ({
-    //   type: pt.type,
-    //   price: pt.price,
-    //   amount: pt.amount,
-    // }));
+    // Prepare the product types data from state
+    const formattedProductTypes = productTypes.map((pt) => ({
+      type: pt.type,
+      price: pt.price,
+      amount: pt.amount,
+    }));
 
-    // const payload = {
-    //   album_id: parseInt(album_id),
-    //   product_types: formattedProductTypes, // Include product types in the payload
-    // };
-    // let newProducts;
-    // try {
-    //   newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
+    const payload = {
+      album_id: parseInt(album_id),
+      product_types: formattedProductTypes, // Include product types in the payload
+    };
+    console.log(payload)
+    let newProducts;
+    try {
+      newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
 
-    // //   console.log({ newProducts });
-    // //     if (newProducts) {
-    // //       navigate(`/albums/${album_id}`);
-    // //     }
-    // } catch (err) {
-    //   console.error({ err });
-    // }
+    //   console.log({ newProducts });
+    //     if (newProducts) {
+    //       navigate(`/albums/${album_id}`);
+    //     }
+    } catch (err) {
+      console.error({ err });
+    }
   };
 
   if (!user) {

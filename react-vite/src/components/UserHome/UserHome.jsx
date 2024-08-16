@@ -20,7 +20,7 @@ useEffect(() => {
     if (user) {
       dispatch(fetchCurrUserAlbums());
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
     return <div>No albums found for this user.</div>;

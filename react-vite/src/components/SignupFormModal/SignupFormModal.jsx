@@ -9,6 +9,8 @@ function SignupFormModal() {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
+    city: '',
+    state: '',
     email: '',
     username: '',
     password: '',
@@ -58,10 +60,11 @@ function SignupFormModal() {
     <>
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="form-container" onSubmit={handleSubmit}>
         <label>
           First Name
           <input
+          className="input-field"
             type="text"
             name="first_name"
             value={formData.first_name}
@@ -74,6 +77,7 @@ function SignupFormModal() {
         <label>
           Last Name
           <input
+          className="input-field"
             type="text"
             name="last_name"
             value={formData.last_name}
@@ -84,8 +88,35 @@ function SignupFormModal() {
         {errors.last_name && <p>{errors.last_name}</p>}
 
         <label>
+          City
+          <input
+          className="input-field"
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.city && <p>{errors.city}</p>}
+
+        <label>
+          State
+          <input
+          className="input-field"
+            type="text"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        {errors.state && <p>{errors.state}</p>}
+
+        <label>
           Email
           <input
+          className="input-field"
             type="text"
             name="email"
             value={formData.email}
@@ -98,6 +129,7 @@ function SignupFormModal() {
         <label>
           Username
           <input
+          className="input-field"
             type="text"
             name="username"
             value={formData.username}
@@ -110,6 +142,7 @@ function SignupFormModal() {
         <label>
           Password
           <input
+          className="input-field"
             type="password"
             name="password"
             value={formData.password}
@@ -122,6 +155,7 @@ function SignupFormModal() {
         <label>
           Confirm Password
           <input
+          className="input-field"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -133,6 +167,7 @@ function SignupFormModal() {
         <label>
           Bio
           <input
+          className="input-field"
             type="text"
             name="bio"
             value={formData.bio}
@@ -144,6 +179,7 @@ function SignupFormModal() {
         <label>
           Spotify
           <input
+          className="input-field"
             type="text"
             name="spotify"
             value={formData.spotify}
@@ -155,6 +191,7 @@ function SignupFormModal() {
         <label>
           Instagram
           <input
+          className="input-field"
             type="text"
             name="instagram"
             value={formData.instagram}
@@ -166,6 +203,7 @@ function SignupFormModal() {
         <label>
           Website
           <input
+          className="input-field"
             type="text"
             name="website"
             value={formData.website}
@@ -177,6 +215,7 @@ function SignupFormModal() {
         <label>
           Facebook
           <input
+          className="input-field"
             type="text"
             name="facebook"
             value={formData.facebook}
@@ -188,6 +227,7 @@ function SignupFormModal() {
         <label>
           Profile Image URL
           <input
+          className="input-field"
             type="text"
             name="profile_img_url"
             value={formData.profile_img_url}
@@ -199,6 +239,7 @@ function SignupFormModal() {
         <label>
           Banner Image URL
           <input
+          className="input-field"
             type="text"
             name="banner_img_url"
             value={formData.banner_img_url}
@@ -210,6 +251,7 @@ function SignupFormModal() {
         <label>
           Background Image URL
           <input
+          className="input-field"
             type="text"
             name="background_img_url"
             value={formData.background_img_url}
@@ -218,7 +260,7 @@ function SignupFormModal() {
         </label>
         {errors.background_img_url && <p>{errors.background_img_url}</p>}
 
-        <button type="submit">Sign Up</button>
+        <button className="form-button" type="submit">Sign Up</button>
       </form>
     </>
   );

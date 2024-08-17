@@ -44,7 +44,7 @@ const CartModal = ({albumData}) => {
 
         try {
             const error = {}
-            if (price < albumData.price) {
+            if (price <= albumData.price) {
                 error.price = `The minimum price is $${albumData.price}`}
             if (typeof price != "number") {
                 error.price = 'Please provide a price'}

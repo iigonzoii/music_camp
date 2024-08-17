@@ -10,7 +10,7 @@ function AlbumAside() {
     return  (
         <>
         <div>
-            <img className="ADasideImg" src={album[albumId].UserInfo[0].profile_img_url} />
+            <img className="ad-aside-img" src={album[albumId].UserInfo[0].profile_img_url} />
             <div>{album[albumId].Album.band}</div>
             <div>{album[albumId].UserInfo[0].city}</div>
             <div>{album[albumId].UserInfo[0].state}</div>
@@ -21,7 +21,7 @@ function AlbumAside() {
         </div>
             {album && album[albumId].UserAlbums.map((album, index) => (
             <div key={index}>
-            <img className="ADasideDiscoImgs" src={album.cover_image_url}/>
+            <img className="ad-aside-disco-imgs" src={album.cover_image_url}/>
             <div>{album.title}</div>
             <div>{`Released ${album.created_at.split(" ")[2]} ${album.created_at.split(" ")[3]} `}</div>
         </div>

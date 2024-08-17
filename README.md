@@ -55,7 +55,7 @@ This is the starter for the Flask React project.
 ## Deployment through Render.com
 
 First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
+. This means that you must already have the __dist__ folder located in
 the root of your __react-vite__ folder when you push to GitHub. This __dist__
 folder contains your React code and all necessary dependencies minified and
 bundled into a smaller footprint, ready to be served from your Python API.

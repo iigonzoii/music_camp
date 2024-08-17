@@ -17,6 +17,8 @@ function MajorityDetails() {
     reviews = Object.values(reviews)
     tracks = Object.values(tracks)
 
+    console.log("tracks", tracks)
+
 
     const albumProducts = album[albumId].Album.products
     const findProduct = (type) => {
@@ -52,12 +54,18 @@ function MajorityDetails() {
                 </div>
 
                 <ol className="ad-trackList">
-                    {tracks && tracks.map((track, index) => (
+                    {tracks.length > 0 ? tracks && tracks.map((track, index) => (
                         <li key={index}>
                             <i className="fa-regular fa-circle-play"></i>
                             {track.name} {track.duration}
                             </li>
-                    ))}
+                    )) : <p>No tracks yet</p>}
+                    {/* {tracks && tracks.map((track, index) => (
+                        <li key={index}>
+                            <i className="fa-regular fa-circle-play"></i>
+                            {track.name} {track.duration}
+                            </li>
+                    ))} */}
                 </ol>
                 <p>{`Produced by ${album[albumId].Album.producer}`}</p>
                 <p>{`Released ${album[albumId].Album.created_at}`}</p>
@@ -70,7 +78,8 @@ function MajorityDetails() {
                 <p><i className="fa-regular fa-heart pointer "></i>wishlist</p>
                 <p>Supported by</p>
                 <ul className="reviews-list">
-                    {reviews && reviews.map((review, index) => (
+
+                {reviews.length > 0 ? reviews && reviews.map((review, index) => (
                         <li key={index}>
                             {`UserId-${review.user_id}-${review.review}`}
                             {sessionUser && review.user_id === sessionUser.id && (
@@ -90,14 +99,39 @@ function MajorityDetails() {
                                 </div>
                             )}
                         </li>
-                    ))}
-                    <li>Version 2 probably make this box scroll and seethrough to show the background img?</li>
+                    )) : <p>No reviews here</p>}
+
+                    {/* {reviews && reviews.map((review, index) => (
+                        <li key={index}>
+                            {`UserId-${review.user_id}-${review.review}`}
+                            {sessionUser && review.user_id === sessionUser.id && (
+                                <div className="review-modify-buttons">
+                                    <div className="review-edit-button">
+                                        <OpenModalButton
+                                            buttonText="EDIT"
+                                            modalComponent={<EditReviewModal reviewId={review.id} review={review} />}
+                                        />
+                                    </div>
+                                    <div className="review-delete-button">
+                                        <OpenModalButton
+                                            buttonText="DELETE"
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </li>
+                    ))} */}
+
+                    {/* <li>Version 2 probably make this box scroll and seethrough to show the background img?</li> */}
                 </ul>
+
                 <div className="AD-review-button">
                     {(
                         <ReviewButton reviews={reviews} albumId={albumId}/>
                     )}
                 </div>
+
                 <div className="ad-v2-supporters">
                     Version2 where we showed a tiled list of supporters profile images
                 </div>

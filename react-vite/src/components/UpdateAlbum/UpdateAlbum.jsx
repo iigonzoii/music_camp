@@ -170,9 +170,9 @@ function UpdateAlbum() {
           )}
 
           <div className="button-group">
-            <button type="submit" className="form-button">
+            {/* <button type="submit" className="form-button">
               Update Album
-            </button>
+            </button> */}
             <NavLink to={`/albums/${album_id}/edit-products`}>
             <button type="submit" className="form-button">
               Update Products

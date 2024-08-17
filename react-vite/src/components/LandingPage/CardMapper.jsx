@@ -45,8 +45,7 @@ function CardMapper({ genre, cat }) {
                     title={`${album.title}`}
                     onClick={() => navigate(`/albums/${album.id}`)}
                     key={index}>
-                        {album.cover_image_url}
-                    <img className="cm-img" src= {album.cover_image_url} alt={`${album.title} cover`} />
+                    <img className="cm-img" src={album.cover_image_url} alt={`${album.title} cover`} />
                     <div className="album-data-container">
                         <p className='data-container-item'>{album.title}</p>
                         <p className='data-container-item'>{`by ${album.band}`}</p>

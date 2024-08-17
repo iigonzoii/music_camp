@@ -15,18 +15,22 @@ function UserHome() {
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
-    // let purchases = useSelector((state) => state.order)
-//   const [showModal, setShowModal] = useState(false);
-//   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
-    const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
+    let purchases = useSelector((state) => state.allOrders)
+    // const [showModal, setShowModal] = useState(false);
+    // const [selectedAlbumId, setSelectedAlbumId] = useState(null);
+
     // const filteredPurchases = Object.values(purchases).allOrders.filter(purchase => purchase.user_id === user.id) ;
+    const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-    // console.log("FLAG:", purchases)
+
+    console.log("FLAG:", albums.user_wishlist)
 
     useEffect(() => {
-        if (user) {
+        if (user && filteredAlbums.length > 0) {
             dispatch(fetchCurrUserAlbums());
+            dispatch(fetchOrders());
+        } else {
             dispatch(fetchOrders());
         }
     }, [dispatch, user]);
@@ -107,8 +111,8 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
-  return albums? (
-    <div className="UH1-container">
+  return filteredAlbums.length > 0? (
+    <div className="uh-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}
       <section className="UHsection1">
@@ -126,9 +130,12 @@ function UserHome() {
             />
         <div className="profile-username">{user.username}</div>
         </div>
-        <h1 className='profile-header'>
-        Manage Products
-        </h1>
+      </section>
+
+      <section className="header-container">
+            <h1 className='profile-header'>
+            Manage Products
+            </h1>
       </section>
 
       <section className="UHsection2">
@@ -138,14 +145,14 @@ function UserHome() {
                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
                  <div className="album-card" >
                     <img
-                    className="CMImg"
+                    className="UH-CMIimg"
                     src={album.cover_image_url}
                     alt={`${album.title} cover`}
                     />
-                    <div className="album-data-container">
-                    <p className="data-container-album">{album.title}</p>
-                    <p className="data-container-artist">{`by ${album.band}`}</p>
-                    <p className="data-container-tag">{album.tags}</p>
+                    <div className="UH-album-data-container">
+                    <p className="UH-data-container-album">{album.title}</p>
+                    <p className="UH-data-container-artist">{`by ${album.band}`}</p>
+                    <p className="UH-data-container-tag">{album.tags}</p>
                     {/* <p className="data-container-tag">{album.orders}</p> */}
                     </div>
 
@@ -167,7 +174,7 @@ function UserHome() {
             <div className='tracks-card'>
                 <p>Album Track list</p>
                 {Object.values(tracks)
-                    .filter(track => track.album_id === selectedAlbumId)
+                    .filter((track) => track.album_id === selectedAlbumId)
                     .map(track => (
                         <div className="track-item" key={track.id}>
                             <p className="track-name">{track.name}</p>
@@ -189,15 +196,15 @@ function UserHome() {
             {Object.values(filteredAlbums).map((album) => (
                     <li className="purchase-items" key={album.id}>
                         <p className="purchase-name">{album.name}</p>
-                        <p className="purchase-type">{album.order?.type}</p>
-                        <p className="purchase-quantity">{album.order?.quantity} s</p>
+                        <p className="purchase-type">{album.purchases.type}</p>
+                        <p className="purchase-quantity">{album.purchases.quantity} s</p>
                     </li>
                 ))}
         </div>
       </section>
     </div>
     ) : (
-    <div className="UH1-container">
+    <div className="uh-container">
         <img id="background-image"></img>
         <section className="UHsection1">
             <div className="banner-container">
@@ -214,9 +221,25 @@ function UserHome() {
                 />
             <div className="profile-username">{user.username}</div>
             </div>
-            <h1 className='profile-header'>
-            Manage Products
-            </h1>
+        </section>
+
+        <h1 className='profile-header'>
+        Manage Products
+        </h1>
+
+        <section>
+            <div className="purchase-wishlist-container">
+                <p>Purchase History</p>
+                {/* {Array.values(purchases.orders)
+                    .filter((purchase) => purchase.user_id === user.id)
+                    .map((purchase) => (
+                        <li className="purchase-items" key={purchase.id}>
+                            <p className="purchase-type">{purchase.type}</p>
+                            <p className="purchase-quantity">{purchase.quantity} s</p>
+                        </li>
+                    ))} */}
+
+            </div>
         </section>
     </div>
   );

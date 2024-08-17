@@ -1,8 +1,8 @@
-/* .UHcontainer {
-    display: flex;
-    flex-direction: column;
-} */
-
+.uh-container {
+    /* display: flex;
+    flex-direction: column; */
+    margin: 0px 80px 0px 80px;
+}
 
 /* Profile images section */
 .background-img-url {
@@ -17,7 +17,6 @@
     flex-wrap: wrap;
     /* border: 5px solid blue; */
     margin-top: 50px;
-    display: flex;
     align-content: center;
     width: 100%;
     height: 250px;
@@ -27,6 +26,7 @@
 
 .banner-container {
     /* justify-content: center; */
+    /* justify-self: center; */
     /* border: 5px solid yellow; */
     width: 100%;
     height: 200px;
@@ -73,23 +73,28 @@
     margin: 6px 25px;
 }
 
+/* .header-container {
+    height: 90px;
+    width: 100%;
+    padding-top: 40px;
+
+} */
 .profile-header {
     position: relative;
     display: inline-flex;
     width: 100%;
-    height: 50px;
-    /* border: 5px solid red; */
-    /* margin-left: 40px; */
+    height: 130px;
+    width: 100%;
     top: -100px;
     align-items: end;
     justify-content: center;
-    font-size: 16px;
-    margin-bottom: -10px;
+    font-size: 20px;
     padding: 0px;
-    /* height: 30px; */
-    /* width: 100px; */
-    left: 10px;
     z-index: 1;
+    /* border: 5px solid red; */
+    /* margin-left: 40px; */
+    /* margin-bottom: -10px; */
+    /* left: 10px; */
     /* border: 5px solid blue; */
 }
 
@@ -127,9 +132,10 @@
 .album-card {
     height: auto;
     width: 100%;
+    padding-bottom: 3px;
 }
 
-.CMImg {
+.UH-CMIimg {
     width: 100%;
     max-width: 250px;
     height: auto;
@@ -140,20 +146,23 @@
     object-fit: cover;
     margin: 0;
 }
-.album-data-container p{
+.UH-album-data-container p{
     display: flex;
     flex-direction: row;
     height: 0px;
-    /* margin-top: 7px; */
+    margin-top: 5px;
 }
-.data-container-album {
+.UH-data-container-album {
     font-size: 14px;
     font-weight: bold;
+    padding-top: 1px;
 }
-.data-container-artist {
-    font-size: 10px;
+.UH-data-container-artist {
+    padding-top: 6px;
+    font-size: 12px;
 }
-.data-container-tag {
+.UH-data-container-tag {
+    padding-top: 9px;
     font-size: 10px;
 }
 
@@ -210,4 +219,10 @@
     display: flex;
     flex-direction: column;
     justify-items: center;
+}
+
+.purchase-wishlist-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -30,8 +30,8 @@ function AddProducts() {
   };
 
   const addProductType = () => {
-    if(productTypes.length < 4){
-        setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
+    if (productTypes.length < 4) {
+      setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
     }
   };
 
@@ -45,6 +45,19 @@ function AddProducts() {
     setErrors({});
 
     const newErrors = {};
+
+    // Validate each product type
+    productTypes.forEach((productType, index) => {
+      if (!productType.type) {
+        newErrors[`type-${index}`] = "Product type is required";
+      }
+      if (!productType.price || productType.price <= 0) {
+        newErrors[`price-${index}`] = "Price must be a positive number";
+      }
+      if (!productType.amount || productType.amount <= 0) {
+        newErrors[`amount-${index}`] = "Quantity must be a positive number";
+      }
+    });
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -62,16 +75,16 @@ function AddProducts() {
       album_id: parseInt(album_id),
       product_types: formattedProductTypes, // Include product types in the payload
     };
-    let newProducts;
-    try {
-      newProducts = await dispatch(createProducts(payload.album_id, payload));
 
-      // console.log({ newProducts });
-        if (newProducts) {
-          navigate(`/albums/${album_id}`);
-        }
+    try {
+      const newProducts = await dispatch(createProducts(payload.album_id, payload));
+
+      if (newProducts) {
+        navigate(`/albums/${album_id}`);
+      }
     } catch (err) {
       console.error({ err });
+      setErrors({ general: "An error occurred while adding products." });
     }
   };
 
@@ -94,11 +107,13 @@ function AddProducts() {
                 }
                 className="input-field"
               >
+                <option value="">Select Product Type</option>
                 <option value="CD">CD</option>
                 <option value="Vinyl">Vinyl</option>
                 <option value="Cassette">Cassette</option>
                 <option value="Digital">Digital</option>
               </select>
+              {errors[`type-${index}`] && <p className="error">{errors[`type-${index}`]}</p>}
               <span>$</span>
               <input
                 value={productType.price}
@@ -108,6 +123,7 @@ function AddProducts() {
                 placeholder="Price"
                 className="input-field"
               />
+              {errors[`price-${index}`] && <p className="error">{errors[`price-${index}`]}</p>}
               <input
                 value={productType.amount}
                 onChange={(e) =>
@@ -116,6 +132,7 @@ function AddProducts() {
                 placeholder="Quantity"
                 className="input-field"
               />
+              {errors[`amount-${index}`] && <p className="error">{errors[`amount-${index}`]}</p>}
               <button type="button" onClick={() => removeProductType(index)}>
                 Remove
               </button>
@@ -130,6 +147,7 @@ function AddProducts() {
               {"Add Products"}
             </button>
           </div>
+          {errors.general && <p className="error">{errors.general}</p>}
         </form>
       </section>
     </>

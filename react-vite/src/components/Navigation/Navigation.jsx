@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProfileButton from "./ProfileButton";
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
 // import CartItemsList from "../CartModal/CartItems";
@@ -9,15 +9,15 @@ import "./Navigation.css";
 function Navigation() {
   const sessionUser = useSelector((store) => store.session.user);
   const navigate = useNavigate()
-  let albumData = useSelector((state) => state.album);
-  albumData = Object.values(albumData)
-  console.log("NAVABUM",albumData)
-
+  const [userInput, setUserInput] = useState("")
   return (
     <nav>
       <div>
         <NavLink to="/" className={"logo"}>Music Camp</NavLink>
-        <input className="navSearch" type="text" placeholder="Search"></input>
+        <input className="navSearch" type="text" placeholder="Search"
+        onChange={(e) => setUserInput(e.target.value)}
+        ></input>
+        {console.log("navbarInput",userInput)}
       </div>
       <div className="navRight" >
       {sessionUser && (

@@ -91,8 +91,6 @@ const CartModal = ({albumData}) => {
                 min_price: albumData.price
             }
 
-            console.log("PAYLOAD", payload)
-
             // handle if item is already existing in cart
             if (existingItem) {
                 existingItem.quantity += parseInt(quantity)

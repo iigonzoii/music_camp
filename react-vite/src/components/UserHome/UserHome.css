@@ -224,6 +224,7 @@
     width: 150px;
     height: 150px;
     object-fit: cover;
+    border-radius: 3px;
     margin: 0;
 }
 
@@ -241,4 +242,10 @@
     font-size: 15px;
     margin-top: 0px;
     margin-bottom: 15px;
+}
+
+.empty-collection{
+    height: 150px;
+    width: 150px;
+    margin-left: 25px;
 }

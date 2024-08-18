@@ -76,7 +76,7 @@ const CheckoutPage = () => {
     // IF NO ITEMS IN CART
     <div className="empty-cart-checkout">
         <p>
-            No items are in your cart. <NavLink to="/">Explore Music</NavLink>
+            No items are in your cart. <NavLink className="empty-cart-NavLink" to="/">Explore Music</NavLink>
         </p>
     </div> :
 

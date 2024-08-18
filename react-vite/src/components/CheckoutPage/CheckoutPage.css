@@ -101,7 +101,22 @@
 .demo-checkout-btn {
     margin-top: auto;
     align-self: flex-start;
-
     height: 35px;
     width: 250px;
+}
+
+
+.empty-cart-checkout {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.empty-cart-checkout > p {
+    font-size: 18px;
+}
+
+.empty-cart-NavLink {
+    color: rgb(69, 184, 199);
 }

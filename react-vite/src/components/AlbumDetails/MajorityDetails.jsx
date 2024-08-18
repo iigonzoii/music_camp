@@ -17,7 +17,7 @@ function MajorityDetails() {
     reviews = Object.values(reviews)
     tracks = Object.values(tracks)
 
-    console.log("tracks", tracks)
+    // console.log("tracks", tracks)
 
 
     const albumProducts = album[albumId].Album.products

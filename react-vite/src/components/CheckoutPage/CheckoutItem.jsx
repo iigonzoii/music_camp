@@ -31,8 +31,6 @@ function CheckoutItem({itemKey, currCart, handleDeleteItem, setCartTotal}) {
         const error = {}
         const chosenPrice = parseFloat(e.target.value)
 
-        console.log("PRICEY", chosenPrice)
-
         if (isNaN(chosenPrice)) {
             error.price = 'Please provide a valid price'}
         if (chosenPrice < currCart[itemKey]?.min_price) {

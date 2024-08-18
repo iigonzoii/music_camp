@@ -145,7 +145,7 @@ function UserHome() {
       <section className="UHsection2">
         <div className="user-container">
           <div className="album-list-container">
-            {Object.values(filteredAlbums).length < 1 ? <p>Add your music to view</p>
+            {Object.values(filteredAlbums).length < 1 ? <p>Add your music!</p>
                 :
             Object.values(filteredAlbums).map((album) => (
                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
@@ -194,16 +194,16 @@ function UserHome() {
             />
           )} */}
         </div>
-        <div className='user-collection'>
-            {Object.values(collection).length < 1 ? <p>no purchases yet</p>
+        {Object.values(collection).length < 1 ? <p className='empty-collection'>No purchases here</p>
                 :
-            Object.values(collection).map(order => (
-                <div className="collection-item" key={order.id}>
-                    <UserCollectionProp albumData={filterAlbumById(order.album_id)} orderData={order}/>
-                </div>
-            ))}
-
-        </div>
+            <div className='user-collection'>
+                {Object.values(collection).map(order => (
+                    <div className="collection-item" key={order.id}>
+                        <UserCollectionProp albumData={filterAlbumById(order.album_id)} orderData={order}/>
+                    </div>
+                ))}
+            </div>
+        }
       </section>
 
     </div>

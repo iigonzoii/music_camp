@@ -3,9 +3,7 @@ import './UserHome.css'
 function UserCollectionProp({albumData, orderData}) {
     const album = Object.values(albumData)[0]
 
-    console.log("ORDER", orderData.album_id)
-
-    if (!album) return (<p>No items in collection</p>)
+    if (!album) return (<p>Loading...</p>)
     return (
         <div key={orderData.id}>
                 <div className="collection-card" >

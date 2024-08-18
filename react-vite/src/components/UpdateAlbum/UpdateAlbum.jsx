@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./UpdateAlbum.css";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import { fetchUpdateAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
-
+import "./UpdateAlbum.css"
 function UpdateAlbum() {
   const { album_id } = useParams();
   const dispatch = useDispatch();

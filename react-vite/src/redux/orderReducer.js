@@ -54,7 +54,7 @@ export const createOrder = (order) => async (dispatch) => {
 
 const initialState = { orders: {} }
 const orderReducer = (state=initialState, action) => {
-    switch(action.type) {
+    switch(action.type) { 
         case GET_ORDERS:
             return {...state, allOrders: {...action.orders}}
 

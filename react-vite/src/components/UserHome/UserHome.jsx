@@ -24,35 +24,50 @@ function UserHome() {
     // const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
     // const filteredPurchases = Object.values(purchases).filter(purchase => purchase.user_id === user.id) ;
-    const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
 
     // console.log("FLAG:", user.purchases)
 
     useEffect(() => {
-        if (user && filteredAlbums.length > 0) {
+        if (user) {
             dispatch(fetchCurrUserAlbums());
-            dispatch(fetchOrders());
-        } else {
             dispatch(fetchOrders());
         }
     }, [dispatch, user]);
 
     useEffect(() => {
-        if (filteredAlbums.length > 0) {
-            setSelectedAlbumId(filteredAlbums[0].id)
-            dispatch(fetchTracksbyAlbumId(selectedAlbumId));
-        } else (
-            setSelectedAlbumId(null)
-        )
-    }, [dispatch, selectedAlbumId])
+        if (albums && Object.values(albums).length > 0) {
+            const firstAlbumId = Object.values(albums)[0].id;
+            setSelectedAlbumId(firstAlbumId);
+            dispatch(fetchTracksbyAlbumId(firstAlbumId));
+        } else {
+            setSelectedAlbumId(null);
+        }
+    }, [dispatch, albums]);
 
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {
             setSelectedAlbumId(albumId);
+            dispatch(fetchTracksbyAlbumId(albumId));
         }
     };
+
+    const handleDelete = (albumId) => {
+        dispatch(deleteAlbum(albumId));
+        if (albumId === selectedAlbumId) {
+            const remainingAlbums = Object.values(albums).filter(album => album.id !== albumId);
+            const newSelectedAlbumId = remainingAlbums[0]?.id || null;
+            setSelectedAlbumId(newSelectedAlbumId);
+            if (newSelectedAlbumId) {
+                dispatch(fetchTracksbyAlbumId(newSelectedAlbumId));
+            } else {
+                setSelectedAlbumId(null);
+            }
+        }
+    };
+
+    const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
 
     // useEffect(() => {
     // if (filteredAlbums.length > 0) {
@@ -83,15 +98,6 @@ function UserHome() {
 //     return () => document.removeEventListener("click", closeMenu);
 //   }, [showModal]);
 
-    const handleDelete = (albumId) => {
-        dispatch(deleteAlbum(albumId));
-        if (albumId === selectedAlbumId) {
-            const newSelectedAlbumId = filteredAlbums[0]?.id || null;
-            if (newSelectedAlbumId) {
-                dispatch(fetchTracksbyAlbumId(newSelectedAlbumId));
-            }
-        }
-    };
 
 
 //   const handleDeleteModal = (albumId) => {
@@ -115,7 +121,7 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
-  return user && filteredAlbums.length > 0? (
+  return user ? (
     <div className="uh-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}
@@ -132,13 +138,13 @@ function UserHome() {
             className="profile-img"
             src={user.profile_img_url}
             />
-        <div className="profile-username">{user.username}</div>
-        <div className="edit-profile-button">
-            <OpenModalButton
-                buttonText="Edit Profile"
-                modalComponent={<ProfileUpdateModal user={user} />}
-            />
-        </div>
+            <div className="profile-username">{user.username}</div>
+            <div className="edit-profile-button-container">
+                <OpenModalButton
+                    buttonText="Edit Profile"
+                    modalComponent={<ProfileUpdateModal user={user} />}
+                />
+            </div>
         </div>
       </section>
 

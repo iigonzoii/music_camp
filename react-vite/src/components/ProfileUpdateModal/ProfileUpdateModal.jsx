@@ -5,164 +5,221 @@ import { useModal } from "../../context/Modal";
 
 function ProfileUpdateModal({ user }) {
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
+  const [formData, setFormData] = useState({
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        city: user.city || "",
+        state: user.state || "",
+        email: user.email || "",
+        username: user.username || "",
+        bio: user.bio || "",
+        spotify: user.spotify || "",
+        instagram: user.instagram || "",
+        website: user.website || "",
+        facebook: user.facebook || "",
+        profile_img_url: user.profile_img_url || "",
+        banner_img_url: user.banner_img_url || "",
+        background_img_url: user.background_img_url || ""
+    });
+    const [errors, setErrors] = useState({});
 
-  const [firstName, setFirstName] = useState(user.first_name || "");
-  const [lastName, setLastName] = useState(user.last_name || "");
-  const [city, setCity] = useState(user.city || "");
-  const [state, setState] = useState(user.state || "");
-  const [username, setUsername] = useState(user.username || "");
-  const [email, setEmail] = useState(user.email || "");
-  const [bio, setBio] = useState(user.bio || "");
-  const [spotify, setSpotify] = useState(user.spotify || "");
-  const [instagram, setInstagram] = useState(user.instagram || "");
-  const [website, setWebsite] = useState(user.website || "");
-  const [facebook, setFacebook] = useState(user.facebook || "");
-  const [profileImgUrl, setProfileImgUrl] = useState(user.profile_img_url || "");
-  const [bannerImgUrl, setBannerImgUrl] = useState(user.banner_img_url || "");
-  const [backgroundImgUrl, setBackgroundImgUrl] = useState(user.background_img_url || "");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const updatedUser = {
-      first_name: firstName,
-      last_name: lastName,
-      city,
-      state,
-      email,
-      username,
-      bio,
-      spotify,
-      instagram,
-      website,
-      facebook,
-      profile_img_url: profileImgUrl,
-      banner_img_url: bannerImgUrl,
-      background_img_url: backgroundImgUrl
+    const { closeModal } = useModal();
+
+    const handleChange = (e) => {
+        setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        });
     };
 
-    const response = await dispatch(thunkUpdateUserProfile(updatedUser));
-    if (response) {
-      closeModal();
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const serverResponse = await dispatch(thunkUpdateUserProfile(formData))
+        if (serverResponse) {
+            setErrors(serverResponse);
+        } else {
+            closeModal();
+        }
+    };
 
   return (
     <div className="profile-modal">
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </label>
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </label>
-        <label>
-          City
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </label>
-        <label>
-          State
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-        </label>
-        <label>
-          Email
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label>
-          Bio
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
-        </label>
-        <label>
-          Spotify
-          <input
-            type="text"
-            value={spotify}
-            onChange={(e) => setSpotify(e.target.value)}
-          />
-        </label>
-        <label>
-          Instagram
-          <input
-            type="text"
-            value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
-          />
-        </label>
-        <label>
-          Website
-          <input
-            type="text"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-          />
-        </label>
-        <label>
-          Facebook
-          <input
-            type="text"
-            value={facebook}
-            onChange={(e) => setFacebook(e.target.value)}
-          />
-        </label>
-        <label>
-          Profile Image URL
-          <input
-            type="url"
-            value={profileImgUrl}
-            onChange={(e) => setProfileImgUrl(e.target.value)}
-          />
-        </label>
-        <label>
-          Banner Image URL
-          <input
-            type="url"
-            value={bannerImgUrl}
-            onChange={(e) => setBannerImgUrl(e.target.value)}
-          />
-        </label>
-        <label>
-          Background Image URL
-          <input
-            type="url"
-            value={backgroundImgUrl}
-            onChange={(e) => setBackgroundImgUrl(e.target.value)}
-          />
-        </label>
-        <button className="save-button" type="submit">Save Changes</button>
-      </form>
+        <h1>Update your Profile</h1>
+        {errors.server && <p>{errors.server}</p>}
+        <form onSubmit={handleSubmit}>
+            <label>
+            First Name
+            <input
+            className="input-field"
+                type="text"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.first_name && <p>{errors.first_name}</p>}
+
+            <label>
+            Last Name
+            <input
+            className="input-field"
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.last_name && <p>{errors.last_name}</p>}
+
+            <label>
+            City
+            <input
+            className="input-field"
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.city && <p>{errors.city}</p>}
+
+            <label>
+            State
+            <input
+            className="input-field"
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.state && <p>{errors.state}</p>}
+
+            <label>
+            Email
+            <input
+            className="input-field"
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.email && <p>{errors.email}</p>}
+
+            <label>
+            Username
+            <input
+            className="input-field"
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.username && <p>{errors.username}</p>}
+
+            <label>
+            Bio
+            <input
+            className="input-field"
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.bio && <p>{errors.bio}</p>}
+
+            <label>
+            Spotify
+            <input
+            className="input-field"
+                type="text"
+                name="spotify"
+                value={formData.spotify}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.spotify && <p>{errors.spotify}</p>}
+
+            <label>
+            Instagram
+            <input
+            className="input-field"
+                type="text"
+                name="instagram"
+                value={formData.instagram}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.instagram && <p>{errors.instagram}</p>}
+
+            <label>
+            Website
+            <input
+            className="input-field"
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.website && <p>{errors.website}</p>}
+
+            <label>
+            Facebook
+            <input
+            className="input-field"
+                type="text"
+                name="facebook"
+                value={formData.facebook}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.facebook && <p>{errors.facebook}</p>}
+
+            <label>
+            Profile Image URL
+            <input
+            className="input-field"
+                type="text"
+                name="profile_img_url"
+                value={formData.profile_img_url}
+                onChange={handleChange}
+            />
+            </label>
+            {errors.profile_img_url && <p>{errors.profile_img_url}</p>}
+
+            <label>
+            Banner Image URL
+            <input
+            className="input-field"
+                type="text"
+                name="banner_img_url"
+                value={formData.banner_img_url}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.banner_img_url && <p>{errors.banner_img_url}</p>}
+
+            <label>
+            Background Image URL
+            <input
+            className="input-field"
+
+                type="text"
+                name="background_img_url"
+                value={formData.background_img_url}
+                onChange={handleChange}
+                />
+            </label>
+            {errors.background_img_url && <p>{errors.background_img_url}</p>}
+            <div className="profile-update-buttons">
+                <button className="submit-button" type="submit">Save Changes</button>
+                <button onClick={() => closeModal()} className="cancel-button">Cancel</button>
+            </div>
+        </form>
     </div>
   );
 }

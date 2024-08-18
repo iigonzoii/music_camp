@@ -53,18 +53,10 @@
 
 }
 
-.logo{
-  text-decoration: none;
-  /* color:#280dae; */
-  color: white;
-  font-size: 15px;
-  padding-right: 10px;
-}
-
 .profile-button {
   display: flex;
   background-color: rgb(255, 255, 255);
-  height: auto;
+  height: 18px;
   width: auto;
   /* background-color: transparent; */
   border-radius: 3px;
@@ -76,13 +68,6 @@
 
 }
 
-.navSearch{
-  border: solid 1px lightgrey;
-  border-radius: 5px;
-  background-color: inherit;
-  /* margin-bottom: 5px; */
-
-}
 nav{
   display: flex;
   border-bottom: solid grey 1px;
@@ -93,6 +78,20 @@ nav{
 }
 nav > input {
   background-color: red;
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.navSearch{
+  border: solid 1px lightgrey;
+  border-radius: 5px;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
 }
 .pointer{
   cursor:pointer;
@@ -142,4 +141,20 @@ nav > input {
 }
 .profileButton{
   margin-right: 5px;
+}
+
+
+
+.logo{
+  width: 50px;
+  /* letter-spacing: 0px; */
+  display: flex;
+  /* align-items: center; */
+  padding-right: 10px;
+}
+
+.nav-app-logo {
+  width: auto;
+  height: 37px;
+  padding-right: 10px;
 }

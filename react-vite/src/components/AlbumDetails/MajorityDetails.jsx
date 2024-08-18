@@ -26,8 +26,6 @@ function MajorityDetails() {
         return product
     }
 
-    // console.log("TEST", album[albumId].Album)
-
     return (
         <>
             <div className="ad-album-data">

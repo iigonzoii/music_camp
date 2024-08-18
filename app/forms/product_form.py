@@ -12,4 +12,3 @@ class ProductForm(FlaskForm):
     cassette_price = FloatField('Cassette Price')
     digital_amount = IntegerField('Digital Quantity')
     digital_price = FloatField('Digital Price')
-  

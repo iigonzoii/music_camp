@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  NavLink } from "react-router-dom";
-import { deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
+import { fetchAlbums, deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
+import { fetchOrders } from "../../redux/orderReducer";
 import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
 // import { useModal } from "../../context/Modal";
-
+import UserCollectionProp from "./UserCollection";
 import "./UserHome.css";
 
 function UserHome() {
@@ -14,13 +15,14 @@ function UserHome() {
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
+    const collection = useSelector((state) => state.order.allOrders)
 //   const [showModal, setShowModal] = useState(false);
 //   const [selectedAlbumId, setSelectedAlbumId] = useState(null);
     const filteredAlbums = Object.values(albums).filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
     useEffect(() => {
-        if (user) {
+        if (user && (filteredAlbums.length > 0)) {
             dispatch(fetchCurrUserAlbums());
         }
     }, [dispatch, user]);
@@ -31,11 +33,23 @@ function UserHome() {
         }
     }, [dispatch, selectedAlbumId])
 
+    useEffect(() => {
+        if (user) {
+            dispatch(fetchAlbums())
+            dispatch(fetchOrders())
+        }
+    }, [dispatch, user])
+
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {
             setSelectedAlbumId(albumId);
         }
     };
+
+    const filterAlbumById = (id) => {
+        const payload = Object.values(albums).filter(album => album.id === id);
+        return payload
+    }
 
     // useEffect(() => {
     // if (filteredAlbums.length > 0) {
@@ -98,6 +112,7 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
+
   return (
     <div className="uh-container">
         <img id="background-image"></img>
@@ -122,10 +137,17 @@ function UserHome() {
         </h1>
       </section>
 
+      <div className='product-labels'>
+        <h2>My Albums</h2>
+        <h2>My Collection</h2>
+      </div>
+
       <section className="UHsection2">
         <div className="user-container">
           <div className="album-list-container">
-            {Object.values(filteredAlbums).map((album) => (
+            {Object.values(filteredAlbums).length < 1 ? <p>Add your music to view</p>
+                :
+            Object.values(filteredAlbums).map((album) => (
                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
                  <div className="album-card" >
                     <img
@@ -155,7 +177,6 @@ function UserHome() {
             ))}
            </div>
             <div className='tracks-card'>
-                <p>Album Track list</p>
                 {Object.values(tracks)
                     .filter(track => track.album_id === selectedAlbumId)
                     .map(track => (
@@ -173,7 +194,18 @@ function UserHome() {
             />
           )} */}
         </div>
+        <div className='user-collection'>
+            {Object.values(collection).length < 1 ? <p>no purchases yet</p>
+                :
+            Object.values(collection).map(order => (
+                <div className="collection-item" key={order.id}>
+                    <UserCollectionProp albumData={filterAlbumById(order.album_id)} orderData={order}/>
+                </div>
+            ))}
+
+        </div>
       </section>
+
     </div>
   );
 }

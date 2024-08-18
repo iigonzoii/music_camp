@@ -17,6 +17,8 @@ const CartModal = ({albumData}) => {
     const albumKey = createCartKey(currUser.id, albumData.id, albumData.type)
     // const item = JSON.parse(localStorage.getItem(albumKey))
 
+    // console.log("ALBUMDATA", albumData)
+
     const postToLocalStorage = (payload) => {
         localStorage.setItem(albumKey, JSON.stringify(payload));
         return payload
@@ -35,19 +37,27 @@ const CartModal = ({albumData}) => {
         if (e.target.value == 0) {
             return;
         } else {
-            setPrice(parseInt(e.target.value));
+            setPrice(parseFloat(e.target.value));
         }
     }
+
+    const isValidPrice = (price) => {
+        const pricestr = price.toString().trim();
+        const regex = /^\d+(\.\d{0,2})?$/;
+        return regex.test(pricestr);
+    };
 
     const handleAddCartSubmit = (e) => {
         e.preventDefault()
 
         try {
             const error = {}
-            if (price <= albumData.price) {
+            if (price < albumData.price) {
                 error.price = `The minimum price is $${albumData.price}`}
             if (typeof price != "number") {
                 error.price = 'Please provide a price'}
+            if (!isValidPrice(price)) {
+                error.price = 'Please provide a valid price'}
             if (quantity > albumData.amount) {
                 error.quantity = "Not enough stock available"}
 
@@ -64,12 +74,12 @@ const CartModal = ({albumData}) => {
             if (existingItem && price != existingItem?.price) {
                 existingItem.price = price
                 postToLocalStorage(existingItem)
-                setPrice(parseInt(price))
+                setPrice(parseFloat(price.toFixed(2)))
             }
 
             const payload = {
                 user_id: currUser.id,
-                album_id: albumData.id,
+                album_id: albumData.album_id,
                 album_details: {
                     band: albumById.band,
                     title: albumById.title,
@@ -77,8 +87,11 @@ const CartModal = ({albumData}) => {
                 },
                 type: albumData.type,
                 quantity,
-                price
+                price,
+                min_price: albumData.price
             }
+
+            console.log("PAYLOAD", payload)
 
             // handle if item is already existing in cart
             if (existingItem) {

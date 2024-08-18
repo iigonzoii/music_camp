@@ -1,27 +1,27 @@
-.ADcontainer {
+.ad-container {
     display: flex;
 }
 
-.ADsection1 {
+.ad-section1 {
     /* border: solid grey 1px; */
     margin: 0px 20px 0px 20px;
 }
 
-.ADbanner {
+.ad-banner {
     object-fit: cover;
     height: 200px;
     /* margin: auto; */
     width: 100%
 }
 
-.ADsection2 {
+.ad-section2 {
     /* border: solid 1px rgb(83, 235, 40); */
     margin: 0px 0px 0px 20px;
     width: 80%;
     display: flex;
 }
 
-.ADalbumData {
+.ad-album-data {
     /* border: solid 1px white; */
     width: 50%;
     display: flex;
@@ -29,7 +29,7 @@
     align-items: flex-start;
 }
 
-.ADalbumData>button {
+.ad-album-data> div > button {
     background-color: transparent;
     color: inherit;
     border: none;
@@ -38,9 +38,14 @@
     cursor: pointer;
     outline: inherit;
     padding-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.ADalbumArea {
+.ad-album-data p {
+    font-size: ;
+}
+.ad-album-area {
     /* border: solid 1px; */
     width: 50%;
     display: flex;
@@ -48,7 +53,7 @@
     align-items: center;
 }
 
-.ADalbumArea>img {
+.ad-album-area>img {
     margin-top: 20px;
     width: 250px;
     height: 180px;
@@ -56,7 +61,7 @@
     border: solid #4C4C4C 1px;
 }
 
-.ADtrackList {
+.ad-trackList {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -65,30 +70,37 @@
     border: solid #4C4C4C 1px;
 }
 
-.V2Play {
+.V2-play {
     /* background-color: lightslategray; */
     border: solid #4C4C4C 1px;
     height: 50px;
 }
 
-.ADv2supporters {
+.ad-v2-supporters {
     height: 100px;
     width: 200px;
     border: solid #4C4C4C 1px;
 }
 
-.ADsection3 {
+.ad-section3 {
     /* border: solid 1px blue; */
     margin: 0px 20px 0px 0px;
     width: 20%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:flex-end;
     font-size: 10px;
 
 }
 
-.ADasideImg {
+.ad-aside-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border: solid #4C4C4C 1px;
+}
+
+.ad-aside-disco-imgs {
     height: 100px;
     width: 100px;
     object-fit: cover;
@@ -96,17 +108,19 @@
     border: solid #4C4C4C 1px;
 }
 
-.ADasideDiscoImgs {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    /* margin-top: 20px; */
-    border: solid #4C4C4C 1px;
-}
-
-.ADsection3>div {
+.ad-section3>div {
     margin-top: 20px;
 }
-.margin{
+/** nav css margin will be roughly 20 px larger than these values in admargin */
+.ad-margin{
     margin: 0px 60px 0px 60px;
 }
+
+/* .AD-CMImg {
+    width: 100px;
+    max-width: 250px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin: 0;
+} */

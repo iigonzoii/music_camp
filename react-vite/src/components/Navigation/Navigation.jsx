@@ -10,10 +10,15 @@ function Navigation() {
   const navigate = useNavigate()
   return (
     <nav>
-      <div>
-        <NavLink to="/" className={"logo"}>Music Camp</NavLink>
+      <div className="nav-container">
+        {/* <NavLink to="/" className={"logo"}>Music Camp</NavLink> */}
+        <NavLink className={"logo"} to="/">
+          <img className="nav-app-logo" src="../../../public/images/mc-logo.png" alt="Logo" />
+        </NavLink>
         <input className="navSearch" type="text" placeholder="Search"></input>
       </div>
+
+
       <div className="navRight" >
       {sessionUser && (
         <>

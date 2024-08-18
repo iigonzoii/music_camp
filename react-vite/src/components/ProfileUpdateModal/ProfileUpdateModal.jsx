@@ -35,8 +35,9 @@ function ProfileUpdateModal({ user }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const serverResponse = await dispatch(thunkUpdateUserProfile(formData))
-        if (serverResponse) {
+        if (serverResponse ) {
             setErrors(serverResponse);
         } else {
             closeModal();
@@ -56,9 +57,10 @@ function ProfileUpdateModal({ user }) {
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
+                required
                 />
             </label>
-            {errors.first_name && <p>{errors.first_name}</p>}
+            {/* {errors.first_name && <p>{errors.first_name}</p>} */}
 
             <label>
             Last Name
@@ -68,9 +70,10 @@ function ProfileUpdateModal({ user }) {
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
+                required
                 />
             </label>
-            {errors.last_name && <p>{errors.last_name}</p>}
+            {/* {errors.last_name && <p>{errors.last_name}</p>} */}
 
             <label>
             City
@@ -82,7 +85,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.city && <p>{errors.city}</p>}
+            {/* {errors.city && <p>{errors.city}</p>} */}
 
             <label>
             State
@@ -92,9 +95,10 @@ function ProfileUpdateModal({ user }) {
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
+                required
                 />
             </label>
-            {errors.state && <p>{errors.state}</p>}
+            {/* {errors.state && <p>{errors.state}</p>} */}
 
             <label>
             Email
@@ -103,10 +107,11 @@ function ProfileUpdateModal({ user }) {
                 type="text"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                readOnly
+                required
                 />
             </label>
-            {errors.email && <p>{errors.email}</p>}
+            {/* {errors.email && <p>{errors.email}</p>} */}
 
             <label>
             Username
@@ -116,9 +121,11 @@ function ProfileUpdateModal({ user }) {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                readOnly
+                required
                 />
             </label>
-            {errors.username && <p>{errors.username}</p>}
+            {/* {errors.username && <p>{errors.username}</p>} */}
 
             <label>
             Bio
@@ -129,7 +136,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.bio && <p>{errors.bio}</p>}
+            {/* {errors.bio && <p>{errors.bio}</p>} */}
 
             <label>
             Spotify
@@ -141,7 +148,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.spotify && <p>{errors.spotify}</p>}
+            {/* {errors.spotify && <p>{errors.spotify}</p>} */}
 
             <label>
             Instagram
@@ -153,7 +160,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.instagram && <p>{errors.instagram}</p>}
+            {/* {errors.instagram && <p>{errors.instagram}</p>} */}
 
             <label>
             Website
@@ -165,7 +172,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.website && <p>{errors.website}</p>}
+            {/* {errors.website && <p>{errors.website}</p>} */}
 
             <label>
             Facebook
@@ -177,7 +184,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.facebook && <p>{errors.facebook}</p>}
+            {/* {errors.facebook && <p>{errors.facebook}</p>} */}
 
             <label>
             Profile Image URL
@@ -189,7 +196,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
             />
             </label>
-            {errors.profile_img_url && <p>{errors.profile_img_url}</p>}
+            {/* {errors.profile_img_url && <p>{errors.profile_img_url}</p>} */}
 
             <label>
             Banner Image URL
@@ -201,7 +208,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.banner_img_url && <p>{errors.banner_img_url}</p>}
+            {/* {errors.banner_img_url && <p>{errors.banner_img_url}</p>} */}
 
             <label>
             Background Image URL
@@ -214,7 +221,7 @@ function ProfileUpdateModal({ user }) {
                 onChange={handleChange}
                 />
             </label>
-            {errors.background_img_url && <p>{errors.background_img_url}</p>}
+            {/* {errors.background_img_url && <p>{errors.background_img_url}</p>} */}
             <div className="profile-update-buttons">
                 <button className="submit-button" type="submit">Save Changes</button>
                 <button onClick={() => closeModal()} className="cancel-button">Cancel</button>

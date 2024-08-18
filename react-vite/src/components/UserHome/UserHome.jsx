@@ -15,11 +15,11 @@ function UserHome() {
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
-    let purchases = useSelector((state) => state.order)
+    let purchases = useSelector((state) => state.orders.allOrders)
     // const [showModal, setShowModal] = useState(false);
     // const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-    // const filteredPurchases = Object.values(purchases).allOrders.filter(purchase => purchase.user_id === user.id) ;
+    const filteredPurchases = Object.values(purchases).filter(purchase => purchase.user_id === user.id) ;
     const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
@@ -192,21 +192,12 @@ function UserHome() {
 
         <div className="right-side-container">
             <p>Purchase History</p>
-            {Object.values(user.purchases).map((purchase) => (
+            {/* {Object.values(filteredPurchases).map((purchase) => (
                     <li className="purchase-items" key={purchase.id}>
-                        {/* <p className="purchase-name">{purchase.name}</p> */}
                         <p className="purchase-type">{purchase.type}</p>
-                        <p className="purchase-quantity">{purchase.quantity} s</p>
+                        <p className="purchase-quantity">{purchase.quantity}</p>
                     </li>
-                ))}
-
-            {Object.values(user.purchases).map((purchase) => (
-                    <li className="purchase-items" key={purchase.id}>
-                        {/* <p className="purchase-name">{purchase.name}</p> */}
-                        <p className="purchase-type">{purchase.type}</p>
-                        <p className="purchase-quantity">{purchase.quantity} s</p>
-                    </li>
-                ))}
+                ))} */}
         </div>
       </section>
     </div>
@@ -237,22 +228,12 @@ function UserHome() {
         <section>
             <div className="purchase-wishlist-container">
                 <p>Purchase History</p>
-                {/* {Object.values(filteredAlbums).map((album) => (
-                    <li className="purchase-items" key={album.id}>
-                        <p className="purchase-name">{album.name}</p>
-                        <p className="purchase-type">{album.purchases.type}</p>
-                        <p className="purchase-quantity">{album.purchases.quantity} s</p>
+                {/* {Object.values(filteredPurchases).map((purchase) => (
+                    <li className="purchase-items" key={purchase.id}>
+                        <p className="purchase-type">{purchase.type}</p>
+                        <p className="purchase-quantity">{purchase.quantity}</p>
                     </li>
                 ))} */}
-                {/* {Object.values(purchases.orders)
-                    .filter((purchase) => purchase.user_id === user.id)
-                    .map((purchase) => (
-                        <li className="purchase-items" key={purchase.id}>
-                            <p className="purchase-type">{purchase.type}</p>
-                            <p className="purchase-quantity">{purchase.quantity} s</p>
-                        </li>
-                    ))} */}
-
             </div>
         </section>
     </div>

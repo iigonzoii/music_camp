@@ -9,7 +9,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .error-text {
+  .error {
     color: red;
     font-size: 0.9rem;
     margin-top: 0.2rem;

@@ -154,7 +154,7 @@ function AddProducts() {
             </button>
           </div>
           {errors.general && <p className="error">{errors.general}</p>}
-          {errors.form && <p className="error-text">{errors.form}</p>}        </form>
+          {errors.form && <p className="error">{errors.form}</p>}        </form>
       </section>
     </>
   );

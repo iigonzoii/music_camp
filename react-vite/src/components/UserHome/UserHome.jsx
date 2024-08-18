@@ -4,6 +4,10 @@ import {  NavLink } from "react-router-dom";
 import { deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 import { fetchOrders } from "../../redux/orderReducer";
 import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
+import OpenModalButton from "../OpenModalButton";
+import ProfileUpdateModal from "../ProfileUpdateModal";
+// import { useModal } from "../../context/Modal";
+
 // import { useModal } from "../../context/Modal";
 
 import "./UserHome.css";
@@ -111,7 +115,7 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
-  return filteredAlbums.length > 0? (
+  return user && filteredAlbums.length > 0? (
     <div className="uh-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}
@@ -129,6 +133,12 @@ function UserHome() {
             src={user.profile_img_url}
             />
         <div className="profile-username">{user.username}</div>
+        <div>
+            <OpenModalButton
+                buttonText="Edit Profile"
+                modalComponent={<ProfileUpdateModal user={user} />}
+            />
+        </div>
         </div>
       </section>
 

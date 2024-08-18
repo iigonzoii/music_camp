@@ -82,3 +82,30 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': {'message': 'Unauthorized'}}, 401
+
+@auth_routes.route('/update-profile', methods=['PUT'])
+@login_required
+def update_profile():
+    """
+    Updates the current user's profile.
+    """
+    user = current_user
+    data = request.json
+
+    user.first_name = data.get('first_name', user.first_name)
+    user.last_name = data.get('last_name', user.last_name)
+    user.city = data.get('city', user.city)
+    user.state = data.get('state', user.state)
+    user.username = data.get('username', user.username)
+    user.bio = data.get('bio', user.bio)
+    user.spotify = data.get('spotify', user.spotify)
+    user.instagram = data.get('instagram', user.instagram)
+    user.website = data.get('website', user.website)
+    user.facebook = data.get('facebook', user.facebook)
+    user.profile_img_url = data.get('profile_img_url', user.profile_img_url)
+    user.banner_img_url = data.get('banner_img_url', user.banner_img_url)
+    user.background_img_url = data.get('background_img_url', user.background_img_url)
+
+    db.session.commit()
+    return user.to_dict()
+

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCurrUserAlbums, fetchUpdateProducts } from "../../redux/albumReducer";
+import "./UpdateProducts.css"
 
 function UpdateProducts() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function UpdateProducts() {
         price: product.price,
         amount: product.amount,
       }))
-    : [{ type: "CD", price: "", amount: "" }];
+    : [{ type: "", price: "", amount: "" }];
 
   const [errors, setErrors] = useState({});
   const [productTypes, setProductTypes] = useState(initialProductTypes);
@@ -60,10 +61,9 @@ function UpdateProducts() {
     e.preventDefault();
     setErrors({});
 
-    const newErrors = {};
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    // Check if there are no products
+    if (productTypes.length === 0) {
+      setErrors({ form: 'You must have at least one product type.' });
       return;
     }
 
@@ -78,15 +78,16 @@ function UpdateProducts() {
       album_id: parseInt(album_id),
       product_types: formattedProductTypes, // Include product types in the payload
     };
-    // console.log(payload)
+
     let newProducts;
     try {
       newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
-
-          navigate(`/albums/${album_id}`);
-
+      if (newProducts) {
+        navigate(`/albums/${album_id}`);
+      }
     } catch (err) {
       console.error({ err });
+      setErrors({ form: 'An error occurred while updating the products. Please try again.' });
     }
   };
 
@@ -145,6 +146,7 @@ function UpdateProducts() {
               {"Update Products"}
             </button>
           </div>
+          {errors.form && <p className="error-text">{errors.form}</p>}
         </form>
       </section>
     </>

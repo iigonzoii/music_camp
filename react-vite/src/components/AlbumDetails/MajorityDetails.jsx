@@ -26,7 +26,7 @@ function MajorityDetails() {
         return product
     }
 
-    // console.log("TEST", album[albumId].Album)
+    // console.log("TEST", album[albumId].Album.user_id)
 
     return (
         <>
@@ -125,12 +125,13 @@ function MajorityDetails() {
 
                     {/* <li>Version 2 probably make this box scroll and seethrough to show the background img?</li> */}
                 </ul>
-
-                <div className="AD-review-button">
-                    {(
-                        <ReviewButton reviews={reviews} albumId={albumId}/>
-                    )}
-                </div>
+                {sessionUser && album[albumId].Album.user_id !== sessionUser.id && (
+                    <div className="ad-review-button">
+                        {(
+                            <ReviewButton reviews={reviews} albumId={albumId} />
+                        )}
+                    </div>
+                )}
 
                 <div className="ad-v2-supporters">
                     Version2 where we showed a tiled list of supporters profile images

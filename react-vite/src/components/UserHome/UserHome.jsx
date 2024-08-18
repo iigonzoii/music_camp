@@ -15,11 +15,11 @@ function UserHome() {
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
-    let purchases = useSelector((state) => state.orders.allOrders)
+    // let purchases = useSelector((state) => state.orders.allOrders)
     // const [showModal, setShowModal] = useState(false);
     // const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-    const filteredPurchases = Object.values(purchases).filter(purchase => purchase.user_id === user.id) ;
+    // const filteredPurchases = Object.values(purchases).filter(purchase => purchase.user_id === user.id) ;
     const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 

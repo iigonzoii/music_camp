@@ -47,7 +47,7 @@ function ProfileUpdateModal({ user }) {
     <div className="profile-modal">
         <h1>Update your Profile</h1>
         {errors.server && <p>{errors.server}</p>}
-        <form onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleSubmit}>
             <label>
             First Name
             <input

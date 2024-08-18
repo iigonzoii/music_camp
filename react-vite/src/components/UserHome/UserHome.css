@@ -112,7 +112,7 @@
     border-radius: 3px;
     background-color: black;
     cursor: pointer;
-    z-index: 10;
+    z-index: 1;
 }
 .edit-profile-button-container button:hover {
     color: black;

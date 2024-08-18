@@ -12,7 +12,7 @@ function AddProducts() {
 
   const [errors, setErrors] = useState({});
   const [productTypes, setProductTypes] = useState([
-    { type: "CD", price: "", amount: "" },
+    { type: "", price: "", amount: "" },
   ]);
 
   const updateProductType = (index, field, value) => {
@@ -43,6 +43,12 @@ function AddProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+
+      // Check if there are no products
+      if (productTypes.length === 0) {
+        setErrors({ form: 'You must have at least one product type.' });
+        return;
+      }
 
     const newErrors = {};
 
@@ -148,7 +154,7 @@ function AddProducts() {
             </button>
           </div>
           {errors.general && <p className="error">{errors.general}</p>}
-        </form>
+          {errors.form && <p className="error">{errors.form}</p>}        </form>
       </section>
     </>
   );

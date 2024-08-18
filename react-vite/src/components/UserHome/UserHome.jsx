@@ -28,7 +28,7 @@ function UserHome() {
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
 
-    console.log("FLAG:", user.purchases)
+    // console.log("FLAG:", user.purchases)
 
     useEffect(() => {
         if (user && filteredAlbums.length > 0) {
@@ -133,7 +133,7 @@ function UserHome() {
             src={user.profile_img_url}
             />
         <div className="profile-username">{user.username}</div>
-        <div>
+        <div className="edit-profile-button">
             <OpenModalButton
                 buttonText="Edit Profile"
                 modalComponent={<ProfileUpdateModal user={user} />}
@@ -227,7 +227,14 @@ function UserHome() {
                 className="profile-img"
                 src={user.profile_img_url}
                 />
-            <div className="profile-username">{user.username}</div>
+                <div className="profile-username">{user.username}</div>
+
+                <div className="edit-profile-button">
+                    <OpenModalButton
+                        buttonText="Edit Profile"
+                        modalComponent={<ProfileUpdateModal user={user} />}
+                    />
+                </div>
             </div>
         </section>
 

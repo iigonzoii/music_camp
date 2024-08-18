@@ -65,7 +65,7 @@ export const thunkLogout = () => async (dispatch) => {
 
 
 export const thunkUpdateUserProfile = (user) => async (dispatch) => {
-  const response = await fetch(`/api/users/${user.id}`, {
+  const response = await fetch(`/api/auth/update-profile`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)
@@ -73,7 +73,7 @@ export const thunkUpdateUserProfile = (user) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data)); // Update the session user with the new profile data
+    dispatch(setUser(data));
     return data;
   } else if (response.status < 500) {
     const errorMessages = await response.json();

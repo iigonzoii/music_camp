@@ -6,3 +6,4 @@ from .review_post_form import ReviewPostForm
 from .review_update_form import ReviewEditForm
 from .track_post_form import TrackPostForm
 from .product_form import ProductForm
+from .profile_update_form import ProfileUpdateForm

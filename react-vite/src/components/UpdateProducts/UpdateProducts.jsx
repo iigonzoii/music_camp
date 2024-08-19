@@ -34,11 +34,11 @@ function UpdateProducts() {
 
   const updateProductType = (index, field, value) => {
     const updatedProductTypes = [...productTypes];
-
+console.log('UpdateFunc', value)
     if (field === 'amount') {
-      updatedProductTypes[index][field] = parseInt(value, 10);
+      updatedProductTypes[index][field] = value;
     } else if (field === 'price') {
-      updatedProductTypes[index][field] = parseFloat(value);
+      updatedProductTypes[index][field] = value;
     } else {
       updatedProductTypes[index][field] = value;
     }
@@ -90,8 +90,8 @@ function UpdateProducts() {
     // Prepare the product types data from state
     const formattedProductTypes = productTypes.map((pt) => ({
       type: pt.type,
-      price: pt.price,
-      amount: pt.amount,
+      price: parseFloat(pt.price), // Use parseFloat to allow decimal values
+      amount: parseInt(pt.amount, 10),
     }));
 
     const payload = {
@@ -99,7 +99,7 @@ function UpdateProducts() {
       product_types: formattedProductTypes, // Include product types in the payload
     };
 
-    
+    console.log("Payload", payload)
     try {
      const newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
      console.log(newErrors.length)

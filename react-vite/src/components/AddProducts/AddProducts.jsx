@@ -12,7 +12,7 @@ function AddProducts() {
 
   const [errors, setErrors] = useState({});
   const [productTypes, setProductTypes] = useState([
-    { type: "", price: "", amount: "" },
+    { type: "", price: 0, amount: 0 },
   ]);
 
   const updateProductType = (index, field, value) => {
@@ -31,7 +31,7 @@ function AddProducts() {
 
   const addProductType = () => {
     if (productTypes.length < 4) {
-      setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
+      setProductTypes([...productTypes, { type: "", price: 0, amount: 0 }]);
     }
   };
 
@@ -73,8 +73,8 @@ function AddProducts() {
     // Prepare the product types data from state
     const formattedProductTypes = productTypes.map((pt) => ({
       type: pt.type,
-      price: pt.price,
-      amount: pt.amount,
+      price: parseFloat(pt.price), // Use parseFloat to allow decimal values
+      amount: parseInt(pt.amount, 10),
     }));
 
     const payload = {

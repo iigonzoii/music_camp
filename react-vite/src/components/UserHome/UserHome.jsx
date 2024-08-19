@@ -24,10 +24,9 @@ function UserHome() {
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
 
-    console.log("FLAG:", user.purchases)
 
     useEffect(() => {
-        if (user && filteredAlbums.length > 0) {
+        if (user) {
             dispatch(fetchCurrUserAlbums());
             dispatch(fetchOrders());
         } else {
@@ -35,14 +34,14 @@ function UserHome() {
         }
     }, [dispatch, user]);
 
-    useEffect(() => {
-        if (filteredAlbums.length > 0) {
-            setSelectedAlbumId(filteredAlbums[0].id)
-            dispatch(fetchTracksbyAlbumId(selectedAlbumId));
-        } else (
-            setSelectedAlbumId(null)
-        )
-    }, [dispatch, selectedAlbumId])
+    // useEffect(() => {
+    //     if (filteredAlbums) {
+    //         setSelectedAlbumId(filteredAlbums[0].id)
+    //         dispatch(fetchTracksbyAlbumId(selectedAlbumId));
+    //     } else (
+    //         setSelectedAlbumId(null)
+    //     )
+    // }, [dispatch, selectedAlbumId])
 
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {

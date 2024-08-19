@@ -28,7 +28,6 @@ function UserHome() {
 
     const filteredTracks = filteredAlbums.flatMap(album => album.tracks);
 
-    console.log(filteredTracks);
 
     useEffect(() => {
         if (user) {
@@ -39,49 +38,16 @@ function UserHome() {
         }
     }, [dispatch, user]);
 
-    // useEffect(() => {
-    //     if (filteredAlbums.length > 0) {
-    //         setSelectedAlbumId(filteredAlbums[0].id)
-    //         dispatch(fetchTracksbyAlbumId(selectedAlbumId));
-    //     } else  {
-    //         setSelectedAlbumId(null)
-    //     }
-    // }, [dispatch])
-
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {
             setSelectedAlbumId(albumId);
         }
     };
 
-    // useEffect(() => {
-    // if (filteredAlbums.length > 0) {
-    //     const firstAlbumId = filteredAlbums[0].id;
-    //     setSelectedAlbumId(firstAlbumId);
-    //     dispatch(fetchTracksbyAlbumId(firstAlbumId));
-    // }
-    // }, [dispatch, filteredAlbums]);
-
-
-
-    // if (!filteredAlbums || Object.values(filteredAlbums).length === 0) {
-    //     return <div>No albums found for this user.</div>;
-    // }
-
-
-//   useEffect(() => {
-//     if (!showModal) return;
-
-//     const closeMenu = (e) => {
-//       if (!ulRef.current.contains(e.target)) {
-//         setShowModal(false);
-//       }
-//     };
-
-//     document.addEventListener("click", closeMenu);
-
-//     return () => document.removeEventListener("click", closeMenu);
-//   }, [showModal]);
+    const filterAlbumById = (id) => {
+      const payload = Object.values(albums).filter(album => album.id === id);
+      return payload
+    }
 
     const handleDelete = (albumId) => {
         dispatch(deleteAlbum(albumId));
@@ -93,29 +59,7 @@ function UserHome() {
         }
     };
 
-
-//   const handleDeleteModal = (albumId) => {
-//     setSelectedAlbumId(albumId);
-//     setShowModal(true);
-//   };
-
-//   const handleConfirmDelete = () => {
-//     dispatch(deleteAlbum(selectedAlbumId))
-//       .then(() => {
-//         setShowModal(false);
-//         setSelectedAlbumId(null);
-//       })
-//       .catch((err) => {
-//         console.error("Error deleting album:", err);
-//       });
-//   };
-
-//   const handleCancelDelete = () => {
-//     setShowModal(false);
-//     setSelectedAlbumId(null);
-//   };
-
-  return filteredAlbums.length && (
+  return (
     <div className="uh-container">
       <img id="background-image" alt="background" />
 
@@ -189,6 +133,7 @@ function UserHome() {
               ))
             }
           </div>
+        </div>
 
         {Object.values(collection).length < 1 ? <p className='empty-collection'>No purchases here</p>
                 :
@@ -200,7 +145,7 @@ function UserHome() {
                 ))}
             </div>
             }
-        </div>
+
       </section>
     </div>
 

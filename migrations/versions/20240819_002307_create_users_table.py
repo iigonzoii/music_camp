@@ -1,8 +1,8 @@
-"""empty message
+"""create users table
 
-Revision ID: 9a9707dfebd8
+Revision ID: 47260aa1733b
 Revises:
-Create Date: 2024-08-16 11:40:41.191990
+Create Date: 2024-08-19 00:23:07.976799
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '9a9707dfebd8'
+revision = '47260aa1733b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -84,8 +84,8 @@ def upgrade():
 
     op.create_table('purchase_items',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('album_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('album_id', sa.Integer(), nullable=True),
     sa.Column('type', sa.String(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
@@ -101,7 +101,7 @@ def upgrade():
 
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('album_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=250), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -114,11 +114,10 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
 
-
     op.create_table('tracks',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('album_id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('album_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('duration', sa.Float(), nullable=False),
     sa.Column('file_url', sa.String(length=250), nullable=True),

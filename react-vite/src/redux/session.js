@@ -89,9 +89,10 @@ export const thunkUpdateUserProfile = (user) => async (dispatch) => {
   }
 };
 
-export const thunkDeleteUser = (userId) => async (dispatch) => {
-  try {   //try-catch because deleting a user can be tricky
-  const response = await fetch(`/api/auth/delete-user/${userId}`, {
+//To improve, it would be better to grab userId from the frontend instead of from the url path.
+export const thunkDeleteUser = () => async (dispatch) => {
+  try {   //try-catch because deleting user can be tricky
+  const response = await fetch(`/api/auth/delete-user`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +100,7 @@ export const thunkDeleteUser = (userId) => async (dispatch) => {
     });
 
     if (response.ok) {
-      dispatch(deleteUser(userId));
+      dispatch(deleteUser());
       return null;
     } else if (response.status < 500) {
       const errorMessages = await response.json();

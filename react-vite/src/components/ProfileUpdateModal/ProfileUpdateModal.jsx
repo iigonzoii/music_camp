@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { thunkUpdateUserProfile } from "../../redux/session";
+import { thunkUpdateUserProfile, thunkDeleteUser } from "../../redux/session";
 import { useModal } from "../../context/Modal";
+import { useNavigate } from "react-router-dom";
+import "./ProfileUpdateModal.css";
 
 function ProfileUpdateModal({ user }) {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ function ProfileUpdateModal({ user }) {
 
 
     const { closeModal } = useModal();
-
+    const navigate = useNavigate()
     const handleChange = (e) => {
         setFormData({
         ...formData,
@@ -47,11 +49,12 @@ function ProfileUpdateModal({ user }) {
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-          const errors = await dispatch(thunkDeleteUser(user.id));
+          const errors = await dispatch(thunkDeleteUser());
           if (errors) {
             setDeleteErrors(errors);
           } else {
             closeModal();
+            navigate("/")
           }
         }
       };
@@ -239,7 +242,11 @@ function ProfileUpdateModal({ user }) {
             <div className="profile-update-buttons">
                 <button className="submit-button" type="submit">Save Changes</button>
                 <button onClick={() => closeModal()} className="cancel-button">Cancel</button>
-                <button onClick={handleDelete} className="delete-button">Delete User</button>
+            </div>
+            <div className="delete-button-container">
+                {user.id !== 1? (
+                    <button onClick={handleDelete} className="profile-delete-button">Delete User</button>
+                ): null}
             </div>
             {deleteErrors.server && (<p className="error-message">{deleteErrors.server}</p>)}
         </form>

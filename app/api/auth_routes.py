@@ -114,19 +114,21 @@ def update_profile():
         return user.to_dict()
     return {'errors': form.errors}, 400
 
-@auth_routes.route('/delete-user/<int:user_id>', methods=['DELETE'])
+@auth_routes.route('/delete-user', methods=['DELETE'])
 @login_required
-def delete_user(user_id):
+def delete_user():
     """
     Deletes the user if user owns account and is authenticated.
     """
-    user = User.query.get(user_id)
-
-    if user is None:
+    user = current_user
+    # user = User.query.get(user_id)
+    if not user:
         return {'errors': {'message': 'User not found'}}, 404
+    # if user is None:
+    #     return {'errors': {'message': 'User not found'}}, 404
 
-    if user.id != current_user.id:
-        return {'errors': {'message': 'Unauthorized to delete this user'}}, 403
+    # if user.id != current_user.id:
+    #     return {'errors': {'message': 'Unauthorized to delete this user'}}, 403
 
     db.session.delete(user)
     db.session.commit()

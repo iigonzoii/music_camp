@@ -22,13 +22,13 @@ class Album(db.Model):
     # relationship to User many to one
     artist = db.relationship('User', back_populates='albums')
     # relationship to Track one to many
-    tracks = db.relationship('Track', back_populates='album')
+    tracks = db.relationship('Track', back_populates='album', cascade="all, delete-orphan")
     # relationship to reviews
-    reviews = db.relationship('Review', back_populates='album')
+    reviews = db.relationship('Review', back_populates='album', cascade="all, delete-orphan")
     # relationship to purchases
     purchases = db.relationship('PurchaseItem', back_populates='album')
     # relationship to product_types
-    products = db.relationship('ProductType', back_populates='album')
+    products = db.relationship('ProductType', back_populates='album', cascade="all, delete-orphan")
 
 
     def to_dict(self):

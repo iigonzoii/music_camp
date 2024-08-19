@@ -46,7 +46,7 @@ const createCartKey = (userId, albumId, type) => {
 
 const isValidUrl = (string) => {
     try {
-        new URL(url)
+        new URL(string)
         return true;
     } catch (err) {
         return false;

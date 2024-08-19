@@ -34,7 +34,7 @@ function UpdateProducts() {
 
   const updateProductType = (index, field, value) => {
     const updatedProductTypes = [...productTypes];
-console.log('UpdateFunc', value)
+// console.log('UpdateFunc', value)
     if (field === 'amount') {
       updatedProductTypes[index][field] = value;
     } else if (field === 'price') {
@@ -99,7 +99,7 @@ console.log('UpdateFunc', value)
       product_types: formattedProductTypes, // Include product types in the payload
     };
 
-    console.log("Payload", payload)
+    // console.log("Payload", payload)
     try {
      const newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
      if (!newErrors.length > 0) {

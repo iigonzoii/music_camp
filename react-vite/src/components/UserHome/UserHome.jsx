@@ -24,9 +24,6 @@ function UserHome() {
     const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
-
-    console.log("FLAG:", user.purchases)
-
     useEffect(() => {
         if (user && (filteredAlbums.length > 0)) {
             dispatch(fetchCurrUserAlbums());
@@ -126,7 +123,7 @@ function UserHome() {
 
 
 
-  return filteredAlbums.length > 0 ? (
+  return filteredAlbums.length > 0 || filterAlbumById(user.id).length > 0 ? (
     <div className="uh-container">
         <img id="background-image"></img>
       {/* className="UHcontainer" */}

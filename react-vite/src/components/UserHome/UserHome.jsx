@@ -22,52 +22,37 @@ function UserHome() {
     // const [selectedAlbumId, setSelectedAlbumId] = useState(null);
 
     // const filteredPurchases = Object.values(purchases).filter(purchase => purchase.user_id === user.id) ;
+    const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
+    // const filteredTracks = filteredAlbums.tracks.map(track => track.id)
+
+    const filteredTracks = filteredAlbums.flatMap(album => album.tracks);
+
+    console.log(filteredTracks);
 
     useEffect(() => {
         if (user) {
             dispatch(fetchCurrUserAlbums());
             dispatch(fetchOrders());
+        } else {
+            dispatch(fetchOrders());
         }
     }, [dispatch, user]);
 
-    useEffect(() => {
-        if (albums && Object.values(albums).length > 0) {
-            const firstAlbumId = Object.values(albums)[0].id;
-            setSelectedAlbumId(firstAlbumId);
-            dispatch(fetchTracksbyAlbumId(firstAlbumId));
-        } else {
-            setSelectedAlbumId(null);
-        }
-    }, [dispatch, albums]);
+    // useEffect(() => {
+    //     if (filteredAlbums.length > 0) {
+    //         setSelectedAlbumId(filteredAlbums[0].id)
+    //         dispatch(fetchTracksbyAlbumId(selectedAlbumId));
+    //     } else  {
+    //         setSelectedAlbumId(null)
+    //     }
+    // }, [dispatch])
 
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {
             setSelectedAlbumId(albumId);
-            dispatch(fetchTracksbyAlbumId(albumId));
         }
     };
-
-    const handleDelete = (albumId) => {
-        dispatch(deleteAlbum(albumId));
-        if (albumId === selectedAlbumId) {
-            const remainingAlbums = Object.values(albums).filter(album => album.id !== albumId);
-            const newSelectedAlbumId = remainingAlbums[0]?.id || null;
-            setSelectedAlbumId(newSelectedAlbumId);
-            if (newSelectedAlbumId) {
-                dispatch(fetchTracksbyAlbumId(newSelectedAlbumId));
-            } else {
-                setSelectedAlbumId(null);
-            }
-        }
-    };
-
-    const filteredAlbums = Object.values(albums)?.filter(item => item.user_id === user.id);
-
-    const filterAlbumById = (id) => {
-        const payload = Object.values(albums).filter(album => album.id === id);
-        return payload
-    }
 
     // useEffect(() => {
     // if (filteredAlbums.length > 0) {
@@ -98,6 +83,15 @@ function UserHome() {
 //     return () => document.removeEventListener("click", closeMenu);
 //   }, [showModal]);
 
+    const handleDelete = (albumId) => {
+        dispatch(deleteAlbum(albumId));
+        if (albumId === selectedAlbumId) {
+            const newSelectedAlbumId = filteredAlbums[0]?.id || null;
+            if (newSelectedAlbumId) {
+                dispatch(fetchTracksbyAlbumId(newSelectedAlbumId));
+            }
+        }
+    };
 
 
 //   const handleDeleteModal = (albumId) => {
@@ -121,37 +115,23 @@ function UserHome() {
 //     setSelectedAlbumId(null);
 //   };
 
-  return user ? (
+  return filteredAlbums.length && (
     <div className="uh-container">
-        <img id="background-image"></img>
-      {/* className="UHcontainer" */}
+      <img id="background-image" alt="background" />
+
       <section className="UHsection1">
         <div className="banner-container">
-            <img
-            className="banner-img"
-            src={user.banner_img_url}
-            />
+          <img className="banner-img" src={user.banner_img_url} alt="banner" />
         </div>
 
-        <div className='profile-details-container'>
-            <img
-            className="profile-img"
-            src={user.profile_img_url}
-            />
-            <div className="profile-username">{user.username}</div>
-            <div className="edit-profile-button-container">
-                <OpenModalButton
-                    buttonText="Edit Profile"
-                    modalComponent={<ProfileUpdateModal user={user} />}
-                />
-            </div>
+        <div className="profile-details-container">
+          <img className="profile-img" src={user.profile_img_url} alt="profile" />
+          <div className="profile-username">{user.username}</div>
         </div>
       </section>
 
       <section className="header-container">
-            <h1 className='profile-header'>
-            Manage Products
-            </h1>
+        <h1 className="profile-header">Manage Products</h1>
       </section>
 
       <div className='product-labels'>
@@ -165,52 +145,51 @@ function UserHome() {
             {Object.values(filteredAlbums).length < 1 ? <p>Add your music!</p>
                 :
             Object.values(filteredAlbums).map((album) => (
-               <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
-                 <div className="album-card" >
-                    <img
-                    className="UH-CMImg"
-                    src={album.cover_image_url}
-                    alt={`${album.title} cover`}
-                    />
+                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
+                  <div className="album-card" >
+                      <img
+                      className="UH-CMImg"
+                      src={album.cover_image_url}
+                      alt={`${album.title} cover`}
+                      />
                     <div className="UH-album-data-container">
-                    <p className="UH-data-container-album">{album.title}</p>
-                    <p className="UH-data-container-artist">{`by ${album.band}`}</p>
-                    <p className="UH-data-container-tag">{album.tags}</p>
+                      <p className="UH-data-container-album">{album.title}</p>
+                      <p className="UH-data-container-artist">{`by ${album.band}`}</p>
+                      <p className="UH-data-container-tag">{album.tags}</p>
                     </div>
+
 
                     <div className="button-group-update">
-                        <NavLink to={`/albums/${album.id}/edit-albums`}>
-                            <button className="update-button">Update</button>
-                        </NavLink>
-                        <button
-                            className="delete-button"
-                            onClick={() => handleDelete(album.id)}
-                            >
-                            Delete
-                        </button>
+                      <NavLink to={`/albums/${album.id}/edit-albums`}>
+                        <button className="update-button">Update</button>
+                      </NavLink>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(album.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
-                 </div>
-              </div>
-            ))}
-           </div>
-            <div className='tracks-card'>
-                {Object.values(tracks)
-                    .filter((track) => track.album_id === selectedAlbumId)
-                    .map(track => (
-                        <div className="track-item" key={track.id}>
+
+                    {/* Render the tracks for the current album */}
+                    {album.tracks && album.tracks.length > 0 && (
+                      <div className="tracks-card">
+                        <p>Album Track list</p>
+                        {album.tracks.map((track) => (
+                          <div className="track-item" key={track.id}>
+                            <i className="fa-regular fa-circle-play"></i>
                             <p className="track-name">{track.name}</p>
                             <p className="track-duration">{track.duration} s</p>
-                        </div>
-                    ))}
-            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
 
-          {/* {showModal && (
-            <ConfirmDeleteSpotModal
-              onConfirm={handleConfirmDelete}
-              onCancel={handleCancelDelete}
-            />
-          )} */}
-        </div>
         {Object.values(collection).length < 1 ? <p className='empty-collection'>No purchases here</p>
                 :
             <div className='user-collection'>
@@ -221,24 +200,11 @@ function UserHome() {
                 ))}
             </div>
             }
-            {/* <div className='profile-details-container'>
-                <img
-                className="profile-img"
-                src={user.profile_img_url}
-                />
-                <div className="profile-username">{user.username}</div>
-
-                <div className="edit-profile-button">
-                    <OpenModalButton
-                        buttonText="Edit Profile"
-                        modalComponent={<ProfileUpdateModal user={user} />}
-                    />
-                </div>
-            </div> */}
-        </section>
-
+        </div>
+      </section>
     </div>
-  ) : (<p></p>);
+
+  );
 }
 
 export default UserHome;

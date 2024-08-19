@@ -139,7 +139,6 @@
     border-bottom: none;
     border-left: none;
     border-right: 0.5px solid rgb(115, 115, 115);
-
 }
 .album-list-container {
     display: flex;
@@ -149,12 +148,18 @@
     border: 1px solid #ccc;
     margin-left: 10px;
     border: none;
+    padding: 10px;
+
 }
 
 .album-card {
     height: auto;
     width: 100%;
     padding-bottom: 3px;
+    border: 1px solid wheat;
+    border-radius: 5%;
+    padding: 5px;
+    margin: 5px;
 }
 
 .UH-CMImg {
@@ -230,6 +235,7 @@
     margin-right: 60px;
     margin-top: 10px;
     width: 60%;
+    border: 2px solid white;
 }
 .track-item {
     display: flex;

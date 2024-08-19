@@ -17,7 +17,7 @@ function MajorityDetails() {
     reviews = Object.values(reviews)
     tracks = Object.values(tracks)
 
-    console.log("tracks", tracks)
+    // console.log("tracks", tracks)
 
 
     const albumProducts = album[albumId].Album.products
@@ -25,8 +25,6 @@ function MajorityDetails() {
         const product = albumProducts.find(product => product.type == type)
         return product
     }
-
-    // console.log("TEST", album[albumId].Album.user_id)
 
     return (
         <>

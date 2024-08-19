@@ -33,7 +33,7 @@ function Navigation() {
       )}
       <i className="fa-solid fa-cart-shopping pointer cartIcon"
         // onClick={OpenModalButton}
-        onClick={() => navigate(`/shoppingCart`)}
+        onClick={() => navigate(`/checkout`)}
       >
       </i>
           <i className="fa-regular fa-heart pointer heartIcon"/>

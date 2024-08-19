@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import ProfileUpdateForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
@@ -82,3 +83,33 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': {'message': 'Unauthorized'}}, 401
+
+@auth_routes.route('/update-profile', methods=['PUT'])
+@login_required
+def update_profile():
+    """
+    Updates the current user's profile.
+    """
+    form = ProfileUpdateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        user = current_user
+
+        user.first_name = form.data.get('first_name', user.first_name)
+        user.last_name = form.data.get('last_name', user.last_name)
+        user.city = form.data.get('city', user.city)
+        user.state = form.data.get('state', user.state)
+        user.username = form.data.get('username', user.username)
+        user.bio = form.data.get('bio', user.bio)
+        user.spotify = form.data.get('spotify', user.spotify)
+        user.instagram = form.data.get('instagram', user.instagram)
+        user.website = form.data.get('website', user.website)
+        user.facebook = form.data.get('facebook', user.facebook)
+        user.profile_img_url = form.data.get('profile_img_url', user.profile_img_url)
+        user.banner_img_url = form.data.get('banner_img_url', user.banner_img_url)
+        user.background_img_url = form.data.get('background_img_url', user.background_img_url)
+
+        db.session.commit()
+        return user.to_dict()
+    return {'errors': form.errors}, 400

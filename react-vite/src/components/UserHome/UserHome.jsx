@@ -221,7 +221,7 @@ function UserHome() {
                 ))}
             </div>
             }
-            <div className='profile-details-container'>
+            {/* <div className='profile-details-container'>
                 <img
                 className="profile-img"
                 src={user.profile_img_url}
@@ -234,7 +234,7 @@ function UserHome() {
                         modalComponent={<ProfileUpdateModal user={user} />}
                     />
                 </div>
-            </div>
+            </div> */}
         </section>
 
     </div>

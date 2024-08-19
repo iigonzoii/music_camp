@@ -22,6 +22,7 @@ function ProfileUpdateModal({ user }) {
         background_img_url: user.background_img_url || ""
     });
     const [errors, setErrors] = useState({});
+    const [deleteErrors, setDeleteErrors] = useState({});
 
 
     const { closeModal } = useModal();
@@ -43,6 +44,19 @@ function ProfileUpdateModal({ user }) {
             closeModal();
         }
     };
+
+    const handleDelete = async () => {
+        if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+          const errors = await dispatch(thunkDeleteUser(user.id));
+          if (errors) {
+            setDeleteErrors(errors);
+          } else {
+            closeModal();
+          }
+        }
+      };
+
+
 
   return (
     <div className="profile-modal">
@@ -225,7 +239,9 @@ function ProfileUpdateModal({ user }) {
             <div className="profile-update-buttons">
                 <button className="submit-button" type="submit">Save Changes</button>
                 <button onClick={() => closeModal()} className="cancel-button">Cancel</button>
+                <button onClick={handleDelete} className="delete-button">Delete User</button>
             </div>
+            {deleteErrors.server && (<p className="error-message">{deleteErrors.server}</p>)}
         </form>
     </div>
   );

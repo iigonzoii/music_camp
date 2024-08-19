@@ -1,5 +1,6 @@
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const DELETE_USER = 'session/deleteUser'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -8,6 +9,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER
+});
+
+const deleteUser = (userId) => ({
+  type: DELETE_USER,
+  payload: userId
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
@@ -65,7 +71,7 @@ export const thunkLogout = () => async (dispatch) => {
 
 
 export const thunkUpdateUserProfile = (user) => async (dispatch) => {
-  const response = await fetch(`/api/auth/update-profile`, {
+  const response = await fetch(`/api/auth/update-user`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)
@@ -83,6 +89,31 @@ export const thunkUpdateUserProfile = (user) => async (dispatch) => {
   }
 };
 
+export const thunkDeleteUser = (userId) => async (dispatch) => {
+  try {   //try-catch because deleting a user can be tricky
+  const response = await fetch(`/api/auth/delete-user/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      dispatch(deleteUser(userId));
+      return null;
+    } else if (response.status < 500) {
+      const errorMessages = await response.json();
+      return errorMessages;
+    } else {
+      return { server: "Something went wrong. Please try again" };
+    }
+  } catch (error) {
+    console.error("Failed to delete user:", error);
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+
 
 const initialState = { user: null };
 
@@ -91,6 +122,8 @@ function sessionReducer(state = initialState, action) {
     case SET_USER:
       return { ...state, user: action.payload };
     case REMOVE_USER:
+      return { ...state, user: null };
+    case DELETE_USER:
       return { ...state, user: null };
     default:
       return state;

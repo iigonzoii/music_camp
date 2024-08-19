@@ -4,15 +4,14 @@ import {  NavLink } from "react-router-dom";
 import { fetchAlbums, deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 import { fetchOrders } from "../../redux/orderReducer";
 import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
-import OpenModalButton from "../OpenModalButton";
-import ProfileUpdateModal from "../ProfileUpdateModal";
+// import OpenModalButton from "../OpenModalButton";
+// import ProfileUpdateModal from "../ProfileUpdateModal";
 import UserCollectionProp from "./UserCollection";
 import "./UserHome.css";
 
 function UserHome() {
     const dispatch = useDispatch();
-    //   const { closeModal } = useModal();
-    //   const ulRef = useRef();
+
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
     let tracks = useSelector((state) => state.track);
@@ -26,13 +25,11 @@ function UserHome() {
     let [selectedAlbumId, setSelectedAlbumId] = useState(null);
     // const filteredTracks = filteredAlbums.tracks.map(track => track.id)
 
-    const filteredTracks = filteredAlbums.flatMap(album => album.tracks);
-
-
     useEffect(() => {
         if (user) {
             dispatch(fetchCurrUserAlbums());
             dispatch(fetchOrders());
+            dispatch(fetchAlbums())
         } else {
             dispatch(fetchOrders());
         }
@@ -61,7 +58,7 @@ function UserHome() {
 
   return (
     <div className="uh-container">
-      <img id="background-image" alt="background" />
+      <img id="background-image"/>
 
       <section className="UHsection1">
         <div className="banner-container">
@@ -135,8 +132,11 @@ function UserHome() {
           </div>
         </div>
 
+
+
+
         {Object.values(collection).length < 1 ? <p className='empty-collection'>No purchases here</p>
-                :
+              :
             <div className='user-collection'>
                 {Object.values(collection).map(order => (
                     <div className="collection-item" key={order.id}>
@@ -144,7 +144,7 @@ function UserHome() {
                     </div>
                 ))}
             </div>
-            }
+        }
 
       </section>
     </div>

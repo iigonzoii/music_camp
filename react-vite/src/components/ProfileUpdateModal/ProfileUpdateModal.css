@@ -1,3 +1,7 @@
+.profile-modal {
+    z-index: 12;
+}
+
 .profile-update-buttons button {
     gap: 10px;
     justify-content: center;
@@ -5,13 +9,18 @@
     width: 100%;
     color: black;
     background-color: rgb(237, 235, 235);
+    box-shadow: 1.5px 1.5px 0.5px 0px rgba(0, 0, 0, 0);
+
+}
+.profile-update-buttons .cancel-button:hover {
+    background-color: rgb(237, 235, 235);
 }
 
 .delete-button-container {
   display: flex;
   width: 100%;
   margin-top: 10px;
-  padding-top: 20px;
+  padding-top: 30px;
   justify-content: center;
 }
 
@@ -30,6 +39,8 @@
     text-align: center;
 }
 
-.profile-delete-button:hover {
+
+
+.profile-delete-button:active {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }

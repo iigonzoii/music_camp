@@ -4,8 +4,8 @@ import {  NavLink } from "react-router-dom";
 import { fetchAlbums, deleteAlbum, fetchCurrUserAlbums } from "../../redux/albumReducer";
 import { fetchOrders } from "../../redux/orderReducer";
 import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
-// import OpenModalButton from "../OpenModalButton";
-// import ProfileUpdateModal from "../ProfileUpdateModal";
+import OpenModalButton from "../OpenModalButton";
+import ProfileUpdateModal from "../ProfileUpdateModal";
 import UserCollectionProp from "./UserCollection";
 import { isValidUrl } from "../../../prettier";
 import "./UserHome.css";
@@ -67,7 +67,8 @@ function UserHome() {
           <img className="banner-img"
               src={isValidUrl(user.banner_img_url) ? user.banner_img_url : 'https://f4.bcbits.com/img/0036753957_0'}
               alt="banner"
-            />
+              />
+        {/* Pretty sure the url is set up as a string type. Checking if it exists, or looking for https or png/jpg in the user's input could work */}
         </div>
 
         <div className="profile-details-container">
@@ -76,6 +77,12 @@ function UserHome() {
               alt="profile"
             />
           <div className="profile-username">{user.username}</div>
+          <div className="edit-profile-button-container">
+                <OpenModalButton
+                    buttonText="Edit Profile"
+                    modalComponent={<ProfileUpdateModal user={user} />}
+                />
+          </div>
         </div>
       </section>
 

@@ -4,19 +4,20 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  right: 20px;
+  right: 80px;
   font-size: 10px;
-  background-color: #307efd96;
-  border: solid 0.5px rgb(255, 255, 255);
+  background-color: #306efdca;
+  border: solid 0.5px rgb(218, 217, 217);
   border-radius: 6px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
-  margin-top: 23px;
+  margin-top: 28px;
   padding: 5px 0 5px;
   width: 120px;
   height: 90px;
   z-index: 1;
   color: rgb(255, 253, 253);
   align-items: center;
+  overflow-x: auto;
   /* justify-content:space-around; */
 }
 
@@ -24,13 +25,14 @@
   font-size: 13px ;
   font-weight:bold;
   border-radius: 3px;
-  background-color: #ff7350;
-  width: 72px;
-  height: 20px;
+  background-color: #dedede;
+  color: rgb(9, 0, 0);
+  width: 65px;
+  height: 21px;
   box-shadow: 0px 0px 1px 0px rgb(0, 0, 0);
 
   border: 1px solid black;
-  margin: 10px 0 0 0;
+  margin: 10px 0 0px 0;
   /* color: white; */
 }
 
@@ -49,23 +51,39 @@
 
 #profile-email {
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 13px;
 
 }
 
 .profile-button {
   display: flex;
-  background-color: rgb(255, 255, 255);
   height: 18px;
-  width: auto;
+  width: 30px;
   /* background-color: transparent; */
-  border-radius: 3px;
+  background-color: rgba(246, 243, 243, 0.994);
+  border-radius: 5px;
   border: none;
+  /* padding-bottom: 5px; */
 }
 
 .profile-logo {
-  color: rgb(0, 98, 255);
+  color: #2d6cff;
+  background-color: white;
+  border-radius: 100%;
+  justify-items: center;
+  padding-left: 1px;
+  /* box-sizing: border-box; */
+  /* border: 0.5px solid white; */
+  /* box-shadow: 0px 0px 5px 0.5px rgba(255, 255, 255, 0.4); */
 
+}
+
+nav #heart-icon {
+  /* display: flex; */
+  align-items: center;
+  margin-right: 7px;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 
 nav{

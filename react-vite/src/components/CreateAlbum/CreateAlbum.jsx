@@ -91,7 +91,7 @@ function CreateAlbum({ album }) {
       <h1>{album ? "Update album" : "Create New album"}</h1>
       <section className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2>Whats your new album name?</h2>
+          <h2>What is your new album&apos;s name?</h2>
           <input
             value={band}
             onChange={updateBand}

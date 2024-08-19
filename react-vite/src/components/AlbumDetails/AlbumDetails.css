@@ -58,6 +58,7 @@
 .ad-album-area>img {
     margin-top: 20px;
     width: 250px;
+    /* height: auto; */
     height: 180px;
     max-width: 100%;
     border: solid #4C4C4C 1px;

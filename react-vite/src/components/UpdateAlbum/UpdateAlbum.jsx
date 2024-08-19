@@ -90,7 +90,7 @@ function UpdateAlbum() {
       if (!newErrors.length > 0) {
         navigate(`/albums/${album_id}/edit-products`);
       }
-      
+
     } catch (err) {
       const data = await err.json();
       if (data?.errors) {
@@ -112,7 +112,7 @@ function UpdateAlbum() {
       <h1>Update Album</h1>
       <section className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2>What&apos;s your album&apos;s new name?</h2>
+          <h2>What is your album&apos;s new name?</h2>
           <input
             value={band}
             onChange={updateBand}

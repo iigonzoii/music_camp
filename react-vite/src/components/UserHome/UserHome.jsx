@@ -14,7 +14,7 @@ function UserHome() {
     //   const ulRef = useRef();
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
-    let tracks = useSelector((state) => state.track);
+    // let tracks = useSelector((state) => state.track);
     let purchases;
     // const [showModal, setShowModal] = useState(false);
     // const [selectedAlbumId, setSelectedAlbumId] = useState(null);

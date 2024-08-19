@@ -7,6 +7,7 @@ import { fetchTracksbyAlbumId } from "../../redux/tracks" ;
 // import OpenModalButton from "../OpenModalButton";
 // import ProfileUpdateModal from "../ProfileUpdateModal";
 import UserCollectionProp from "./UserCollection";
+import { isValidUrl } from "../../../prettier";
 import "./UserHome.css";
 
 function UserHome() {
@@ -14,7 +15,6 @@ function UserHome() {
 
     const user = useSelector((state) => state.session.user);
     let albums = useSelector((state) => state.album);
-    let tracks = useSelector((state) => state.track);
     const collection = useSelector((state) => state.order.allOrders)
     // let purchases = useSelector((state) => state.orders.allOrders)
     // const [showModal, setShowModal] = useState(false);
@@ -38,6 +38,8 @@ function UserHome() {
     const handleAlbumClick = (albumId) => {
         if (albumId !== selectedAlbumId) {
             setSelectedAlbumId(albumId);
+        } else {
+          setSelectedAlbumId(null)
         }
     };
 
@@ -62,11 +64,17 @@ function UserHome() {
 
       <section className="UHsection1">
         <div className="banner-container">
-          <img className="banner-img" src={user.banner_img_url} alt="banner" />
+          <img className="banner-img"
+              src={isValidUrl(user.banner_img_url) ? user.banner_img_url : 'https://f4.bcbits.com/img/0036753957_0'}
+              alt="banner"
+            />
         </div>
 
         <div className="profile-details-container">
-          <img className="profile-img" src={user.profile_img_url} alt="profile" />
+          <img className="profile-img"
+              src={isValidUrl(user.profile_img_url) ? user.profile_img_url : 'https://f4.bcbits.com/img/a2023701887_2.jpg'}
+              alt="profile"
+            />
           <div className="profile-username">{user.username}</div>
         </div>
       </section>
@@ -86,7 +94,7 @@ function UserHome() {
             {Object.values(filteredAlbums).length < 1 ? <p>Add your music!</p>
                 :
             Object.values(filteredAlbums).map((album) => (
-                <div key={album.id} onClick={() => handleAlbumClick(album.id)}>
+                <div className='album-track-card' key={album.id} onClick={() => handleAlbumClick(album.id)}>
                   <div className="album-card" >
                       <img
                       className="UH-CMImg"
@@ -111,9 +119,10 @@ function UserHome() {
                         Delete
                       </button>
                     </div>
+                  </div>
 
                     {/* Render the tracks for the current album */}
-                    {album.tracks && album.tracks.length > 0 && (
+                    {album.tracks && album.tracks.length > 0 && selectedAlbumId == album.id && (
                       <div className="tracks-card">
                         <p>Album Track list</p>
                         {album.tracks.map((track) => (
@@ -125,7 +134,6 @@ function UserHome() {
                         ))}
                       </div>
                     )}
-                  </div>
                 </div>
               ))
             }
@@ -135,7 +143,7 @@ function UserHome() {
 
 
 
-        {Object.values(collection).length < 1 ? <p className='empty-collection'>No purchases here</p>
+        {Object.values(collection).length < 1 ? <div className='empty-collection'>No purchases :( </div>
               :
             <div className='user-collection'>
                 {Object.values(collection).map(order => (

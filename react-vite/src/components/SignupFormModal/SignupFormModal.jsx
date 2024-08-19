@@ -36,6 +36,7 @@ function SignupFormModal() {
     });
   };
 
+  console.log()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,7 +60,7 @@ function SignupFormModal() {
   return (
     <>
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className='errors'>{errors.server}</p>}
       <form className="form-container" onSubmit={handleSubmit}>
         <label>
           First Name

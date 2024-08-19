@@ -63,6 +63,27 @@ export const thunkLogout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
+
+export const thunkUpdateUserProfile = (user) => async (dispatch) => {
+  const response = await fetch(`/api/auth/update-profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data));
+    return data;
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
@@ -75,5 +96,7 @@ function sessionReducer(state = initialState, action) {
       return state;
   }
 }
+
+
 
 export default sessionReducer;

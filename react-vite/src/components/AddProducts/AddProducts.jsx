@@ -10,18 +10,19 @@ function AddProducts() {
   const { album_id } = useParams();
   const user = useSelector((state) => state.session.user);
 
+
   const [errors, setErrors] = useState({});
   const [productTypes, setProductTypes] = useState([
-    { type: "", price: 0, amount: 0 },
+    { type: "", price: "", amount: "" },
   ]);
 
   const updateProductType = (index, field, value) => {
     const updatedProductTypes = [...productTypes];
 
     if (field === 'amount') {
-      updatedProductTypes[index][field] = parseInt(value, 10);
+      updatedProductTypes[index][field] = value;
     } else if (field === 'price') {
-      updatedProductTypes[index][field] = parseFloat(value);
+      updatedProductTypes[index][field] = value;
     } else {
       updatedProductTypes[index][field] = value;
     }
@@ -31,7 +32,7 @@ function AddProducts() {
 
   const addProductType = () => {
     if (productTypes.length < 4) {
-      setProductTypes([...productTypes, { type: "", price: 0, amount: 0 }]);
+      setProductTypes([...productTypes, { type: "", price: "", amount: "" }]);
     }
   };
 

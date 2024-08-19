@@ -102,7 +102,6 @@ console.log('UpdateFunc', value)
     console.log("Payload", payload)
     try {
      const newProducts = await dispatch(fetchUpdateProducts(payload.album_id, payload));
-     console.log(newErrors.length)
      if (!newErrors.length > 0) {
         navigate(`/albums/${album_id}`);
       }

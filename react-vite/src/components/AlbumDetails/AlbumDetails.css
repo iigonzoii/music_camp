@@ -30,21 +30,23 @@
 }
 
 .ad-album-data> div > button {
-    background-color: transparent;
+    background-color: rgb(60, 57, 57);
     color: inherit;
-    border: none;
-    padding: 0;
+    margin: 15px 0px;
+    border: 1px solid rgb(79, 79, 79);
+    border-radius: 3px;
+    padding: 5px 8px;
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.ad-album-data p {
-    font-size: ;
+.ad-album-data> div > button:hover {
+    background-color: rgb(113, 109, 109);
 }
+
 .ad-album-area {
     /* border: solid 1px; */
     width: 50%;
@@ -56,6 +58,7 @@
 .ad-album-area>img {
     margin-top: 20px;
     width: 250px;
+    /* height: auto; */
     height: 180px;
     max-width: 100%;
     border: solid #4C4C4C 1px;

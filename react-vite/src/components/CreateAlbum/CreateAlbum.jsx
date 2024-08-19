@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CreateAlbum.css";
 import { useNavigate } from "react-router-dom";
+import { isValidUrl } from "../../../prettier";
 import { createAlbum, updateAlbum } from "../../redux/albumReducer";
 
 
@@ -24,12 +25,11 @@ function CreateAlbum({ album }) {
 
   const updateBand = (e) => setBand(e.target.value);
   const updateTitle = (e) => setTitle(e.target.value);
-  const updateCoverImage = (e) => setCoverImageUrl(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updateGenre = (e) => setGenre(e.target.value);
   const updateTags = (e) => setTags(e.target.value);
   const updateProducer = (e) => setProducer(e.target.value)
-
+  const updateCoverImage = (e) => setCoverImageUrl(e.target.value)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
@@ -63,6 +63,8 @@ function CreateAlbum({ album }) {
 
     let newAlbum;
     try {
+      if (!isValidUrl(payload.cover_image_url)) {
+        payload['cover_image_url'] = 'https://f4.bcbits.com/img/a0860406192_2.jpg'}
       if (album) {
         payload.id = album.id;
         newAlbum = await dispatch(updateAlbum(album.id, payload));
@@ -89,7 +91,7 @@ function CreateAlbum({ album }) {
       <h1>{album ? "Update album" : "Create New album"}</h1>
       <section className="form-container">
         <form onSubmit={handleSubmit}>
-          <h2>Whats your new album name?</h2>
+          <h2>What is your new album&apos;s name?</h2>
           <input
             value={band}
             onChange={updateBand}

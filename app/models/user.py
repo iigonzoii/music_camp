@@ -31,8 +31,8 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     # Relationships
-    albums = db.relationship('Album', back_populates='artist')
-    reviews = db.relationship('Review', back_populates='reviewer')
+    albums = db.relationship('Album', back_populates='artist', cascade="all, delete-orphan")
+    reviews = db.relationship('Review', back_populates='reviewer', cascade=", delete-orphan")
     tracks = db.relationship('Track', back_populates='user')
 
     #* Association table relations with User

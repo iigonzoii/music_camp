@@ -43,4 +43,14 @@ const createCartKey = (userId, albumId, type) => {
     return hashString(newKey)
 }
 
-export { formatDate, sortByDate, capitalizeFirstLetter, createCartKey }
+
+const isValidUrl = (string) => {
+    try {
+        new URL(url)
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+export { formatDate, sortByDate, capitalizeFirstLetter, createCartKey, isValidUrl }

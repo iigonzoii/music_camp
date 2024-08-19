@@ -9,13 +9,15 @@ import sessionReducer from "./session";
 import albumReducer from "./albumReducer";
 import trackReducer from "./tracks";
 import reviewReducer from "./reviews";
+import orderReducer from "./orderReducer";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   album: albumReducer,
   track: trackReducer,
-  review: reviewReducer
+  review: reviewReducer,
+  order: orderReducer
 });
 
 let enhancer;

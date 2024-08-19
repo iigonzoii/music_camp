@@ -1,6 +1,46 @@
+.profile-modal {
+    z-index: 12;
+}
+
 .profile-update-buttons button {
     gap: 10px;
     justify-content: center;
     align-content: center;
     width: 100%;
+    color: black;
+    background-color: rgb(237, 235, 235);
+    box-shadow: 1.5px 1.5px 0.5px 0px rgba(0, 0, 0, 0);
+
+}
+.profile-update-buttons .cancel-button:hover {
+    background-color: rgb(237, 235, 235);
+}
+
+.delete-button-container {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 30px;
+  justify-content: center;
+}
+
+.profile-delete-button {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    background-color: #ff0000;
+    color: #fcfafa;
+    cursor: pointer;
+    border: 1px solid rgb(13, 0, 0);
+    box-shadow: 1.5px 1.5px 0.5px 0px rgba(0, 0, 0, 1);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.profile-delete-button:active {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }

@@ -14,7 +14,7 @@ function Navigation() {
       <div className="nav-container">
         {/* <NavLink to="/" className={"logo"}>Music Camp</NavLink> */}
         <NavLink className={"logo"} to="/">
-          <img className="nav-app-logo" src="../../../public/images/mc-logo.png" alt="Logo" />
+          <img className="nav-app-logo" src="/images/mc-logo.png" alt="Logo" />
         </NavLink>
         <input className="navSearch" type="text" placeholder="Search"></input>
       </div>
@@ -33,10 +33,10 @@ function Navigation() {
       )}
       <i className="fa-solid fa-cart-shopping pointer cartIcon"
         // onClick={OpenModalButton}
-        onClick={() => navigate(`/shoppingCart`)}
+        onClick={() => navigate(`/checkout`)}
       >
       </i>
-          <i className="fa-regular fa-heart pointer heartIcon"/>
+          <i id="heart-icon" className="fa-regular fa-heart pointer heartIcon"/>
         <ProfileButton />
       </div>
     </nav>

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9a9707dfebd8
+Revision ID: 0af19d6d8c25
 Revises:
-Create Date: 2024-08-16 11:40:41.191990
+Create Date: 2024-08-18 22:59:56.930308
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '9a9707dfebd8'
+revision = '0af19d6d8c25'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,7 +45,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
@@ -63,7 +63,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE albums SET SCHEMA {SCHEMA};")
 
@@ -78,14 +77,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['album_id'], ['albums.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE product_types SET SCHEMA {SCHEMA};")
 
     op.create_table('purchase_items',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('album_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('album_id', sa.Integer(), nullable=True),
     sa.Column('type', sa.String(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
@@ -95,13 +93,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE purchase_items SET SCHEMA {SCHEMA};")
 
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('album_id', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=250), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -110,15 +107,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
 
-
     op.create_table('tracks',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('album_id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('album_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('duration', sa.Float(), nullable=False),
     sa.Column('file_url', sa.String(length=250), nullable=True),
@@ -128,7 +123,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
     if environment == "production":
         op.execute(f"ALTER TABLE tracks SET SCHEMA {SCHEMA};")
 

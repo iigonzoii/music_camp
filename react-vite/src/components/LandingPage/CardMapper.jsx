@@ -36,7 +36,7 @@ function CardMapper({ genre, cat }) {
 
     albums = filterAlbums(genre, cat);
 
-    console.log(albums);
+    // console.log(albums);
 
     return (
         <div className="cm-container">

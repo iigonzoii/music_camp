@@ -1,3 +1,40 @@
 .demo-user-btn {
     margin: 0%;
 }
+
+.login-form {
+    max-height: 60vh;
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-form {
+    width: 1000;
+}
+
+.login-buttons {
+    width: 100%;
+}
+.login-buttons button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.modal-content {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
